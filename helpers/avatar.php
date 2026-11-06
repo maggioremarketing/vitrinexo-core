@@ -24,7 +24,7 @@ function vx_avatar_svg( string $initials ): string {
         $initials = 'V';
     }
     return '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">'
-         . '<rect width="200" height="200" fill="#00aeb8"/>'
+         . '<rect width="200" height="200" fill="#FF7A4D"/>'
          . '<text x="100" y="100" dy="0.35em" text-anchor="middle" '
          . 'font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" fill="#ffffff">'
          . htmlspecialchars( $initials, ENT_QUOTES, 'UTF-8' )

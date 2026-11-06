@@ -78,10 +78,10 @@ class VX_Admin_Dinner
             case 'vx_deadline':
                 $dl = (int) get_post_meta( $post_id, VX_Dinner_Meta::DEADLINE, true );
                 if ( $dl ) {
-                    $color = $dl < time() ? '#dc2626' : '#16a34a';
+                    $color = $dl < time() ? '#AD4319' : '#7DBF9E';
                     echo '<span style="color:' . $color . ';font-size:12px">' . date_i18n( 'd/m/Y H:i', $dl ) . '</span>';
                 } else {
-                    echo '<span style="color:#6b7280;font-size:12px">Sin límite</span>';
+                    echo '<span style="color:#5C5F6B;font-size:12px">Sin límite</span>';
                 }
                 break;
 
@@ -94,13 +94,13 @@ class VX_Admin_Dinner
             case 'vx_estado':
                 $estado = get_post_meta( $post_id, VX_Dinner_Meta::ESTADO, true );
                 $colors = [
-                    'abierto'    => '#22c55e',
-                    'confirmado' => '#2563eb',
-                    'completo'   => '#2563eb',
-                    'realizado'  => '#6b7280',
-                    'cancelado'  => '#ef4444',
+                    'abierto'    => '#7DBF9E',
+                    'confirmado' => '#8BA3C0',
+                    'completo'   => '#8BA3C0',
+                    'realizado'  => '#5C5F6B',
+                    'cancelado'  => '#C58D78',
                 ];
-                $color = $colors[ $estado ] ?? '#999';
+                $color = $colors[ $estado ] ?? '#5C5F6B';
                 echo '<span style="color:' . $color . ';font-weight:600">' . esc_html( ucfirst( $estado ) ) . '</span>';
                 break;
 
@@ -256,7 +256,7 @@ class VX_Admin_Dinner
         $mesas     = $dinner ? $dinner->get_mesas() : [];
 
         if ( empty( $asignados ) ) {
-            echo '<p style="color:#6b7280;margin:0">Aún no hay asistentes confirmados para este evento.</p>';
+            echo '<p style="color:#5C5F6B;margin:0">Aún no hay asistentes confirmados para este evento.</p>';
             return;
         }
 
@@ -297,24 +297,24 @@ class VX_Admin_Dinner
         <style>
         #vx-mesas-wrap { display:flex; flex-direction:column; gap:10px; }
         .vx-drop-zone  { min-height:52px; padding:8px; border-radius:6px; display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start; }
-        .vx-drop-zone.vx-over { background:#eff6ff !important; outline:2px dashed #3b82f6; outline-offset:-2px; }
-        #vx-pool-box   { border:2px dashed #d1d5db; border-radius:8px; background:#f9fafb; }
-        #vx-pool-label { font-size:11px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.05em; padding:8px 10px 4px; }
-        .vx-mesa-block { border:1px solid #e2ecf3; border-radius:8px; overflow:hidden; }
-        .vx-mesa-head  { background:#f8fafc; padding:7px 12px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #e2ecf3; }
+        .vx-drop-zone.vx-over { background:#F4F1EC !important; outline:2px dashed #A9C6E8; outline-offset:-2px; }
+        #vx-pool-box   { border:2px dashed #E6E2DB; border-radius:8px; background:#F4F1EC; }
+        #vx-pool-label { font-size:11px; font-weight:700; color:#5C5F6B; text-transform:uppercase; letter-spacing:.05em; padding:8px 10px 4px; }
+        .vx-mesa-block { border:1px solid #E6E2DB; border-radius:8px; overflow:hidden; }
+        .vx-mesa-head  { background:#F4F1EC; padding:7px 12px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #E6E2DB; }
         .vx-mesa-name  { border:none; background:transparent; font-weight:600; font-size:14px; flex:1; min-width:0; outline:none; }
-        .vx-mesa-name:focus { background:#fff; border:1px solid #d1d5db; border-radius:4px; padding:2px 6px; }
-        .vx-seat-count { font-size:11px; color:#9ca3af; white-space:nowrap; }
-        .vx-chip { background:#fff; border:1px solid #d1d5db; border-radius:99px; padding:4px 10px 4px 4px; font-size:12px; cursor:grab; display:inline-flex; align-items:center; gap:5px; user-select:none; }
+        .vx-mesa-name:focus { background:#fff; border:1px solid #E6E2DB; border-radius:4px; padding:2px 6px; }
+        .vx-seat-count { font-size:11px; color:#5C5F6B; white-space:nowrap; }
+        .vx-chip { background:#fff; border:1px solid #E6E2DB; border-radius:99px; padding:4px 10px 4px 4px; font-size:12px; cursor:grab; display:inline-flex; align-items:center; gap:5px; user-select:none; }
         .vx-chip:active { cursor:grabbing; }
-        .vx-chip.vx-in-mesa { background:#eff6ff; border-color:#bfdbfe; }
+        .vx-chip.vx-in-mesa { background:#F4F1EC; border-color:#DDE8F6; }
         .vx-chip.vx-dragging { opacity:.35; }
         .vx-chip img { width:20px; height:20px; border-radius:50%; object-fit:cover; flex-shrink:0; pointer-events:none; }
         .vx-chip span { pointer-events:none; }
-        .vx-empty-hint { color:#9ca3af; font-size:12px; font-style:italic; pointer-events:none; align-self:center; padding:4px 2px; }
+        .vx-empty-hint { color:#5C5F6B; font-size:12px; font-style:italic; pointer-events:none; align-self:center; padding:4px 2px; }
         </style>
 
-        <p style="color:#6b7280;font-size:13px;margin:0 0 10px">
+        <p style="color:#5C5F6B;font-size:13px;margin:0 0 10px">
             Arrastra personas desde el pool hacia cualquier mesa. Usa <strong>+ Agregar mesa</strong> para crear tantas mesas como necesites.
         </p>
 
@@ -352,7 +352,7 @@ class VX_Admin_Dinner
                 <input type="text" class="vx-mesa-name" value="<?php echo esc_attr( $mesa['nombre'] ?? 'Mesa ' . ( $idx + 1 ) ); ?>">
                 <span class="vx-seat-count"><?php echo $n; ?> persona<?php echo $n !== 1 ? 's' : ''; ?></span>
                 <button type="button" onclick="vxBorrarMesa(this)"
-                        style="margin-left:auto;border:none;background:none;cursor:pointer;color:#dc2626;font-size:12px;padding:2px 6px;line-height:1">
+                        style="margin-left:auto;border:none;background:none;cursor:pointer;color:#AD4319;font-size:12px;padding:2px 6px;line-height:1">
                   Eliminar
                 </button>
               </div>
@@ -380,7 +380,7 @@ class VX_Admin_Dinner
             <button type="button" class="button" onclick="vxAgregarMesa()">+ Agregar mesa</button>
             <button type="button" class="button button-primary" onclick="vxGuardar()">Guardar mesas</button>
             <button type="button" class="button" onclick="vxNotificarMesas()"
-                    style="border-color:#f59e0b;color:#92400e;background:#fffbeb"
+                    style="border-color:#C6C167;color:#14161F;background:#FAF7C9"
                     title="Envía un email a cada asistente con el nombre de su mesa y los datos del evento">
               Notificar mesas
             </button>
@@ -458,7 +458,7 @@ class VX_Admin_Dinner
               '<div class="vx-mesa-head">' +
                 '<input type="text" class="vx-mesa-name" value="Mesa ' + mesaSeq + '">' +
                 '<span class="vx-seat-count">0 personas</span>' +
-                '<button type="button" onclick="vxBorrarMesa(this)" style="margin-left:auto;border:none;background:none;cursor:pointer;color:#dc2626;font-size:12px;padding:2px 6px;line-height:1">Eliminar</button>' +
+                '<button type="button" onclick="vxBorrarMesa(this)" style="margin-left:auto;border:none;background:none;cursor:pointer;color:#AD4319;font-size:12px;padding:2px 6px;line-height:1">Eliminar</button>' +
               '</div>' +
               '<div class="vx-drop-zone" ondragover="vxOver(event)" ondragleave="vxLeave(event)" ondrop="vxDrop(event)">' +
                 '<span class="vx-empty-hint">Arrastra personas aquí</span>' +
@@ -618,12 +618,12 @@ class VX_Admin_Dinner
                 echo '<td>' . esc_html( $emp ? $emp->post_title : '-' ) . '</td>';
                 echo '<td>' . ( $u->get_email() ? '<a href="mailto:' . esc_attr( $u->get_email() ) . '">' . esc_html( $u->get_email() ) . '</a>' : '-' ) . '</td>';
                 echo '<td>' . ( $u->get_telefono() ? '<a href="tel:' . esc_attr( $u->get_telefono() ) . '">' . esc_html( $u->get_telefono() ) . '</a>' : '-' ) . '</td>';
-                echo '<td><a href="' . esc_url( $rm_url ) . '" style="color:#dc2626" onclick="return confirm(\'¿Desasignar?\')">Quitar</a></td>';
+                echo '<td><a href="' . esc_url( $rm_url ) . '" style="color:#AD4319" onclick="return confirm(\'¿Desasignar?\')">Quitar</a></td>';
                 echo '</tr>';
             }
             echo '</tbody></table>';
         } else {
-            echo '<p style="color:#6b7280;margin:0 0 16px">Sin asistentes confirmados.</p>';
+            echo '<p style="color:#5C5F6B;margin:0 0 16px">Sin asistentes confirmados.</p>';
         }
 
         echo '<hr style="margin:12px 0">';
@@ -642,30 +642,30 @@ class VX_Admin_Dinner
                 $rech_url = wp_nonce_url( admin_url( 'admin.php?action=vx_dinner_rechaz_interes&invite_id=' . $inv['id'] . '&dinner_id=' . $post->ID ), 'vx_dinner_rechaz_interes_' . $inv['id'] );
 
                 echo '<tr>';
-                echo '<td><strong>' . $nombre . '</strong>' . ( $u ? '<br><small style="color:#6b7280">' . esc_html( $u->get_email() ) . '</small>' : '' ) . '</td>';
+                echo '<td><strong>' . $nombre . '</strong>' . ( $u ? '<br><small style="color:#5C5F6B">' . esc_html( $u->get_email() ) . '</small>' : '' ) . '</td>';
                 echo '<td>' . $tipo_label . '</td>';
                 echo '<td>' . ( $inv['mensaje'] ? esc_html( wp_trim_words( $inv['mensaje'], 10 ) ) : '-' ) . '</td>';
                 echo '<td>' . date_i18n( 'd/m/Y', $inv['fecha'] ) . '</td>';
                 echo '<td><a href="' . esc_url( $asig_url ) . '" class="button button-primary button-small" onclick="return confirm(\'¿Asignar?\')">Asignar</a> ';
-                echo '<a href="' . esc_url( $rech_url ) . '" class="button button-small" style="color:#dc2626" onclick="return confirm(\'¿Rechazar?\')">Rechazar</a></td>';
+                echo '<a href="' . esc_url( $rech_url ) . '" class="button button-small" style="color:#AD4319" onclick="return confirm(\'¿Rechazar?\')">Rechazar</a></td>';
                 echo '</tr>';
             }
             echo '</tbody></table>';
         } else {
-            echo '<p style="color:#6b7280;margin:0 0 12px">Sin solicitudes pendientes.</p>';
+            echo '<p style="color:#5C5F6B;margin:0 0 12px">Sin solicitudes pendientes.</p>';
         }
 
         // ── Historial ──
         $history = array_merge( $aceptadas, $rechazadas );
         if ( $history ) {
-            echo '<details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;color:#6b7280">Historial aceptadas/rechazadas (' . count($history) . ')</summary>';
+            echo '<details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;color:#5C5F6B">Historial aceptadas/rechazadas (' . count($history) . ')</summary>';
             echo '<ul style="margin:8px 0 0;font-size:12px">';
             foreach ( $history as $inv ) {
                 $u   = VX_User::get( $inv['user_id'] );
                 $nom = $u ? esc_html( $u->get_nombre_completo() ) : '#' . $inv['user_id'];
                 $badge = 'aceptado' === $inv['estado']
-                    ? '<span style="color:#16a34a">Aceptado</span>'
-                    : '<span style="color:#dc2626">Rechazado</span>';
+                    ? '<span style="color:#14161F">Aceptado</span>'
+                    : '<span style="color:#AD4319">Rechazado</span>';
                 echo '<li>' . $nom . ' · ' . $badge . '</li>';
             }
             echo '</ul></details>';
@@ -686,7 +686,7 @@ class VX_Admin_Dinner
         ?>
         <div style="font-size:13px">
 
-          <p style="color:#6b7280;margin:0 0 12px">Busca miembros activos y envíales invitación.</p>
+          <p style="color:#5C5F6B;margin:0 0 12px">Busca miembros activos y envíales invitación.</p>
 
           <!-- Filtros -->
           <div style="margin-bottom:10px">
@@ -711,10 +711,10 @@ class VX_Admin_Dinner
           </div>
 
           <!-- Resultados -->
-          <div id="vx-busq-results" style="max-height:400px;overflow-y:auto;border:1px solid #e2ecf3;border-radius:6px;display:none">
+          <div id="vx-busq-results" style="max-height:400px;overflow-y:auto;border:1px solid #E6E2DB;border-radius:6px;display:none">
             <div id="vx-busq-lista"></div>
           </div>
-          <p id="vx-busq-msg" style="font-size:12px;color:#6b7280;margin:6px 0 0"></p>
+          <p id="vx-busq-msg" style="font-size:12px;color:#5C5F6B;margin:6px 0 0"></p>
         </div>
 
         <script>
@@ -750,14 +750,14 @@ class VX_Admin_Dinner
             lista.innerHTML = '';
             members.forEach(function(m) {
               var row = document.createElement('div');
-              row.style.cssText = 'padding:10px 12px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:10px';
+              row.style.cssText = 'padding:10px 12px;border-bottom:1px solid #E6E2DB;display:flex;align-items:center;gap:10px';
               var alreadyAsigned = m.ya_asignado;
               row.innerHTML =
                 '<img src="' + (m.foto_url||'') + '" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">' +
                 '<div style="flex:1;min-width:0">' +
                   '<div style="font-weight:600;font-size:12px">' + m.nombre + '</div>' +
-                  '<div style="font-size:11px;color:#6b7280">' + (m.empresa||'') + (m.ciudad ? ' · ' + m.ciudad : '') + '</div>' +
-                  (m.industria ? '<div style="font-size:11px;color:#2563eb">' + m.industria + '</div>' : '') +
+                  '<div style="font-size:11px;color:#5C5F6B">' + (m.empresa||'') + (m.ciudad ? ' · ' + m.ciudad : '') + '</div>' +
+                  (m.industria ? '<div style="font-size:11px;color:#8BA3C0">' + m.industria + '</div>' : '') +
                 '</div>' +
                 '<div style="display:flex;gap:4px;flex-shrink:0">' +
                   '<a href="' + m.perfil_admin_url + '" target="_blank" class="button button-small" title="Ver perfil">Ver</a>' +
@@ -782,7 +782,7 @@ class VX_Admin_Dinner
             beforeSend:  function(xhr){ xhr.setRequestHeader('X-WP-Nonce', vxBusqNonce); },
             data:        JSON.stringify({ user_id: userId }),
             success: function(res) {
-              if ( res.success ) { btn.textContent = 'Enviado'; btn.style.background='#16a34a'; }
+              if ( res.success ) { btn.textContent = 'Enviado'; btn.style.background='#7DBF9E'; }
               else { btn.textContent = res.message || 'Error'; btn.disabled = false; }
             },
             error: function(xhr) {

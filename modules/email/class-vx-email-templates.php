@@ -18,7 +18,7 @@ class VX_Email_Templates
     public static function render_plain( string $html_body ): string
     {
         return self::wrapper(
-            '<p style="margin:0 0 20px;font-size:16px;line-height:1.7;color:#3d444e;">' . $html_body . '</p>'
+            '<p style="margin:0 0 20px;font-size:16px;line-height:1.7;color:#14161F;">' . $html_body . '</p>'
         );
     }
 
@@ -40,7 +40,7 @@ class VX_Email_Templates
             if ( empty( $buffer ) ) {
                 return;
             }
-            $blocks .= '<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3d444e;">'
+            $blocks .= '<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#14161F;">'
                 . implode( '<br>', $buffer ) . '</p>';
             $buffer = [];
         };
@@ -82,37 +82,37 @@ class VX_Email_Templates
         return '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Vitrinexo</title></head>
-<body style="margin:0;padding:0;background:#edf5fc;font-family:\'Switzer\',-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#edf5fc;">
+<body style="margin:0;padding:0;background:#DDE8F6;font-family:\'Switzer\',-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#DDE8F6;">
 <tr><td align="center" style="padding:32px 16px;">
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;">
-<tr><td style="background:#ffffff;padding:24px 32px;border-bottom:3px solid #00aeb8;">
+<tr><td style="background:#ffffff;padding:24px 32px;border-bottom:3px solid #FF7A4D;">
 <img src="' . esc_url( VX_PLUGIN_URL . 'assets/img/vitrinexo-email.png' ) . '"
      alt="Vitrinexo" width="144" height="52" style="display:block;">
 </td></tr>
 <tr><td style="padding:32px;">' . $content . '</td></tr>
-<tr><td style="background:#f8fafc;padding:20px 32px;border-top:1px solid #e2ecf3;">
-<p style="margin:0;font-size:12px;color:#8ea5b8;text-align:center;">
+<tr><td style="background:#F4F1EC;padding:20px 32px;border-top:1px solid #E6E2DB;">
+<p style="margin:0;font-size:12px;color:#5C5F6B;text-align:center;">
 © ' . wp_date('Y') . ' Vitrinexo SpA &nbsp;·&nbsp;
-<a href="' . home_url('/privacidad/') . '" style="color:#8ea5b8;text-decoration:none;">Privacidad</a> &nbsp;·&nbsp;
-<a href="' . home_url('/terminos/') . '" style="color:#8ea5b8;text-decoration:none;">Términos</a>
+<a href="' . home_url('/privacidad/') . '" style="color:#5C5F6B;text-decoration:none;">Privacidad</a> &nbsp;·&nbsp;
+<a href="' . home_url('/terminos/') . '" style="color:#5C5F6B;text-decoration:none;">Términos</a>
 </p></td></tr>
 </table></td></tr></table></body></html>';
     }
 
-    private static function btn( string $url, string $label, string $color = '#2cced6' ): string
+    private static function btn( string $url, string $label, string $color = '#FF7A4D' ): string
     {
         return '<a href="' . esc_url( $url ) . '" style="display:inline-block;background:' . $color . ';color:#ffffff;text-decoration:none;padding:13px 28px;border-radius:999px;font-size:14px;font-weight:600;">' . esc_html( $label ) . '</a>';
     }
 
     private static function h1( string $text ): string
     {
-        return '<h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#1a2335;">' . esc_html( $text ) . '</h1>';
+        return '<h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#14161F;">' . esc_html( $text ) . '</h1>';
     }
 
     private static function p( string $text ): string
     {
-        return '<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3d444e;">' . wp_kses_post( $text ) . '</p>';
+        return '<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#14161F;">' . wp_kses_post( $text ) . '</p>';
     }
 
     // ── Templates ────────────────────────────────────────────────
@@ -131,7 +131,7 @@ class VX_Email_Templates
             . '<div style="text-align:center;margin:28px 0;">'
             . self::btn( $link, 'Confirmar mi email' )
             . '</div>'
-            . self::p( '<small style="color:#8ea5b8;">Este enlace expira en 24 horas. Si no creaste esta cuenta, ignora este mensaje.</small>' );
+            . self::p( '<small style="color:#5C5F6B;">Este enlace expira en 24 horas. Si no creaste esta cuenta, ignora este mensaje.</small>' );
 
         return self::wrapper( $content );
     }
@@ -172,8 +172,8 @@ class VX_Email_Templates
         foreach ( $steps as [$icon, $title, $desc] ) {
             $steps_html .= '<tr><td style="padding:10px 0;vertical-align:top;width:44px;font-size:22px;">' . $icon . '</td>
             <td style="padding:10px 0 10px 8px;">
-            <strong style="font-size:14px;color:#1a2335;display:block;">' . $title . '</strong>
-            <span style="font-size:13px;color:#5e6b7a;">' . $desc . '</span></td></tr>';
+            <strong style="font-size:14px;color:#14161F;display:block;">' . $title . '</strong>
+            <span style="font-size:13px;color:#5C5F6B;">' . $desc . '</span></td></tr>';
         }
         $steps_html .= '</table>';
 
@@ -202,17 +202,17 @@ class VX_Email_Templates
         $url_rechazar = esc_url( add_query_arg( 'token', $d['token_rechazar'] ?? '', rest_url( VX_REST_NAMESPACE . '/conexiones/rechazar' ) ) );
 
         $ver_perfil = $perfil_url
-            ? '<p style="margin:16px 0 0;font-size:14px;"><a href="' . $perfil_url . '" style="color:#2cced6;text-decoration:none;font-weight:600;">Ver el perfil de ' . $emisor . '</a></p>'
+            ? '<p style="margin:16px 0 0;font-size:14px;"><a href="' . $perfil_url . '" style="color:#AD4319;text-decoration:none;font-weight:600;">Ver el perfil de ' . $emisor . '</a></p>'
             : '';
 
         $content = self::h1( "$receptor, tienes una solicitud de conexión" )
             . self::p( "<strong>$emisor</strong>" . ( $empresa ? " de <strong>$empresa</strong>" : '' ) . " quiere conectar contigo." )
-            . '<div style="background:#f8fafc;border-left:4px solid #2cced6;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;">'
-            . '<p style="margin:0;font-size:14px;color:#3d444e;font-style:italic;">"' . $pitch . '"</p></div>'
-            . '<p style="font-size:13px;color:#8ea5b8;margin:0 0 24px;">Sus datos de contacto se revelarán <strong>solo si aceptas</strong>. Puedes revisar su perfil público antes de decidir.</p>'
+            . '<div style="background:#F4F1EC;border-left:4px solid #FF7A4D;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;">'
+            . '<p style="margin:0;font-size:14px;color:#14161F;font-style:italic;">"' . $pitch . '"</p></div>'
+            . '<p style="font-size:13px;color:#5C5F6B;margin:0 0 24px;">Sus datos de contacto se revelarán <strong>solo si aceptas</strong>. Puedes revisar su perfil público antes de decidir.</p>'
             . '<table cellpadding="0" cellspacing="0"><tr>'
-            . '<td style="padding-right:12px;">' . self::btn( $url_aceptar, 'Aceptar', '#2ead6e' ) . '</td>'
-            . '<td><a href="' . $url_rechazar . '" style="display:inline-block;color:#8ea5b8;text-decoration:none;padding:13px 24px;border:1.5px solid #d7e4ef;border-radius:999px;font-size:14px;">Rechazar</a></td>'
+            . '<td style="padding-right:12px;">' . self::btn( $url_aceptar, 'Aceptar', '#7DBF9E' ) . '</td>'
+            . '<td><a href="' . $url_rechazar . '" style="display:inline-block;color:#5C5F6B;text-decoration:none;padding:13px 24px;border:1.5px solid #E6E2DB;border-radius:999px;font-size:14px;">Rechazar</a></td>'
             . '</tr></table>'
             . $ver_perfil;
 
@@ -241,19 +241,19 @@ class VX_Email_Templates
                 $valor = $campos[ $def['post_key'] ];
                 $texto = is_array( $valor ) ? implode( ', ', $valor ) : (string) $valor;
                 if ( '' === $texto ) continue;
-                $campos_html .= '<p style="margin:0 0 8px;font-size:14px;color:#3d444e;"><strong>' . esc_html( $def['label'] ) . ':</strong> ' . esc_html( $texto ) . '</p>';
+                $campos_html .= '<p style="margin:0 0 8px;font-size:14px;color:#14161F;"><strong>' . esc_html( $def['label'] ) . ':</strong> ' . esc_html( $texto ) . '</p>';
             }
         }
 
         $content = self::h1( "$nombre, un admin sugiere actualizar tu perfil" )
             . self::p( "Nuestro equipo revisó tu perfil y propone estos cambios para mejorar tu presencia en el directorio. Tú decides si los aceptas." )
-            . '<div style="background:#f8fafc;border-left:4px solid #2cced6;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;">'
+            . '<div style="background:#F4F1EC;border-left:4px solid #FF7A4D;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;">'
             . $campos_html
             . '</div>'
             . '<div style="text-align:center;margin:28px 0;">'
             . self::btn( $url_ver, 'Ver propuesta y responder' )
             . '</div>'
-            . self::p( '<small style="color:#8ea5b8;">No se aplicará ningún cambio hasta que tú lo apruebes desde tu cuenta.</small>' );
+            . self::p( '<small style="color:#5C5F6B;">No se aplicará ningún cambio hasta que tú lo apruebes desde tu cuenta.</small>' );
 
         return self::wrapper( $content );
     }
@@ -270,28 +270,28 @@ class VX_Email_Templates
         $mensaje  = trim( (string) ( $d['mensaje'] ?? '' ) );
 
         $mensaje_html = $mensaje
-            ? '<div style="background:#f8fafc;border-left:4px solid #2cced6;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 16px;">'
-              . '<p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#2cced6;text-transform:uppercase;letter-spacing:.5px;">Mensaje de ' . $receptor . '</p>'
-              . '<p style="margin:0;font-size:14px;color:#3d444e;font-style:italic;">"' . esc_html( $mensaje ) . '"</p>'
+            ? '<div style="background:#F4F1EC;border-left:4px solid #FF7A4D;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 16px;">'
+              . '<p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#AD4319;text-transform:uppercase;letter-spacing:.5px;">Mensaje de ' . $receptor . '</p>'
+              . '<p style="margin:0;font-size:14px;color:#14161F;font-style:italic;">"' . esc_html( $mensaje ) . '"</p>'
               . '</div>'
             : '';
 
         $links = '';
         if ( ! empty( $contacto['email'] ) ) {
-            $links .= '<a href="mailto:' . esc_attr( $contacto['email'] ) . '" style="display:inline-block;margin:4px;padding:8px 16px;background:#f0faf5;border:1.5px solid #2ead6e;border-radius:999px;font-size:13px;color:#2ead6e;text-decoration:none;">' . esc_html( $contacto['email'] ) . '</a>';
+            $links .= '<a href="mailto:' . esc_attr( $contacto['email'] ) . '" style="display:inline-block;margin:4px;padding:8px 16px;background:#CBE5D8;border:1.5px solid #7DBF9E;border-radius:999px;font-size:13px;color:#14161F;text-decoration:none;">' . esc_html( $contacto['email'] ) . '</a>';
         }
         if ( ! empty( $contacto['linkedin'] ) ) {
-            $links .= '<a href="' . esc_url( $contacto['linkedin'] ) . '" style="display:inline-block;margin:4px;padding:8px 16px;background:#eef4ff;border:1.5px solid #5100ff;border-radius:999px;font-size:13px;color:#5100ff;text-decoration:none;">in LinkedIn</a>';
+            $links .= '<a href="' . esc_url( $contacto['linkedin'] ) . '" style="display:inline-block;margin:4px;padding:8px 16px;background:#EAE7FF;border:1.5px solid #A6A0D2;border-radius:999px;font-size:13px;color:#A6A0D2;text-decoration:none;">in LinkedIn</a>';
         }
         if ( ! empty( $contacto['telefono'] ) ) {
-            $links .= '<a href="tel:' . esc_attr( str_replace( ' ', '', $contacto['telefono'] ) ) . '" style="display:inline-block;margin:4px;padding:8px 16px;background:#f8fafc;border:1.5px solid #d7e4ef;border-radius:999px;font-size:13px;color:#3d444e;text-decoration:none;">' . esc_html( $contacto['telefono'] ) . '</a>';
+            $links .= '<a href="tel:' . esc_attr( str_replace( ' ', '', $contacto['telefono'] ) ) . '" style="display:inline-block;margin:4px;padding:8px 16px;background:#F4F1EC;border:1.5px solid #E6E2DB;border-radius:999px;font-size:13px;color:#14161F;text-decoration:none;">' . esc_html( $contacto['telefono'] ) . '</a>';
         }
 
         $content = self::h1( "¡$receptor aceptó tu conexión!" )
             . $mensaje_html
             . self::p( "Ya tienen contacto mutuo. Estos son sus datos:" )
-            . '<div style="background:#f0faf5;border-radius:12px;padding:20px;margin:20px 0;">'
-            . '<p style="margin:0 0 12px;font-size:16px;font-weight:600;color:#1a2335;">' . $receptor . '</p>'
+            . '<div style="background:#CBE5D8;border-radius:12px;padding:20px;margin:20px 0;">'
+            . '<p style="margin:0 0 12px;font-size:16px;font-weight:600;color:#14161F;">' . $receptor . '</p>'
             . $links
             . '</div>'
             . '<div style="text-align:center;margin:24px 0;">'
@@ -315,11 +315,11 @@ class VX_Email_Templates
 
         $content = self::h1( "Recordatorio: $emisor espera tu respuesta" )
             . self::p( "Hace 3 días te llegó una solicitud de conexión de <strong>$emisor</strong> y aún no ha sido respondida." )
-            . '<div style="background:#f8fafc;border-left:4px solid #2cced6;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;">'
-            . '<p style="margin:0;font-size:14px;color:#3d444e;font-style:italic;">"' . $pitch . '"</p></div>'
+            . '<div style="background:#F4F1EC;border-left:4px solid #FF7A4D;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;">'
+            . '<p style="margin:0;font-size:14px;color:#14161F;font-style:italic;">"' . $pitch . '"</p></div>'
             . '<table cellpadding="0" cellspacing="0"><tr>'
-            . '<td style="padding-right:12px;">' . self::btn( $url_aceptar, 'Aceptar', '#2ead6e' ) . '</td>'
-            . '<td><a href="' . $url_rechazar . '" style="display:inline-block;color:#8ea5b8;text-decoration:none;padding:13px 24px;border:1.5px solid #d7e4ef;border-radius:999px;font-size:14px;">Rechazar</a></td>'
+            . '<td style="padding-right:12px;">' . self::btn( $url_aceptar, 'Aceptar', '#7DBF9E' ) . '</td>'
+            . '<td><a href="' . $url_rechazar . '" style="display:inline-block;color:#5C5F6B;text-decoration:none;padding:13px 24px;border:1.5px solid #E6E2DB;border-radius:999px;font-size:14px;">Rechazar</a></td>'
             . '</tr></table>';
 
         return self::wrapper( $content );
@@ -344,26 +344,26 @@ class VX_Email_Templates
             . self::p( "Esta semana encontramos <strong>$total nuevos match" . ( $total > 1 ? 'es' : '' ) . "</strong> para ti." );
 
         if ( ! empty( $seeks_matches ) ) {
-            $content .= '<p style="font-size:13px;font-weight:700;color:#2ead6e;margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Ofrecen lo que buscas</p>';
+            $content .= '<p style="font-size:13px;font-weight:700;color:#14161F;margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Ofrecen lo que buscas</p>';
             foreach ( array_slice( $seeks_matches, 0, 3 ) as $user ) {
-                $content .= '<div style="display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #e2ecf3;">'
-                    . '<div style="width:40px;height:40px;border-radius:50%;background:#e2ecf3;flex-shrink:0;overflow:hidden;">'
+                $content .= '<div style="display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #E6E2DB;">'
+                    . '<div style="width:40px;height:40px;border-radius:50%;background:#E6E2DB;flex-shrink:0;overflow:hidden;">'
                     . '<img src="' . esc_url( $user['foto_url'] ?? '' ) . '" width="40" height="40" style="border-radius:50%;object-fit:cover;"></div>'
                     . '<div style="margin-left:12px;flex:1;">'
-                    . '<strong style="font-size:14px;color:#1a2335;">' . esc_html( $user['nombre'] ?? '' ) . '</strong>'
-                    . '<div style="font-size:12px;color:#8ea5b8;">' . esc_html( $user['empresa'] ?? '' ) . '</div></div></div>';
+                    . '<strong style="font-size:14px;color:#14161F;">' . esc_html( $user['nombre'] ?? '' ) . '</strong>'
+                    . '<div style="font-size:12px;color:#5C5F6B;">' . esc_html( $user['empresa'] ?? '' ) . '</div></div></div>';
             }
         }
 
         if ( ! empty( $offers_matches ) ) {
-            $content .= '<p style="font-size:13px;font-weight:700;color:#ff4d82;margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Buscan lo que ofreces</p>';
+            $content .= '<p style="font-size:13px;font-weight:700;color:#14161F;margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Buscan lo que ofreces</p>';
             foreach ( array_slice( $offers_matches, 0, 3 ) as $user ) {
-                $content .= '<div style="display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #e2ecf3;">'
-                    . '<div style="width:40px;height:40px;border-radius:50%;background:#e2ecf3;flex-shrink:0;overflow:hidden;">'
+                $content .= '<div style="display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #E6E2DB;">'
+                    . '<div style="width:40px;height:40px;border-radius:50%;background:#E6E2DB;flex-shrink:0;overflow:hidden;">'
                     . '<img src="' . esc_url( $user['foto_url'] ?? '' ) . '" width="40" height="40" style="border-radius:50%;object-fit:cover;"></div>'
                     . '<div style="margin-left:12px;flex:1;">'
-                    . '<strong style="font-size:14px;color:#1a2335;">' . esc_html( $user['nombre'] ?? '' ) . '</strong>'
-                    . '<div style="font-size:12px;color:#8ea5b8;">' . esc_html( $user['empresa'] ?? '' ) . '</div></div></div>';
+                    . '<strong style="font-size:14px;color:#14161F;">' . esc_html( $user['nombre'] ?? '' ) . '</strong>'
+                    . '<div style="font-size:12px;color:#5C5F6B;">' . esc_html( $user['empresa'] ?? '' ) . '</div></div></div>';
             }
         }
 
@@ -411,21 +411,21 @@ class VX_Email_Templates
 
         // ── Sección cuentas pendientes ─────────────────────────────────────────
         if ( $n_cuentas > 0 ) {
-            $content .= '<p style="font-size:13px;font-weight:700;color:#b45309;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px;">'
+            $content .= '<p style="font-size:13px;font-weight:700;color:#C6C167;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px;">'
                 . 'Cuentas por aprobar (' . $n_cuentas . ')</p>';
 
             $content .= '<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:16px;">';
-            $content .= '<tr style="background:#f8fafc;">'
-                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#64748b;border-bottom:1px solid #e2ecf3">Nombre</th>'
-                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#64748b;border-bottom:1px solid #e2ecf3">Email</th>'
-                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#64748b;border-bottom:1px solid #e2ecf3">Registro</th>'
+            $content .= '<tr style="background:#F4F1EC;">'
+                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#5C5F6B;border-bottom:1px solid #E6E2DB">Nombre</th>'
+                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#5C5F6B;border-bottom:1px solid #E6E2DB">Email</th>'
+                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#5C5F6B;border-bottom:1px solid #E6E2DB">Registro</th>'
                 . '</tr>';
 
             foreach ( $lista_cuentas as $u ) {
-                $content .= '<tr style="border-bottom:1px solid #f1f5f9;">'
-                    . '<td style="padding:8px 12px;font-size:13px;color:#1a2335;">' . esc_html( $u['nombre'] ?: '(sin nombre)' ) . '</td>'
-                    . '<td style="padding:8px 12px;font-size:13px;color:#5e6b7a;">' . esc_html( $u['email'] ) . '</td>'
-                    . '<td style="padding:8px 12px;font-size:12px;color:#8ea5b8;">' . esc_html( $u['fecha'] ) . '</td>'
+                $content .= '<tr style="border-bottom:1px solid #E6E2DB;">'
+                    . '<td style="padding:8px 12px;font-size:13px;color:#14161F;">' . esc_html( $u['nombre'] ?: '(sin nombre)' ) . '</td>'
+                    . '<td style="padding:8px 12px;font-size:13px;color:#5C5F6B;">' . esc_html( $u['email'] ) . '</td>'
+                    . '<td style="padding:8px 12px;font-size:12px;color:#5C5F6B;">' . esc_html( $u['fecha'] ) . '</td>'
                     . '</tr>';
             }
             $content .= '</table>';
@@ -433,21 +433,21 @@ class VX_Email_Templates
 
         // ── Sección solicitudes Senior ─────────────────────────────────────────
         if ( $n_senior > 0 ) {
-            $content .= '<p style="font-size:13px;font-weight:700;color:#4c1d95;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px;">'
+            $content .= '<p style="font-size:13px;font-weight:700;color:#14161F;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px;">'
                 . 'Solicitudes Senior (' . $n_senior . ')</p>';
 
             $content .= '<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:16px;">';
-            $content .= '<tr style="background:#f8fafc;">'
-                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#64748b;border-bottom:1px solid #e2ecf3">Nombre</th>'
-                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#64748b;border-bottom:1px solid #e2ecf3">Email</th>'
-                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#64748b;border-bottom:1px solid #e2ecf3">Industria</th>'
+            $content .= '<tr style="background:#F4F1EC;">'
+                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#5C5F6B;border-bottom:1px solid #E6E2DB">Nombre</th>'
+                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#5C5F6B;border-bottom:1px solid #E6E2DB">Email</th>'
+                . '<th style="padding:8px 12px;text-align:left;font-size:12px;color:#5C5F6B;border-bottom:1px solid #E6E2DB">Industria</th>'
                 . '</tr>';
 
             foreach ( $lista_senior as $u ) {
-                $content .= '<tr style="border-bottom:1px solid #f1f5f9;">'
-                    . '<td style="padding:8px 12px;font-size:13px;color:#1a2335;">' . esc_html( $u['nombre'] ?: '(sin nombre)' ) . '</td>'
-                    . '<td style="padding:8px 12px;font-size:13px;color:#5e6b7a;">' . esc_html( $u['email'] ) . '</td>'
-                    . '<td style="padding:8px 12px;font-size:12px;color:#8ea5b8;">' . esc_html( $u['industria'] ?: '—' ) . '</td>'
+                $content .= '<tr style="border-bottom:1px solid #E6E2DB;">'
+                    . '<td style="padding:8px 12px;font-size:13px;color:#14161F;">' . esc_html( $u['nombre'] ?: '(sin nombre)' ) . '</td>'
+                    . '<td style="padding:8px 12px;font-size:13px;color:#5C5F6B;">' . esc_html( $u['email'] ) . '</td>'
+                    . '<td style="padding:8px 12px;font-size:12px;color:#5C5F6B;">' . esc_html( $u['industria'] ?: '—' ) . '</td>'
                     . '</tr>';
             }
             $content .= '</table>';
@@ -456,7 +456,7 @@ class VX_Email_Templates
         $content .= '<div style="text-align:center;margin:28px 0;">'
             . self::btn( $url, 'Revisar validaciones pendientes' )
             . '</div>'
-            . self::p( '<small style="color:#8ea5b8;">Este recordatorio se envía cada mañana a las 9 AM solo si hay validaciones pendientes. No recibirás este email cuando todo esté al día.</small>' );
+            . self::p( '<small style="color:#5C5F6B;">Este recordatorio se envía cada mañana a las 9 AM solo si hay validaciones pendientes. No recibirás este email cuando todo esté al día.</small>' );
 
         return self::wrapper( $content );
     }
@@ -525,7 +525,7 @@ class VX_Email_Templates
             : 'Renovar mi plan';
 
         $msg_extra = $fundador
-            ? '<p style="font-size:14px;color:#1a2335;">Como <strong>Miembro Pionero</strong> tienes acceso a un precio especial permanente. Actívalo antes de que venza tu acceso gratuito para no perder ninguna conexión.</p>'
+            ? '<p style="font-size:14px;color:#14161F;">Como <strong>Miembro Pionero</strong> tienes acceso a un precio especial permanente. Actívalo antes de que venza tu acceso gratuito para no perder ninguna conexión.</p>'
             : '';
 
         $content = self::h1( "$urgencia Tu plan vence el $fecha" )
@@ -550,7 +550,7 @@ class VX_Email_Templates
         $fecha     = esc_html( $d['fecha_vencimiento'] ?? '' );
         $fundador  = ! empty( $d['es_fundador'] );
 
-        $badge     = $fundador ? ' <span style="background:#fef3c7;color:#92400e;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;">Pionero</span>' : '';
+        $badge     = $fundador ? ' <span style="background:#FAF7C9;color:#14161F;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;">Pionero</span>' : '';
 
         $content = self::h1( "¡Tu plan $plan está activo, $nombre!" )
             . self::p( 'Bienvenido de vuelta. Tienes acceso completo a Vitrinexo' . ( $fecha ? ' hasta el <strong>' . $fecha . '</strong>' : ' sin fecha de vencimiento' ) . '.' . $badge )
@@ -574,17 +574,17 @@ class VX_Email_Templates
 
         $content = self::h1( "¡$nombre, tienes una invitación a un 4Dinner!" )
             . self::p( 'El equipo de Vitrinexo te ha reservado un cupo en la próxima cena. Aquí los detalles:' )
-            . '<div style="background:#1a2335;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
-            . '<p style="margin:0 0 4px;font-size:12px;color:#8ea5b8;text-transform:uppercase;letter-spacing:.5px;">Tu invitación</p>'
+            . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
+            . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu invitación</p>'
             . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
-            . '<p style="margin:0 0 6px;font-size:14px;color:#cdd7e2;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
-            . '<p style="margin:0;font-size:14px;color:#cdd7e2;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
+            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
+            . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
             . self::p( '4 personas, 1 mesa, sin agenda formal. Solo una conversación real entre miembros verificados de Vitrinexo.' )
             . '<div style="text-align:center;margin:28px 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">'
-            . self::btn( $d['url_aceptar'] ?? '#', 'Acepto la invitación', '#2cced6' )
+            . self::btn( $d['url_aceptar'] ?? '#', 'Acepto la invitación', '#FF7A4D' )
             . '&nbsp;'
-            . '<a href="' . esc_url( $d['url_rechazar'] ?? '#' ) . '" style="display:inline-block;background:#f1f5f9;color:#475569;text-decoration:none;padding:13px 28px;border-radius:999px;font-size:14px;font-weight:600;">No puedo asistir</a>'
+            . '<a href="' . esc_url( $d['url_rechazar'] ?? '#' ) . '" style="display:inline-block;background:#E6E2DB;color:#5C5F6B;text-decoration:none;padding:13px 28px;border-radius:999px;font-size:14px;font-weight:600;">No puedo asistir</a>'
             . '</div>'
             . self::p( '<small>Los links son de un solo uso. Si tienes dudas escríbenos a hola@vitrinexo.com</small>' );
 
@@ -605,7 +605,7 @@ class VX_Email_Templates
             . '<div style="text-align:center;margin:28px 0;">'
             . self::btn( $link, 'Crear nueva contraseña' )
             . '</div>'
-            . self::p( '<small style="color:#8ea5b8;">Este enlace es válido por 24 horas y solo puede usarse una vez. Si no solicitaste el cambio, ignora este mensaje, tu contraseña actual no cambiará.</small>' );
+            . self::p( '<small style="color:#5C5F6B;">Este enlace es válido por 24 horas y solo puede usarse una vez. Si no solicitaste el cambio, ignora este mensaje, tu contraseña actual no cambiará.</small>' );
 
         return self::wrapper( $content );
     }
@@ -623,9 +623,9 @@ class VX_Email_Templates
 
         $content = self::h1( "¡$nombre, recibimos tu interés!" )
             . self::p( "Tu interés en el <strong>4Dinner $ciudad</strong>" . ( $fecha_str ? " del $fecha_str" : '' ) . " quedó registrado." )
-            . '<div style="background:#fef9ee;border:1px solid #fde68a;border-radius:12px;padding:20px;margin:20px 0;">'
-            . '<p style="margin:0 0 6px;font-size:13px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px;">¿Qué sigue?</p>'
-            . '<ul style="margin:0;padding-left:18px;color:#78350f;font-size:14px;line-height:1.8;">'
+            . '<div style="background:#FAF7C9;border:1px solid #F2EC79;border-radius:12px;padding:20px;margin:20px 0;">'
+            . '<p style="margin:0 0 6px;font-size:13px;font-weight:700;color:#14161F;text-transform:uppercase;letter-spacing:.5px;">¿Qué sigue?</p>'
+            . '<ul style="margin:0;padding-left:18px;color:#14161F;font-size:14px;line-height:1.8;">'
             . '<li>El equipo de Vitrinexo revisa los interesados y arma las mesas.</li>'
             . '<li>Si quedas seleccionado, recibirás una <strong>invitación oficial</strong> con todos los detalles.</li>'
             . '<li>La cena es el <strong>miércoles a las 8pm</strong>, hora local.</li>'
@@ -634,7 +634,7 @@ class VX_Email_Templates
             . '<div style="text-align:center;margin:28px 0;">'
             . self::btn( home_url( '/4dinner/' ), 'Ver próximos 4Dinners' )
             . '</div>'
-            . self::p( '<small style="color:#8ea5b8;">¿No puedes asistir? Puedes retirar tu interés desde la página del evento.</small>' );
+            . self::p( '<small style="color:#5C5F6B;">¿No puedes asistir? Puedes retirar tu interés desde la página del evento.</small>' );
 
         return self::wrapper( $content );
     }
@@ -651,23 +651,23 @@ class VX_Email_Templates
         $fecha_str   = ! empty( $dinner['fecha'] ) ? date_i18n( 'l j \d\e F', (int) $dinner['fecha'] ) : 'mañana';
 
         $mesa_html = $mesa_nombre
-            ? '<div style="background:#eff6ff;border-radius:8px;padding:14px 16px;margin:20px 0;border-left:4px solid #3b82f6;">'
-              . '<p style="margin:0 0 2px;font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px;">Tu mesa asignada</p>'
-              . '<p style="margin:0;font-size:18px;font-weight:700;color:#1a2335;">' . $mesa_nombre . '</p>'
+            ? '<div style="background:#F4F1EC;border-radius:8px;padding:14px 16px;margin:20px 0;border-left:4px solid #A9C6E8;">'
+              . '<p style="margin:0 0 2px;font-size:11px;font-weight:700;color:#8BA3C0;text-transform:uppercase;letter-spacing:.5px;">Tu mesa asignada</p>'
+              . '<p style="margin:0;font-size:18px;font-weight:700;color:#14161F;">' . $mesa_nombre . '</p>'
               . '</div>'
             : '';
 
         $content = self::h1( "¡$nombre, tu 4Dinner es $fecha_str!" )
             . self::p( 'Solo quedan <strong>24 horas</strong>. Aquí un recordatorio de los detalles:' )
-            . '<div style="background:#1a2335;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
-            . '<p style="margin:0 0 4px;font-size:12px;color:#8ea5b8;text-transform:uppercase;letter-spacing:.5px;">Tu cena</p>'
+            . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
+            . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu cena</p>'
             . '<p style="margin:0 0 14px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
-            . '<p style="margin:0 0 6px;font-size:14px;color:#cdd7e2;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
-            . '<p style="margin:0;font-size:14px;color:#cdd7e2;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
+            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
+            . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
             . $mesa_html
-            . '<div style="background:#f0fdf4;border-radius:8px;padding:14px 16px;margin:20px 0;">'
-            . '<p style="margin:0;font-size:13px;color:#166534;"><strong>Recuerda:</strong> cada quien paga su consumo. Sin agenda formal, la conversación fluye sola.</p>'
+            . '<div style="background:#CBE5D8;border-radius:8px;padding:14px 16px;margin:20px 0;">'
+            . '<p style="margin:0;font-size:13px;color:#14161F;"><strong>Recuerda:</strong> cada quien paga su consumo. Sin agenda formal, la conversación fluye sola.</p>'
             . '</div>'
             . '<div style="text-align:center;margin:24px 0;">'
             . self::btn( home_url( '/4dinner/' ), 'Ver detalles del evento' )
@@ -689,17 +689,17 @@ class VX_Email_Templates
 
         $content = self::h1( "¡$nombre, ya tienes mesa asignada!" )
             . self::p( 'El equipo ya armó las mesas para el 4Dinner de <strong>' . esc_html( $dinner['ciudad'] ?? '' ) . '</strong>. Esta es tu asignación:' )
-            . '<div style="background:#eff6ff;border-radius:12px;padding:20px;margin:20px 0;border-left:4px solid #3b82f6;text-align:center;">'
-            . '<p style="margin:0 0 4px;font-size:12px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
-            . '<p style="margin:0;font-size:28px;font-weight:700;color:#1a2335;">' . $mesa_nombre . '</p>'
+            . '<div style="background:#F4F1EC;border-radius:12px;padding:20px;margin:20px 0;border-left:4px solid #A9C6E8;text-align:center;">'
+            . '<p style="margin:0 0 4px;font-size:12px;font-weight:700;color:#8BA3C0;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
+            . '<p style="margin:0;font-size:28px;font-weight:700;color:#14161F;">' . $mesa_nombre . '</p>'
             . '</div>'
-            . '<div style="background:#1a2335;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
-            . '<p style="margin:0 0 4px;font-size:12px;color:#8ea5b8;text-transform:uppercase;letter-spacing:.5px;">Detalles del evento</p>'
-            . ( $fecha_str ? '<p style="margin:0 0 6px;font-size:14px;color:#cdd7e2;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>' : '' )
-            . '<p style="margin:0;font-size:14px;color:#cdd7e2;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
+            . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
+            . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Detalles del evento</p>'
+            . ( $fecha_str ? '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>' : '' )
+            . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
-            . '<div style="background:#f0fdf4;border-radius:8px;padding:14px 16px;margin:20px 0;">'
-            . '<p style="margin:0;font-size:13px;color:#166534;"><strong>Recuerda:</strong> cada quien paga su consumo. Sin agenda formal, la conversación fluye sola.</p>'
+            . '<div style="background:#CBE5D8;border-radius:8px;padding:14px 16px;margin:20px 0;">'
+            . '<p style="margin:0;font-size:13px;color:#14161F;"><strong>Recuerda:</strong> cada quien paga su consumo. Sin agenda formal, la conversación fluye sola.</p>'
             . '</div>'
             . '<div style="text-align:center;margin:24px 0;">'
             . self::btn( home_url( '/4dinner/' ), 'Ver detalles del evento' )
@@ -718,9 +718,9 @@ class VX_Email_Templates
 
         $content = self::h1( "¡$nombre, eres parte de Vitrinexo Senior!" )
             . self::p( 'Tu solicitud para unirte a la comunidad <strong>Vitrinexo Senior</strong> fue aprobada. Ahora tienes acceso al directorio vertical de ejecutivos con trayectoria consolidada.' )
-            . '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:20px;margin:20px 0;text-align:center;">'
-            . '<p style="margin:0;font-size:18px;font-weight:700;color:#78350f;">Distintivo Senior activado</p>'
-            . '<p style="margin:6px 0 0;font-size:13px;color:#92400e;">Tu distintivo es visible en tu ficha de Vitrinexo.</p>'
+            . '<div style="background:#FAF7C9;border:1px solid #F2EC79;border-radius:12px;padding:20px;margin:20px 0;text-align:center;">'
+            . '<p style="margin:0;font-size:18px;font-weight:700;color:#14161F;">Distintivo Senior activado</p>'
+            . '<p style="margin:6px 0 0;font-size:13px;color:#14161F;">Tu distintivo es visible en tu ficha de Vitrinexo.</p>'
             . '</div>'
             . self::p( 'Explora los perfiles de tu comunidad, conecta con otros ejecutivos senior y participa en los próximos 4Dinners exclusivos.' )
             . '<div style="text-align:center;margin:28px 0;">'
@@ -741,10 +741,10 @@ class VX_Email_Templates
 
         $content = self::h1( "Lamentamos verte partir, $nombre" )
             . self::p( "Tu cuenta de Vitrinexo asociada a <strong>$email</strong> ha sido eliminada de forma permanente junto con todos tus datos, empresas y conexiones." )
-            . '<div style="background:#f8fafc;border-radius:8px;padding:14px 16px;margin:20px 0;">'
-            . '<p style="margin:0;font-size:13px;color:#5e6b7a;">Si esto fue un error o quieres volver en el futuro, puedes registrarte nuevamente en vitrinexo.com. Tu distintivo Pionero no puede ser recuperado.</p>'
+            . '<div style="background:#F4F1EC;border-radius:8px;padding:14px 16px;margin:20px 0;">'
+            . '<p style="margin:0;font-size:13px;color:#5C5F6B;">Si esto fue un error o quieres volver en el futuro, puedes registrarte nuevamente en vitrinexo.com. Tu distintivo Pionero no puede ser recuperado.</p>'
             . '</div>'
-            . self::p( 'Gracias por haber sido parte de la red. Si tienes comentarios sobre por qué decidiste irte, escríbenos a <a href="mailto:hola@vitrinexo.com" style="color:#2cced6;">hola@vitrinexo.com</a>, nos ayuda a mejorar.' );
+            . self::p( 'Gracias por haber sido parte de la red. Si tienes comentarios sobre por qué decidiste irte, escríbenos a <a href="mailto:hola@vitrinexo.com" style="color:#AD4319;">hola@vitrinexo.com</a>, nos ayuda a mejorar.' );
 
         return self::wrapper( $content );
     }
@@ -762,18 +762,18 @@ class VX_Email_Templates
 
         $content = self::h1( "No pudimos procesar tu pago, $nombre" )
             . self::p( "El cobro de tu plan <strong>$plan</strong>" . ( $fecha ? " del $fecha" : '' ) . " no pudo completarse. Tu acceso a Vitrinexo podría suspenderse pronto si no se regulariza." )
-            . '<div style="background:#fff5f5;border:1px solid #fecaca;border-radius:12px;padding:18px 20px;margin:20px 0;">'
-            . '<p style="margin:0;font-size:14px;color:#dc2626;font-weight:600;">Posibles causas:</p>'
-            . '<ul style="margin:8px 0 0;padding-left:18px;color:#7f1d1d;font-size:13px;line-height:1.8;">'
+            . '<div style="background:#E8D1C9;border:1px solid #E8D1C9;border-radius:12px;padding:18px 20px;margin:20px 0;">'
+            . '<p style="margin:0;font-size:14px;color:#AD4319;font-weight:600;">Posibles causas:</p>'
+            . '<ul style="margin:8px 0 0;padding-left:18px;color:#14161F;font-size:13px;line-height:1.8;">'
             . '<li>Fondos insuficientes en la tarjeta.</li>'
             . '<li>Tarjeta vencida o bloqueada.</li>'
             . '<li>Límite de crédito alcanzado.</li>'
             . '</ul>'
             . '</div>'
             . '<div style="text-align:center;margin:28px 0;">'
-            . self::btn( $url, 'Actualizar método de pago', '#dc2626' )
+            . self::btn( $url, 'Actualizar método de pago', '#AD4319' )
             . '</div>'
-            . self::p( 'Si el problema persiste, escríbenos a <a href="mailto:hola@vitrinexo.com" style="color:#2cced6;">hola@vitrinexo.com</a>.' );
+            . self::p( 'Si el problema persiste, escríbenos a <a href="mailto:hola@vitrinexo.com" style="color:#AD4319;">hola@vitrinexo.com</a>.' );
 
         return self::wrapper( $content );
     }
@@ -793,20 +793,20 @@ class VX_Email_Templates
             $comensales_html .= '<div style="display:flex;align-items:center;padding:8px 0;">'
                 . '<img src="' . esc_url( $c['foto_url'] ?? '' ) . '" width="36" height="36" style="border-radius:50%;object-fit:cover;flex-shrink:0;">'
                 . '<div style="margin-left:10px;">'
-                . '<strong style="font-size:14px;color:#1a2335;">' . esc_html( $c['nombre'] ?? '' ) . '</strong>'
-                . '<div style="font-size:12px;color:#8ea5b8;">' . esc_html( $c['empresa'] ?? '' ) . '</div></div></div>';
+                . '<strong style="font-size:14px;color:#14161F;">' . esc_html( $c['nombre'] ?? '' ) . '</strong>'
+                . '<div style="font-size:12px;color:#5C5F6B;">' . esc_html( $c['empresa'] ?? '' ) . '</div></div></div>';
         }
 
         $fecha_str = ! empty( $dinner['fecha'] ) ? date_i18n( 'l j \d\e F \d\e Y', $dinner['fecha'] ) : '';
 
         $content = self::h1( "¡Tu mesa para el 4Dinner está confirmada, $nombre!" )
-            . '<div style="background:#1a2335;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
-            . '<p style="margin:0 0 4px;font-size:12px;color:#8ea5b8;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
+            . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
+            . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
             . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
-            . '<p style="margin:0 0 6px;font-size:14px;color:#cdd7e2;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
-            . '<p style="margin:0;font-size:14px;color:#cdd7e2;">Lugar: ' . esc_html( $dinner['restaurante'] ?? '' ) . ' · ' . esc_html( $dinner['direccion'] ?? '' ) . '</p>'
+            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
+            . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( $dinner['restaurante'] ?? '' ) . ' · ' . esc_html( $dinner['direccion'] ?? '' ) . '</p>'
             . '</div>'
-            . '<p style="font-size:14px;font-weight:600;color:#1a2335;margin:20px 0 8px;">Tus comensales:</p>'
+            . '<p style="font-size:14px;font-weight:600;color:#14161F;margin:20px 0 8px;">Tus comensales:</p>'
             . $comensales_html
             . '<div style="text-align:center;margin:28px 0;">'
             . self::btn( home_url( '/mis-eventos/' ), 'Ver mis detalles en Mis 4Dinners' )
@@ -833,26 +833,26 @@ class VX_Email_Templates
         $url_rechazar = esc_url( $d['url_rechazar'] ?? '' );
 
         $row = function( string $label, string $value, bool $first = false ) {
-            $top = $first ? 'border-radius:6px 6px 0 0;' : 'border-top:1px solid #d7e4ef;';
-            return '<tr><td style="padding:10px 12px;' . $top . 'background:#f3f9fd;font-weight:600;color:#3d444e;width:130px">' . $label . '</td>'
-                 . '<td style="padding:10px 12px;' . $top . 'background:#f3f9fd;color:#3d444e">' . $value . '</td></tr>';
+            $top = $first ? 'border-radius:6px 6px 0 0;' : 'border-top:1px solid #E6E2DB;';
+            return '<tr><td style="padding:10px 12px;' . $top . 'background:#DDE8F6;font-weight:600;color:#14161F;width:130px">' . $label . '</td>'
+                 . '<td style="padding:10px 12px;' . $top . 'background:#DDE8F6;color:#14161F">' . $value . '</td></tr>';
         };
 
         $rows  = $row( 'Nombre',   $nombre . ' ' . $apellido, true );
-        $rows .= $row( 'Email',    '<a href="mailto:' . $email_u . '" style="color:#00aeb8">' . $email_u . '</a>' );
+        $rows .= $row( 'Email',    '<a href="mailto:' . $email_u . '" style="color:#AD4319">' . $email_u . '</a>' );
         $rows .= $row( 'Empresa',  $empresa );
         $rows .= $row( 'Cargo',    $cargo );
         $rows .= $row( 'País',     $pais );
         if ( $telefono ) $rows .= $row( 'Teléfono', $telefono );
-        if ( $linkedin ) $rows .= $row( 'LinkedIn', '<a href="' . $linkedin . '" style="color:#00aeb8">' . $linkedin . '</a>' );
+        if ( $linkedin ) $rows .= $row( 'LinkedIn', '<a href="' . $linkedin . '" style="color:#AD4319">' . $linkedin . '</a>' );
 
-        $content = '<p style="color:#5e6b7a;margin:0 0 24px">' . $intro . '</p>'
+        $content = '<p style="color:#5C5F6B;margin:0 0 24px">' . $intro . '</p>'
             . '<table style="width:100%;border-collapse:collapse;margin:0 0 32px">' . $rows . '</table>'
             . '<div style="margin:0 0 24px">'
-            . '<a href="' . $url_aprobar . '" style="display:inline-block;background:#00aeb8;color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;margin-right:12px">Aprobar</a>'
-            . '<a href="' . $url_rechazar . '" style="display:inline-block;background:#ff4d82;color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px">Rechazar</a>'
+            . '<a href="' . $url_aprobar . '" style="display:inline-block;background:#FF7A4D;color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;margin-right:12px">Aprobar</a>'
+            . '<a href="' . $url_rechazar . '" style="display:inline-block;background:#F4C6DC;color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px">Rechazar</a>'
             . '</div>'
-            . '<p style="color:#9ca3af;font-size:12px;margin:0">Estos botones son de un solo uso. Una vez utilizados no podrán volver a usarse.</p>';
+            . '<p style="color:#5C5F6B;font-size:12px;margin:0">Estos botones son de un solo uso. Una vez utilizados no podrán volver a usarse.</p>';
 
         return self::wrapper( $content );
     }

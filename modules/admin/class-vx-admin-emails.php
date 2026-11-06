@@ -177,11 +177,11 @@ class VX_Admin_Emails
 
             <div style="display:flex;gap:24px;margin-top:20px;align-items:flex-start">
                 <div style="width:220px;flex-shrink:0">
-                    <ul style="margin:0;padding:0;list-style:none;background:#fff;border:1px solid #c3c4c7;border-radius:4px;overflow:hidden">
+                    <ul style="margin:0;padding:0;list-style:none;background:#fff;border:1px solid #E6E2DB;border-radius:4px;overflow:hidden">
                     <?php foreach ( $tpls as $slug => $tpl ) : ?>
-                        <li style="border-bottom:1px solid #f0f0f0">
+                        <li style="border-bottom:1px solid #F4F1EC">
                             <a href="<?php echo esc_url( add_query_arg( [ 'page' => 'vx-email-templates', 'tpl' => $slug ], admin_url( 'admin.php' ) ) ); ?>"
-                               style="display:block;padding:10px 14px;text-decoration:none;font-weight:<?php echo $slug === $active ? '600' : '400'; ?>;background:<?php echo $slug === $active ? '#f0f8ff' : 'transparent'; ?>;color:#1d2327">
+                               style="display:block;padding:10px 14px;text-decoration:none;font-weight:<?php echo $slug === $active ? '600' : '400'; ?>;background:<?php echo $slug === $active ? '#DDE8F6' : 'transparent'; ?>;color:#14161F">
                                <?php echo esc_html( $tpl['label'] ); ?>
                             </a>
                         </li>
@@ -190,7 +190,7 @@ class VX_Admin_Emails
                 </div>
 
                 <div style="flex:1">
-                    <p style="color:#646970;margin-top:0"><?php echo esc_html( $current['desc'] ); ?> <br>
+                    <p style="color:#5C5F6B;margin-top:0"><?php echo esc_html( $current['desc'] ); ?> <br>
                     <strong>Variables disponibles:</strong> <code><?php echo esc_html( $current['vars'] ); ?></code></p>
 
                     <form method="post">
@@ -218,7 +218,7 @@ class VX_Admin_Emails
                         </p>
                     </form>
 
-                    <div style="margin-top:16px;padding-top:16px;border-top:1px solid #e0e0e0">
+                    <div style="margin-top:16px;padding-top:16px;border-top:1px solid #E6E2DB">
                         <form method="post" onsubmit="return confirm('Se enviará una prueba de esta plantilla a joao@vitrinexo.com y marcia@vitrinexo.com. ¿Continuar?');">
                             <?php wp_nonce_field( 'vx_email_templates' ); ?>
                             <input type="hidden" name="vx_email_test" value="1">

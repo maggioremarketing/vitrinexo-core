@@ -263,7 +263,7 @@ add_action( 'admin_menu', function () {
             ?>
             <div class="wrap">
                 <h1>Planes de membresía</h1>
-                <p style="color:#6b7280">Un plan por línea. El primero será el plan por defecto.</p>
+                <p style="color:#5C5F6B">Un plan por línea. El primero será el plan por defecto.</p>
                 <form method="post">
                     <?php wp_nonce_field( 'vx_planes' ); ?>
                     <input type="hidden" name="vx_planes_save" value="1">
@@ -380,41 +380,41 @@ function vx_admin_stripe_manual_page(): void {
 <title>Manual de activación Stripe | Vitrinexo</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.7; color: #1a2335; background: #f8fafc; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.7; color: #14161F; background: #F4F1EC; }
   .doc { max-width: 860px; margin: 0 auto; background: #fff; padding: 48px 56px; }
-  .doc-header { border-bottom: 3px solid #2cced6; padding-bottom: 24px; margin-bottom: 32px; }
-  .doc-header h1 { font-size: 26px; font-weight: 700; color: #1a2335; }
-  .doc-header p { color: #5e6b7a; margin-top: 6px; }
-  .doc-header .badge { display:inline-block;background:#e0faf8;color:#0e8f98;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;margin-top:8px; }
-  h2 { font-size: 17px; font-weight: 700; margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #e2ecf3; color: #1a2335; display:flex;align-items:center;gap:8px; }
-  h2 .step-num { display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#2cced6;color:#fff;font-size:13px;font-weight:700;flex-shrink:0; }
-  h3 { font-size: 14px; font-weight: 700; margin: 20px 0 8px; color: #334155; }
-  p { margin-bottom: 12px; color: #374151; }
+  .doc-header { border-bottom: 3px solid #FF7A4D; padding-bottom: 24px; margin-bottom: 32px; }
+  .doc-header h1 { font-size: 26px; font-weight: 700; color: #14161F; }
+  .doc-header p { color: #5C5F6B; margin-top: 6px; }
+  .doc-header .badge { display:inline-block;background:#FFE3D8;color:#AD4319;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;margin-top:8px; }
+  h2 { font-size: 17px; font-weight: 700; margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #E6E2DB; color: #14161F; display:flex;align-items:center;gap:8px; }
+  h2 .step-num { display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#FF7A4D;color:#fff;font-size:13px;font-weight:700;flex-shrink:0; }
+  h3 { font-size: 14px; font-weight: 700; margin: 20px 0 8px; color: #5C5F6B; }
+  p { margin-bottom: 12px; color: #14161F; }
   ul, ol { padding-left: 20px; margin-bottom: 14px; }
   li { margin-bottom: 6px; }
-  code { background: #f1f5f9; border: 1px solid #e2ecf3; border-radius: 4px; padding: 1px 6px; font-family: 'Consolas', monospace; font-size: 12px; color: #0f172a; word-break: break-all; }
-  .code-block { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 16px 20px; margin: 12px 0; font-family: 'Consolas', monospace; font-size: 12px; line-height: 1.6; overflow-x: auto; }
-  .code-block .comment { color: #64748b; }
-  .info-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #22c55e; border-radius: 4px; padding: 12px 16px; margin: 14px 0; }
-  .warn-box { background: #fff8e5; border: 1px solid #fde68a; border-left: 4px solid #f59e0b; border-radius: 4px; padding: 12px 16px; margin: 14px 0; }
-  .danger-box { background: #fff5f5; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 4px; padding: 12px 16px; margin: 14px 0; }
+  code { background: #E6E2DB; border: 1px solid #E6E2DB; border-radius: 4px; padding: 1px 6px; font-family: 'Consolas', monospace; font-size: 12px; color: #14161F; word-break: break-all; }
+  .code-block { background: #14161F; color: #E6E2DB; border-radius: 8px; padding: 16px 20px; margin: 12px 0; font-family: 'Consolas', monospace; font-size: 12px; line-height: 1.6; overflow-x: auto; }
+  .code-block .comment { color: #5C5F6B; }
+  .info-box { background: #CBE5D8; border: 1px solid #CBE5D8; border-left: 4px solid #7DBF9E; border-radius: 4px; padding: 12px 16px; margin: 14px 0; }
+  .warn-box { background: #FAF7C9; border: 1px solid #F2EC79; border-left: 4px solid #C6C167; border-radius: 4px; padding: 12px 16px; margin: 14px 0; }
+  .danger-box { background: #E8D1C9; border: 1px solid #E8D1C9; border-left: 4px solid #C58D78; border-radius: 4px; padding: 12px 16px; margin: 14px 0; }
   .field-table { width:100%; border-collapse:collapse; margin:14px 0; font-size:13px; }
-  .field-table th { background:#f8fafc; padding:8px 12px; text-align:left; font-weight:700; border:1px solid #e2ecf3; }
-  .field-table td { padding:8px 12px; border:1px solid #e2ecf3; vertical-align:top; }
+  .field-table th { background:#F4F1EC; padding:8px 12px; text-align:left; font-weight:700; border:1px solid #E6E2DB; }
+  .field-table td { padding:8px 12px; border:1px solid #E6E2DB; vertical-align:top; }
   .field-table td:first-child { font-weight:600; white-space:nowrap; }
-  .field-table .url-cell { font-family:monospace; font-size:12px; word-break:break-all; background:#f8fafc; }
+  .field-table .url-cell { font-family:monospace; font-size:12px; word-break:break-all; background:#F4F1EC; }
   .checklist { list-style:none; padding-left:0; }
   .checklist li { padding: 5px 0; padding-left: 28px; position: relative; }
-  .checklist li::before { content: ''; position: absolute; left: 4px; top: 10px; width: 11px; height: 11px; border: 1.5px solid #94a3b8; border-radius: 2px; }
-  .print-btn { position:fixed; top:20px; right:20px; background:#2cced6; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.15); z-index:999; }
-  .print-btn:hover { background:#22a1a7; }
-  .toc { background:#f8fafc; border:1px solid #e2ecf3; border-radius:6px; padding:16px 20px; margin:20px 0 32px; }
-  .toc h3 { margin:0 0 10px; font-size:13px; color:#64748b; text-transform:uppercase; letter-spacing:.06em; }
+  .checklist li::before { content: ''; position: absolute; left: 4px; top: 10px; width: 11px; height: 11px; border: 1.5px solid #5C5F6B; border-radius: 2px; }
+  .print-btn { position:fixed; top:20px; right:20px; background:#FF7A4D; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.15); z-index:999; }
+  .print-btn:hover { background:#F26A3B; }
+  .toc { background:#F4F1EC; border:1px solid #E6E2DB; border-radius:6px; padding:16px 20px; margin:20px 0 32px; }
+  .toc h3 { margin:0 0 10px; font-size:13px; color:#5C5F6B; text-transform:uppercase; letter-spacing:.06em; }
   .toc ol { margin:0; padding-left:18px; }
   .toc li { margin-bottom:4px; }
-  .toc a { color:#0e8f98; text-decoration:none; }
+  .toc a { color:#AD4319; text-decoration:none; }
   .toc a:hover { text-decoration:underline; }
-  .footer-doc { margin-top:48px; padding-top:20px; border-top:1px solid #e2ecf3; text-align:center; color:#94a3b8; font-size:12px; }
+  .footer-doc { margin-top:48px; padding-top:20px; border-top:1px solid #E6E2DB; text-align:center; color:#5C5F6B; font-size:12px; }
   @media print {
     body { background:#fff; }
     .print-btn { display:none; }
@@ -751,18 +751,18 @@ function vx_admin_tags_page(): void {
     ?>
     <div class="wrap">
     <h1>Tags sugeridos</h1>
-    <p style="color:#646970">Estos tags aparecen como sugerencias cuando un miembro edita su perfil (sección Ofrece / Busca). Los miembros también pueden escribir tags propios.</p>
+    <p style="color:#5C5F6B">Estos tags aparecen como sugerencias cuando un miembro edita su perfil (sección Ofrece / Busca). Los miembros también pueden escribir tags propios.</p>
 
     <?php if ( ! empty( $_GET['vx_ok'] ) ) : ?>
     <div class="notice notice-success is-dismissible"><p>Tags guardados correctamente.</p></div>
     <?php endif; ?>
 
     <div style="max-width:720px;margin-top:20px">
-      <div id="vx-tags-wrap" style="display:flex;flex-wrap:wrap;gap:8px;padding:16px;border:1px solid #c3c4c7;border-radius:4px;background:#fff;min-height:60px;margin-bottom:16px">
+      <div id="vx-tags-wrap" style="display:flex;flex-wrap:wrap;gap:8px;padding:16px;border:1px solid #E6E2DB;border-radius:4px;background:#fff;min-height:60px;margin-bottom:16px">
         <?php foreach ( $tags as $tag ) : ?>
-        <span class="vx-tag-chip" style="display:inline-flex;align-items:center;gap:6px;background:#f0f6fc;border:1px solid #c3ddf8;border-radius:99px;padding:5px 12px;font-size:13px">
+        <span class="vx-tag-chip" style="display:inline-flex;align-items:center;gap:6px;background:#F4F1EC;border:1px solid #DDE8F6;border-radius:99px;padding:5px 12px;font-size:13px">
           <?php echo esc_html( $tag ); ?>
-          <button type="button" onclick="vxRemoveTag(this)" style="border:none;background:none;cursor:pointer;color:#9ca3af;font-size:14px;line-height:1;padding:0" title="Eliminar">×</button>
+          <button type="button" onclick="vxRemoveTag(this)" style="border:none;background:none;cursor:pointer;color:#5C5F6B;font-size:14px;line-height:1;padding:0" title="Eliminar">×</button>
         </span>
         <?php endforeach; ?>
       </div>
@@ -778,7 +778,7 @@ function vx_admin_tags_page(): void {
         <input type="hidden" name="action" value="vx_save_tags">
         <input type="hidden" name="vx_tags_json" id="vx-tags-json" value="<?php echo esc_attr( wp_json_encode( $tags ) ); ?>">
         <button type="button" class="button button-primary" onclick="vxGuardarTags()">Guardar tags</button>
-        <span style="margin-left:12px;font-size:13px;color:#646970" id="vx-tag-count"><?php echo count( $tags ); ?> tags</span>
+        <span style="margin-left:12px;font-size:13px;color:#5C5F6B" id="vx-tag-count"><?php echo count( $tags ); ?> tags</span>
       </form>
     </div>
     </div>
@@ -793,8 +793,8 @@ function vx_admin_tags_page(): void {
         tags.forEach(function (t, i) {
           var s = document.createElement('span');
           s.className = 'vx-tag-chip';
-          s.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:#f0f6fc;border:1px solid #c3ddf8;border-radius:99px;padding:5px 12px;font-size:13px';
-          s.innerHTML = escHtml(t) + '<button type="button" onclick="vxRemoveTag(this)" data-idx="'+i+'" style="border:none;background:none;cursor:pointer;color:#9ca3af;font-size:14px;line-height:1;padding:0" title="Eliminar">×</button>';
+          s.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:#F4F1EC;border:1px solid #DDE8F6;border-radius:99px;padding:5px 12px;font-size:13px';
+          s.innerHTML = escHtml(t) + '<button type="button" onclick="vxRemoveTag(this)" data-idx="'+i+'" style="border:none;background:none;cursor:pointer;color:#5C5F6B;font-size:14px;line-height:1;padding:0" title="Eliminar">×</button>';
           wrap.appendChild(s);
         });
         document.getElementById('vx-tag-count').textContent = tags.length + ' tags';
@@ -931,31 +931,31 @@ function vx_admin_validaciones_page(): void {
     <?php endif; ?>
 
     <style>
-    .vx-val-section { background:#fff; border:1px solid #c3c4c7; border-radius:4px; margin-bottom:24px; }
-    .vx-val-section-head { padding:14px 18px; border-bottom:1px solid #f0f0f1; display:flex; align-items:center; gap:10px; }
+    .vx-val-section { background:#fff; border:1px solid #E6E2DB; border-radius:4px; margin-bottom:24px; }
+    .vx-val-section-head { padding:14px 18px; border-bottom:1px solid #F4F1EC; display:flex; align-items:center; gap:10px; }
     .vx-val-section-head h2 { margin:0; font-size:14px; font-weight:600; }
-    .vx-val-badge { display:inline-flex; align-items:center; justify-content:center; background:#d63638; color:#fff; border-radius:10px; min-width:20px; height:20px; font-size:11px; font-weight:700; padding:0 6px; line-height:1; }
-    .vx-val-badge--ok { background:#00a32a; }
-    .vx-val-empty { padding:24px 18px; color:#646970; font-style:italic; font-size:13px; }
+    .vx-val-badge { display:inline-flex; align-items:center; justify-content:center; background:#AD4319; color:#fff; border-radius:10px; min-width:20px; height:20px; font-size:11px; font-weight:700; padding:0 6px; line-height:1; }
+    .vx-val-badge--ok { background:#7DBF9E; }
+    .vx-val-empty { padding:24px 18px; color:#5C5F6B; font-style:italic; font-size:13px; }
     .vx-val-table { width:100%; border-collapse:collapse; font-size:13px; }
-    .vx-val-table th { background:#f6f7f7; padding:10px 14px; text-align:left; font-weight:600; color:#1d2327; border-bottom:1px solid #c3c4c7; white-space:nowrap; }
-    .vx-val-table td { padding:12px 14px; border-bottom:1px solid #f0f0f1; vertical-align:middle; }
+    .vx-val-table th { background:#F4F1EC; padding:10px 14px; text-align:left; font-weight:600; color:#14161F; border-bottom:1px solid #E6E2DB; white-space:nowrap; }
+    .vx-val-table td { padding:12px 14px; border-bottom:1px solid #F4F1EC; vertical-align:middle; }
     .vx-val-table tr:last-child td { border-bottom:none; }
-    .vx-val-table tr:hover td { background:#f6f7f7; }
-    .vx-val-name { font-weight:600; color:#1d2327; }
-    .vx-val-email { color:#646970; font-size:12px; margin-top:2px; }
-    .vx-val-date { color:#646970; white-space:nowrap; }
+    .vx-val-table tr:hover td { background:#F4F1EC; }
+    .vx-val-name { font-weight:600; color:#14161F; }
+    .vx-val-email { color:#5C5F6B; font-size:12px; margin-top:2px; }
+    .vx-val-date { color:#5C5F6B; white-space:nowrap; }
     .vx-val-actions { display:flex; gap:6px; flex-wrap:wrap; }
-    .vx-val-btn-approve { background:#00a32a; color:#fff; border:none; padding:5px 12px; border-radius:3px; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-block; }
-    .vx-val-btn-approve:hover { background:#007521; color:#fff; }
-    .vx-val-btn-reject { background:#fff; color:#d63638; border:1px solid #d63638; padding:5px 12px; border-radius:3px; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-block; }
-    .vx-val-btn-reject:hover { background:#fcf0f1; }
-    .vx-val-btn-view { background:#f6f7f7; color:#1d2327; border:1px solid #c3c4c7; padding:5px 10px; border-radius:3px; font-size:12px; cursor:pointer; text-decoration:none; display:inline-block; }
-    .vx-val-btn-view:hover { background:#ececec; }
+    .vx-val-btn-approve { background:#7DBF9E; color:#fff; border:none; padding:5px 12px; border-radius:3px; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-block; }
+    .vx-val-btn-approve:hover { background:#689D85; color:#fff; }
+    .vx-val-btn-reject { background:#fff; color:#AD4319; border:1px solid #AD4319; padding:5px 12px; border-radius:3px; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-block; }
+    .vx-val-btn-reject:hover { background:#E8D1C9; }
+    .vx-val-btn-view { background:#F4F1EC; color:#14161F; border:1px solid #E6E2DB; padding:5px 10px; border-radius:3px; font-size:12px; cursor:pointer; text-decoration:none; display:inline-block; }
+    .vx-val-btn-view:hover { background:#E6E2DB; }
     .vx-val-tipo { display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 7px; border-radius:3px; }
-    .vx-val-tipo--manual { background:#fff8e5; color:#996800; }
-    .vx-val-tipo--senior { background:#f0ebff; color:#4c1d95; }
-    .vx-val-onboarding { font-size:11px; color:#646970; }
+    .vx-val-tipo--manual { background:#FAF7C9; color:#C6C167; }
+    .vx-val-tipo--senior { background:#EAE7FF; color:#14161F; }
+    .vx-val-onboarding { font-size:11px; color:#5C5F6B; }
     </style>
 
     <?php
@@ -970,7 +970,7 @@ function vx_admin_validaciones_page(): void {
             <?php else : ?>
             <span class="vx-val-badge vx-val-badge--ok"><span class="dashicons dashicons-yes" aria-hidden="true"></span></span>
             <?php endif; ?>
-            <span style="color:#646970;font-size:12px;margin-left:auto">Usuarios con correo genérico (@gmail, @hotmail…) que requieren aprobación manual</span>
+            <span style="color:#5C5F6B;font-size:12px;margin-left:auto">Usuarios con correo genérico (@gmail, @hotmail…) que requieren aprobación manual</span>
         </div>
 
         <?php if ( empty( $pendientes ) ) : ?>
@@ -1023,21 +1023,21 @@ function vx_admin_validaciones_page(): void {
                 </td>
                 <td>
                     <?php if ( $empresa_nombre ) : ?>
-                        <div style="font-weight:600;color:#1d2327"><?php echo esc_html( $empresa_nombre ); ?></div>
+                        <div style="font-weight:600;color:#14161F"><?php echo esc_html( $empresa_nombre ); ?></div>
                     <?php else : ?>
-                        <span style="color:#bbb;font-style:italic;font-size:12px">Sin completar</span>
+                        <span style="color:#5C5F6B;font-style:italic;font-size:12px">Sin completar</span>
                     <?php endif; ?>
                     <?php if ( $cargo ) : ?>
-                        <div style="font-size:12px;color:#646970"><?php echo esc_html( $cargo ); ?></div>
+                        <div style="font-size:12px;color:#5C5F6B"><?php echo esc_html( $cargo ); ?></div>
                     <?php endif; ?>
                     <?php if ( $industria ) : ?>
                         <div style="margin-top:4px"><span class="vx-val-tipo vx-val-tipo--manual"><?php echo esc_html( $industria ); ?></span></div>
                     <?php endif; ?>
                 </td>
-                <td style="font-size:12px;color:#646970;white-space:nowrap">
+                <td style="font-size:12px;color:#5C5F6B;white-space:nowrap">
                     <?php
                     $ubicacion_parts = array_filter( [ $ciudad, $pais ] );
-                    echo $ubicacion_parts ? esc_html( implode( ', ', $ubicacion_parts ) ) : '<span style="color:#bbb;font-style:italic">-</span>';
+                    echo $ubicacion_parts ? esc_html( implode( ', ', $ubicacion_parts ) ) : '<span style="color:#5C5F6B;font-style:italic">-</span>';
                     ?>
                 </td>
                 <td class="vx-val-date"><?php echo esc_html( $reg_date ); ?></td>
@@ -1080,7 +1080,7 @@ function vx_admin_validaciones_page(): void {
             <?php else : ?>
             <span class="vx-val-badge vx-val-badge--ok"><span class="dashicons dashicons-yes" aria-hidden="true"></span></span>
             <?php endif; ?>
-            <span style="color:#646970;font-size:12px;margin-left:auto">Miembros que solicitaron verificación de su trayectoria Senior (ya aparecen en la comunidad; la verificación agrega el distintivo)</span>
+            <span style="color:#5C5F6B;font-size:12px;margin-left:auto">Miembros que solicitaron verificación de su trayectoria Senior (ya aparecen en la comunidad; la verificación agrega el distintivo)</span>
         </div>
 
         <?php if ( empty( $senior_reqs ) ) : ?>
@@ -1155,7 +1155,7 @@ function vx_admin_validaciones_page(): void {
     </div>
 
     <?php if ( empty( $pendientes ) && empty( $senior_reqs ) ) : ?>
-    <div style="text-align:center;padding:40px 20px;color:#646970">
+    <div style="text-align:center;padding:40px 20px;color:#5C5F6B">
         
         <p style="font-size:16px;font-weight:600;margin:8px 0 4px">Todo al día</p>
         <p style="margin:0">No hay validaciones pendientes en este momento.</p>
@@ -1232,17 +1232,17 @@ function vx_admin_ajustes_page(): void {
 
         <!-- Resumen -->
         <div style="display:flex;gap:16px;margin:16px 0;flex-wrap:wrap">
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px 24px;text-align:center">
-                <div style="font-size:28px;font-weight:700;color:#16a34a"><?php echo $total_fundadores; ?></div>
-                <div style="color:#6b7280;font-size:13px">Miembros Pioneros en total</div>
+            <div style="background:#fff;border:1px solid #E6E2DB;border-radius:8px;padding:16px 24px;text-align:center">
+                <div style="font-size:28px;font-weight:700;color:#14161F"><?php echo $total_fundadores; ?></div>
+                <div style="color:#5C5F6B;font-size:13px">Miembros Pioneros en total</div>
             </div>
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px 24px;text-align:center">
-                <div style="font-size:28px;font-weight:700;color:#2563eb"><?php echo $fundadores_gratis; ?></div>
-                <div style="color:#6b7280;font-size:13px">En plan gratuito activo</div>
+            <div style="background:#fff;border:1px solid #E6E2DB;border-radius:8px;padding:16px 24px;text-align:center">
+                <div style="font-size:28px;font-weight:700;color:#8BA3C0"><?php echo $fundadores_gratis; ?></div>
+                <div style="color:#5C5F6B;font-size:13px">En plan gratuito activo</div>
             </div>
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px 24px;text-align:center">
-                <div style="font-size:28px;font-weight:700;color:#9333ea"><?php echo $total_fundadores - $fundadores_gratis; ?></div>
-                <div style="color:#6b7280;font-size:13px">En plan de pago</div>
+            <div style="background:#fff;border:1px solid #E6E2DB;border-radius:8px;padding:16px 24px;text-align:center">
+                <div style="font-size:28px;font-weight:700;color:#A6A0D2"><?php echo $total_fundadores - $fundadores_gratis; ?></div>
+                <div style="color:#5C5F6B;font-size:13px">En plan de pago</div>
             </div>
         </div>
 
@@ -1271,11 +1271,11 @@ function vx_admin_ajustes_page(): void {
                                value="<?php echo esc_attr( $fin_date ); ?>"
                                style="margin-right:12px">
                         <?php if ( $fin_ts ) : ?>
-                            <span style="color:#f59e0b;font-weight:600">
+                            <span style="color:#C6C167;font-weight:600">
                                 Los Fundadores en plan gratuito vencen el <?php echo date_i18n( 'd/m/Y', $fin_ts ); ?>
                             </span>
                         <?php else : ?>
-                            <span style="color:#6b7280">Sin fecha definida, acceso gratuito indefinido</span>
+                            <span style="color:#5C5F6B">Sin fecha definida, acceso gratuito indefinido</span>
                         <?php endif; ?>
                         <p class="description">
                             Cuando llegue esta fecha, los Fundadores en plan gratuito quedarán con <em>plan_estado = vencido</em>
@@ -1284,7 +1284,7 @@ function vx_admin_ajustes_page(): void {
                         <label style="margin-top:8px;display:block">
                             <input type="checkbox" name="vx_aplicar_vencimiento" value="1">
                             Aplicar esta fecha a todos los Fundadores en plan gratuito ahora mismo
-                            <span style="color:#6b7280">(actualiza <?php echo $fundadores_gratis; ?> usuarios)</span>
+                            <span style="color:#5C5F6B">(actualiza <?php echo $fundadores_gratis; ?> usuarios)</span>
                         </label>
                     </td>
                 </tr>
@@ -1328,7 +1328,7 @@ function vx_admin_ajustes_page(): void {
                         <input type="number" name="<?php echo esc_attr($opt); ?>"
                                value="<?php echo esc_attr( get_option($opt, $default) ); ?>"
                                step="0.01" min="0" style="width:100px">
-                        <span style="color:#6b7280"><?php echo esc_html( get_option('vx_moneda','USD') ); ?>/mes o año</span>
+                        <span style="color:#5C5F6B"><?php echo esc_html( get_option('vx_moneda','USD') ); ?>/mes o año</span>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -1358,7 +1358,7 @@ function vx_admin_ajustes_page(): void {
                                class="regular-text"
                                autocomplete="off">
                         <?php if ( $val ) : ?>
-                        <span style="color:#16a34a;font-size:12px">Configurada</span>
+                        <span style="color:#14161F;font-size:12px">Configurada</span>
                         <?php endif; ?>
                     </td>
                 </tr>

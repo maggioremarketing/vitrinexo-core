@@ -50,12 +50,12 @@ class VX_Admin_Connections
             case 'vx_estado':
                 $estado = get_post_meta( $post_id, VX_Connection_Meta::ESTADO, true );
                 $colors = [
-                    'pendiente'    => '#f59e0b',
-                    'aceptado'     => '#22c55e',
-                    'rechazado'    => '#ef4444',
-                    'sin_respuesta'=> '#6b7280',
+                    'pendiente'    => '#C6C167',
+                    'aceptado'     => '#7DBF9E',
+                    'rechazado'    => '#C58D78',
+                    'sin_respuesta'=> '#5C5F6B',
                 ];
-                $color = $colors[ $estado ] ?? '#999';
+                $color = $colors[ $estado ] ?? '#5C5F6B';
                 echo '<span style="color:' . $color . ';font-weight:600">' . esc_html( $estado ) . '</span>';
                 break;
 

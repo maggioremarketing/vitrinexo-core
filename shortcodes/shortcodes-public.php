@@ -256,7 +256,7 @@ add_shortcode( 'vx_landing', function (): string {
                                 <span style="font-size:13px;color:var(--color-text-muted)">Miembros Pioneros</span>
                                 <span id="founderCountText" style="font-size:13px;font-weight:600;color:var(--color-primary)">0 / 100</span>
                             </div>
-                            <div style="background:#e8f0fe;border-radius:999px;height:6px;overflow:hidden">
+                            <div style="background:var(--celeste-suave);border-radius:999px;height:6px;overflow:hidden">
                                 <div id="founderProgressBar" style="height:100%;width:0%;background:var(--color-primary);border-radius:999px;transition:width .6s ease"></div>
                             </div>
                             <p id="founderCountSub" style="font-size:12px;color:var(--color-text-muted);margin:4px 0 0"></p>
@@ -504,10 +504,10 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
             <div class="d-flex align-items-center gap-2 mb-3">
               <span class="badge-hero-4dinner">Evento presencial</span>
             </div>
-            <h1 style="font-size:clamp(2.2rem,5vw,3.5rem);font-weight:400;letter-spacing:var(--ls-hero);color:#78350f;line-height:1.1;margin-bottom:1rem">
+            <h1 style="font-size:clamp(2.2rem,5vw,3.5rem);font-weight:400;letter-spacing:var(--ls-hero);color:var(--color-text-primary);line-height:1.1;margin-bottom:1rem">
               4 personas.<br>1 mesa.<br><em style="font-style:italic">1 conversación real.</em>
             </h1>
-            <p style="font-size:1rem;color:#92400e;line-height:1.7;max-width:480px;margin-bottom:2rem">
+            <p style="font-size:1rem;color:var(--color-text-primary);line-height:1.7;max-width:480px;margin-bottom:2rem">
               Cada miércoles a las 8pm, cuatro miembros de Vitrinexo se sientan a cenar en una ciudad de Hispanoamérica. Sin agenda formal, sin pitches. Solo personas que ya se conocen por sus fichas y quieren dar el paso a lo presencial.
             </p>
             <div class="d-flex gap-3 flex-wrap">
@@ -535,7 +535,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
                   <div class="stat-label-hero">ciudades activas</div>
                 </div>
               </div>
-              <hr style="border-color:#fde68a;margin:1.25rem 0">
+              <hr style="border-color:var(--mantequilla);margin:1.25rem 0">
               <div class="d-flex flex-column gap-2">
                 <div class="d-flex align-items-center gap-2 checklist-item-hero"><i class="ti ti-circle-check checklist-icon-hero"></i> Cada quien paga su consumo, sin costo de acceso</div>
                 <div class="d-flex align-items-center gap-2 checklist-item-hero"><i class="ti ti-circle-check checklist-icon-hero"></i> Perfiles mixtos de industria, nada de silos</div>
@@ -690,10 +690,10 @@ add_shortcode( 'vx_blog', function (): string {
     $gradients = [
         'linear-gradient(135deg,var(--lavanda-hover),var(--lavanda))',
         'linear-gradient(135deg,var(--rosa-hover),var(--rosa))',
-        'linear-gradient(135deg,#f59e0b,#f97316)',
-        'linear-gradient(135deg,#0ea5e9,#6366f1)',
+        'linear-gradient(135deg,var(--mantequilla-presion),var(--coral))',
+        'linear-gradient(135deg,var(--celeste-presion),var(--lavanda-presion))',
         'linear-gradient(135deg,var(--salvia-presion),var(--coral))',
-        'linear-gradient(135deg,#be185d,#ec4899)',
+        'linear-gradient(135deg,var(--rosa-presion),var(--rosa-presion))',
     ];
 
     ob_start();

@@ -250,13 +250,13 @@ add_shortcode( 'vx_onboarding', function (): string {
       <div class="mb-3">
         <label class="form-label-vx">Nombre de la empresa <span class="form-hint d-inline">(desde tu registro)</span></label>
         <input type="text" id="ob3-empresa-nombre" class="form-control-vx" readonly
-               style="background:var(--color-surface-2, #f5f7fa);cursor:not-allowed"
+               style="background:var(--color-surface-2, var(--hueso));cursor:not-allowed"
                value="<?php echo esc_attr( $ob3_empresa_nombre ); ?>">
       </div>
       <div class="mb-3">
         <label class="form-label-vx">Tu cargo / rol <span class="form-hint d-inline">(desde tu registro)</span></label>
         <input type="text" id="ob3-empresa-cargo" class="form-control-vx" readonly
-               style="background:var(--color-surface-2, #f5f7fa);cursor:not-allowed"
+               style="background:var(--color-surface-2, var(--hueso));cursor:not-allowed"
                value="<?php echo esc_attr( $ob3_empresa_cargo ); ?>">
       </div>
       <div class="mb-3">
@@ -312,7 +312,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       <!-- Qué ofreces -->
       <div class="mb-4">
         <div class="d-flex align-items-center gap-2 mb-2">
-          <span class="badge-vx" style="background:#e8f8f0;color:#166534;font-size:11px;font-weight:700">OFRECES</span>
+          <span class="badge-vx" style="background:var(--salvia-suave);color:var(--salvia-presion);font-size:11px;font-weight:700">OFRECES</span>
           <span style="font-size:12px;color:var(--color-text-secondary)">Elige los que apliquen.¿En qué puedes ayudar a otros?</span>
         </div>
         <div class="d-flex flex-wrap gap-2 mb-2" id="tags-offer">
@@ -334,7 +334,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       <!-- Qué buscas -->
       <div class="mb-4">
         <div class="d-flex align-items-center gap-2 mb-2">
-          <span class="badge-vx" style="background:#fce8f4;color:#831843;font-size:11px;font-weight:700">BUSCAS</span>
+          <span class="badge-vx" style="background:var(--rosa-suave);color:var(--color-text-primary);font-size:11px;font-weight:700">BUSCAS</span>
           <span style="font-size:12px;color:var(--color-text-secondary)">Elige los que apliquen.¿Qué necesitas de la red?</span>
         </div>
         <div class="d-flex flex-wrap gap-2 mb-2" id="tags-seek">
@@ -2706,7 +2706,7 @@ add_shortcode( 'vx_configuracion', function (): string {
               <h2 class="section-title-sm mb-3">Tu membresía actual</h2>
               <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
                 <?php if ( $es_fundador ) : ?>
-                <span style="background:#fef3c7;color:#92400e;border-radius:6px;padding:4px 12px;font-weight:700;font-size:14px">Miembro Pionero</span>
+                <span style="background:var(--mantequilla-suave);color:var(--color-text-primary);border-radius:6px;padding:4px 12px;font-weight:700;font-size:14px">Miembro Pionero</span>
                 <?php endif; ?>
                 <span class="badge-vx <?php echo $is_vencido ? 'badge-neutral' : 'badge-primary'; ?>" style="font-size:13px">
                   <?php echo esc_html( ucfirst( $plan_actual ) ); ?>
@@ -2790,9 +2790,9 @@ add_shortcode( 'vx_configuracion', function (): string {
               <p class="cta-card__desc mb-4">Comunidades a las que perteneces en Vitrinexo.</p>
               <?php
               $coms_map = [
-                  'out2b'  => [ 'LGBTQ+',  'ti-rainbow',       'color:#a855f7' ],
-                  'woman'  => [ 'Woman',  'ti-gender-female', 'color:#ec4899' ],
-                  'senior' => [ 'Senior', 'ti-award',         'color:#d97706' ],
+                  'out2b'  => [ 'LGBTQ+',  'ti-rainbow',       'color:var(--lavanda-presion)' ],
+                  'woman'  => [ 'Woman',  'ti-gender-female', 'color:var(--rosa-presion)' ],
+                  'senior' => [ 'Senior', 'ti-award',         'color:var(--mantequilla-presion)' ],
               ];
               foreach ( $coms_map as $id => [ $nombre, $icon, $style ] ) :
                   $activa = $user->is_in_community( $id );
@@ -2872,7 +2872,7 @@ add_shortcode( 'vx_configuracion', function (): string {
               </div>
               <div id="vx-delete-msg" class="d-none mt-3 small"></div>
               <button type="button" class="btn-vx btn-vx-sm mt-3" id="vx-btn-delete-account"
-                      style="background:var(--rosa);color:#fff;border:none">
+                      style="background:var(--rosa);color:var(--blanco);border:none">
                 <i class="ti ti-trash me-1"></i>Eliminar mi cuenta definitivamente
               </button>
               <p class="text-xs-muted mt-2">Si tienes dudas, escríbenos a hola@vitrinexo.com antes de proceder.</p>
@@ -3271,14 +3271,14 @@ add_shortcode( 'vx_perfil', function (): string {
           }
           if ( $coms_activas ) :
             $com_labels = [
-              'out2b'  => [ 'LGBTQ+',  '#a78bfa' ],
-              'woman'  => [ 'Woman',  '#f9a8d4' ],
-              'senior' => [ 'Senior', '#fcd34d' ],
+              'out2b'  => [ 'LGBTQ+',  'var(--lavanda)' ],
+              'woman'  => [ 'Woman',  'var(--rosa)' ],
+              'senior' => [ 'Senior', 'var(--mantequilla)' ],
             ];
           ?>
           <div class="d-flex gap-1 flex-wrap mt-2">
             <?php foreach ( $coms_activas as $com ) :
-              [ $lbl, $color ] = $com_labels[ $com ] ?? [ ucfirst($com), '#ccc' ];
+              [ $lbl, $color ] = $com_labels[ $com ] ?? [ ucfirst($com), 'var(--linea)' ];
             ?>
             <span style="background:<?php echo esc_attr( $color ); ?>22;color:<?php echo esc_attr( $color ); ?>;border:1px solid <?php echo esc_attr( $color ); ?>;border-radius:999px;font-size:11px;font-weight:600;padding:2px 10px"><?php echo esc_html( $lbl ); ?></span>
             <?php endforeach; ?>
@@ -4751,8 +4751,8 @@ add_shortcode( 'vx_4dinner', function (): string {
     $gradients = [
         'linear-gradient(135deg,var(--salvia-hover),var(--salvia))',
         'linear-gradient(135deg,var(--lavanda-hover),var(--lavanda))',
-        'linear-gradient(135deg,#f59e0b,#f97316)',
-        'linear-gradient(135deg,#0ea5e9,#6366f1)',
+        'linear-gradient(135deg,var(--mantequilla-presion),var(--coral))',
+        'linear-gradient(135deg,var(--celeste-presion),var(--lavanda-presion))',
     ];
 
     ob_start();
@@ -4860,7 +4860,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                             <span><i class="ti ti-map-pin me-1 <?php echo ( $completo || $deadline_passed ) ? '' : 'ic-success'; ?>"></i><?php echo esc_html( $dinner->get_ciudad() . ', ' . $dinner->get_pais() ); ?></span>
                             <span><i class="ti ti-clock me-1 <?php echo ( $completo || $deadline_passed ) ? '' : 'ic-success'; ?>"></i>8:00 pm</span>
                             <?php if ( $deadline_ts && ! $user_asig ) : ?>
-                            <span style="color:<?php echo $deadline_passed ? '#dc2626' : '#b45309'; ?>">
+                            <span style="color:<?php echo $deadline_passed ? 'var(--terracota-presion)' : 'var(--mantequilla-presion)'; ?>">
                                 <i class="ti ti-calendar-x me-1"></i>
                                 <?php if ( $deadline_passed ) : ?>
                                 Inscripciones cerradas
@@ -5332,24 +5332,24 @@ add_shortcode( 'vx_mis_eventos', function (): string {
 
         <div class="card-vx p-0 overflow-hidden">
             <!-- Cabecera -->
-            <div style="background:#fef9ee;border-bottom:3px solid #f59e0b;padding:1.25rem 1.5rem">
+            <div style="background:var(--mantequilla-suave);border-bottom:3px solid var(--mantequilla-presion);padding:1.25rem 1.5rem">
                 <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
                     <div>
                         <div class="d-flex align-items-center gap-2 mb-1">
                             <span class="badge-vx badge-success" style="font-size:11px">Estás confirmado</span>
                             <?php if ( 'confirmado' === $pd_estado ) : ?>
-                            <span class="badge-vx" style="background:#fde68a;color:#92400e;font-size:11px">Cena confirmada</span>
+                            <span class="badge-vx" style="background:var(--mantequilla);color:var(--color-text-primary);font-size:11px">Cena confirmada</span>
                             <?php endif; ?>
                         </div>
-                        <h3 style="margin:0;font-size:1.25rem;font-weight:700;color:#78350f">
+                        <h3 style="margin:0;font-size:1.25rem;font-weight:700;color:var(--color-text-primary)">
                             4Dinner <?php echo esc_html( $pd_ciudad ); ?>
                         </h3>
                     </div>
                     <!-- Fecha destacada -->
-                    <div class="text-center" style="background:#fff;border:2px solid #fde68a;border-radius:var(--radius-md);padding:.75rem 1.25rem;min-width:90px">
-                        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:var(--ls-sobretitulo-xs);color:#b45309"><?php echo esc_html( strtoupper( date_i18n( 'M', $pd_fecha ) ) ); ?></div>
-                        <div style="font-size:2.2rem;font-weight:800;line-height:1;color:#78350f"><?php echo esc_html( date_i18n( 'j', $pd_fecha ) ); ?></div>
-                        <div style="font-size:11px;color:#92400e"><?php echo esc_html( strtoupper( date_i18n( 'D', $pd_fecha ) ) ); ?></div>
+                    <div class="text-center" style="background:var(--blanco);border:2px solid var(--mantequilla);border-radius:var(--radius-md);padding:.75rem 1.25rem;min-width:90px">
+                        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:var(--ls-sobretitulo-xs);color:var(--mantequilla-presion)"><?php echo esc_html( strtoupper( date_i18n( 'M', $pd_fecha ) ) ); ?></div>
+                        <div style="font-size:2.2rem;font-weight:800;line-height:1;color:var(--color-text-primary)"><?php echo esc_html( date_i18n( 'j', $pd_fecha ) ); ?></div>
+                        <div style="font-size:11px;color:var(--color-text-primary)"><?php echo esc_html( strtoupper( date_i18n( 'D', $pd_fecha ) ) ); ?></div>
                     </div>
                 </div>
             </div>
@@ -5362,38 +5362,38 @@ add_shortcode( 'vx_mis_eventos', function (): string {
                         <h4 class="subsection-label mb-3">Detalles del evento</h4>
                         <div class="d-flex flex-column gap-2" style="font-size:.93rem">
                             <div class="d-flex align-items-center gap-2">
-                                <i class="ti ti-clock" style="color:#b45309;font-size:18px;flex-shrink:0"></i>
+                                <i class="ti ti-clock" style="color:var(--mantequilla-presion);font-size:18px;flex-shrink:0"></i>
                                 <div>
                                     <span style="font-weight:600"><?php echo esc_html( date_i18n( 'l j \d\e F \d\e Y', $pd_fecha ) ); ?></span>
                                     <span style="color:var(--color-text-secondary)"> · 8:00 PM hora local</span>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center gap-2">
-                                <i class="ti ti-map-pin" style="color:#b45309;font-size:18px;flex-shrink:0"></i>
+                                <i class="ti ti-map-pin" style="color:var(--mantequilla-presion);font-size:18px;flex-shrink:0"></i>
                                 <span><?php echo esc_html( $pd_ciudad . ', ' . $pd_pais ); ?></span>
                             </div>
                             <?php if ( $pd_rest ) : ?>
                             <div class="d-flex align-items-center gap-2">
-                                <i class="ti ti-building" style="color:#b45309;font-size:18px;flex-shrink:0"></i>
+                                <i class="ti ti-building" style="color:var(--mantequilla-presion);font-size:18px;flex-shrink:0"></i>
                                 <span style="font-weight:600"><?php echo esc_html( $pd_rest ); ?></span>
                             </div>
                             <?php endif; ?>
                             <?php if ( $pd_dir ) : ?>
                             <div class="d-flex align-items-start gap-2">
-                                <i class="ti ti-route" style="color:#b45309;font-size:18px;flex-shrink:0;margin-top:2px"></i>
+                                <i class="ti ti-route" style="color:var(--mantequilla-presion);font-size:18px;flex-shrink:0;margin-top:2px"></i>
                                 <span style="color:var(--color-text-secondary)"><?php echo esc_html( $pd_dir ); ?></span>
                             </div>
                             <?php endif; ?>
                             <?php if ( ! $pd_rest ) : ?>
                             <div class="d-flex align-items-center gap-2 mt-1">
-                                <i class="ti ti-info-circle" style="color:#b45309;font-size:16px;flex-shrink:0"></i>
+                                <i class="ti ti-info-circle" style="color:var(--mantequilla-presion);font-size:16px;flex-shrink:0"></i>
                                 <span style="font-size:.82rem;color:var(--color-text-secondary)">El restaurante se confirmará próximamente por email.</span>
                             </div>
                             <?php endif; ?>
                         </div>
 
                         <!-- Recordatorio -->
-                        <div class="mt-3 p-3 rounded" style="background:#fffbeb;border:1px solid #fde68a;font-size:.82rem;color:#92400e">
+                        <div class="mt-3 p-3 rounded" style="background:var(--mantequilla-suave);border:1px solid var(--mantequilla);font-size:.82rem;color:var(--color-text-primary)">
                             <i class="ti ti-circle-check me-1"></i>
                             Cada quien paga su consumo. Sin agenda formal, la conversación fluye sola.
                         </div>
@@ -5486,15 +5486,15 @@ add_shortcode( 'vx_mis_eventos', function (): string {
             <div class="card-vx h-100 p-0 overflow-hidden">
 
                 <!-- Cabecera ámbar -->
-                <div style="background:#fef9ee;border-bottom:1px solid #fde68a;padding:1rem 1.25rem;">
+                <div style="background:var(--mantequilla-suave);border-bottom:1px solid var(--mantequilla);padding:1rem 1.25rem;">
                     <div class="d-flex align-items-start justify-content-between gap-2 flex-wrap">
                         <div>
                             <span class="badge-vx badge-success mb-1" style="font-size:11px">Asistí</span>
-                            <h3 class="mb-0 fw-semibold" style="font-size:1rem;color:#78350f">
+                            <h3 class="mb-0 fw-semibold" style="font-size:1rem;color:var(--color-text-primary)">
                                 <?php echo esc_html( $dinner->get_title() ); ?>
                             </h3>
                         </div>
-                        <div style="font-size:12px;color:#92400e;text-align:right;line-height:1.6">
+                        <div style="font-size:12px;color:var(--color-text-primary);text-align:right;line-height:1.6">
                             <div><i class="ti ti-calendar me-1"></i><?php echo esc_html( date_i18n( 'j \d\e F Y', $fecha_ts ) ); ?></div>
                             <div><i class="ti ti-map-pin me-1"></i><?php echo esc_html( $dinner->get_ciudad() . ', ' . $dinner->get_pais() ); ?></div>
                             <?php if ( $dinner->get_restaurante() ) : ?>
