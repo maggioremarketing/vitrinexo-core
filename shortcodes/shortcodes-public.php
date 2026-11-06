@@ -254,7 +254,7 @@ add_shortcode( 'vx_landing', function (): string {
                         <div id="founderCounter" style="margin-bottom:16px">
                             <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
                                 <span style="font-size:13px;color:var(--color-text-muted)">Miembros Pioneros</span>
-                                <span id="founderCountText" style="font-size:13px;font-weight:600;color:var(--color-primary)">0 / 100</span>
+                                <span id="founderCountText" style="font-size:13px;font-weight:600;color:var(--color-primary-ink)">0 / 100</span>
                             </div>
                             <div style="background:var(--celeste-suave);border-radius:999px;height:6px;overflow:hidden">
                                 <div id="founderProgressBar" style="height:100%;width:0%;background:var(--color-primary);border-radius:999px;transition:width .6s ease"></div>
@@ -330,7 +330,7 @@ add_shortcode( 'vx_landing', function (): string {
                             </div>
                             <div class="mb-3">
                                 <label class="d-flex align-items-start gap-2" style="cursor:pointer;font-size:13px;line-height:1.5">
-                                    <input type="checkbox" name="consentimiento" id="founderConsent" style="accent-color:var(--color-primary);margin-top:3px;flex-shrink:0">
+                                    <input type="checkbox" name="consentimiento" id="founderConsent" style="accent-color:var(--color-primary-ink);margin-top:3px;flex-shrink:0">
                                     <span>Autorizo que otros miembros verificados de Vitrinexo me contacten a través de la plataforma.</span>
                                 </label>
                             </div>
@@ -535,7 +535,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
                   <div class="stat-label-hero">ciudades activas</div>
                 </div>
               </div>
-              <hr style="border-color:var(--mantequilla);margin:1.25rem 0">
+              <hr style="border-color:var(--color-text-primary);margin:1.25rem 0">
               <div class="d-flex flex-column gap-2">
                 <div class="d-flex align-items-center gap-2 checklist-item-hero"><i class="ti ti-circle-check checklist-icon-hero"></i> Cada quien paga su consumo, sin costo de acceso</div>
                 <div class="d-flex align-items-center gap-2 checklist-item-hero"><i class="ti ti-circle-check checklist-icon-hero"></i> Perfiles mixtos de industria, nada de silos</div>
@@ -874,7 +874,7 @@ add_shortcode( 'vx_ayuda', function (): string {
         </div>
         <div class="card-vx" style="text-align:center;padding:28px">
           <p style="margin:0 0 6px;font-size:13px;color:var(--color-text-secondary)">Correo</p>
-          <p style="margin:0 0 20px"><a href="mailto:hola@vitrinexo.com" style="font-size:18px;font-weight:600;color:var(--color-primary);text-decoration:none">hola@vitrinexo.com</a></p>
+          <p style="margin:0 0 20px"><a href="mailto:hola@vitrinexo.com" style="font-size:18px;font-weight:600;color:var(--color-primary-ink);text-decoration:none">hola@vitrinexo.com</a></p>
           <p style="margin:0 0 6px;font-size:13px;color:var(--color-text-secondary)">WhatsApp</p>
           <p style="margin:0 0 20px;font-size:18px;font-weight:600;color:var(--color-navy)">+56 9 6319 3574</p>
           <a href="https://wa.me/<?php echo esc_attr( $wa_num ); ?>?text=<?php echo $wa_txt; ?>" target="_blank" rel="noopener" class="btn-vx btn-primary-vx btn-vx-md"><i class="ti ti-brand-whatsapp me-1"></i> Escribir por WhatsApp</a>

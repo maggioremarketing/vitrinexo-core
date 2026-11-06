@@ -189,7 +189,7 @@ add_shortcode( 'vx_onboarding', function (): string {
           foreach ( $genero_opts as $val => $lbl ) :
           ?>
           <label class="d-flex align-items-center gap-2 p-2 border rounded-2" style="cursor:pointer;font-size:14px">
-            <input type="radio" name="ob2-genero" value="<?php echo esc_attr( $val ); ?>" <?php checked( $genero, $val ); ?> style="accent-color:var(--color-primary)">
+            <input type="radio" name="ob2-genero" value="<?php echo esc_attr( $val ); ?>" <?php checked( $genero, $val ); ?> style="accent-color:var(--color-primary-ink)">
             <?php echo esc_html( $lbl ); ?>
           </label>
           <?php endforeach; ?>
@@ -986,7 +986,7 @@ function vx_render_member_card( array $m, int $viewer_id = 0, ?array $only_offer
         $vo = VX_User::get( $viewer_id );
         if ( $vo && in_array( $uid, (array) $vo->get_favoritos(), true ) ) {
             $is_fav    = true;
-            $fav_style = ' style="color:var(--rosa)"';
+            $fav_style = ' style="color:var(--color-text-primary)"';
         }
     }
     $fav_icon = $is_fav ? 'ti-heart-filled' : 'ti-heart';
@@ -1600,7 +1600,7 @@ add_shortcode( 'vx_dashboard', function (): string {
                 <?php if ( $logo_url ) : ?>
                 <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $emp->post_title ); ?>">
                 <?php else : ?>
-                <span style="font-weight:700;font-size:20px;color:var(--color-primary)"><?php echo esc_html( $initial ); ?></span>
+                <span style="font-weight:700;font-size:20px;color:var(--color-primary-ink)"><?php echo esc_html( $initial ); ?></span>
                 <?php endif; ?>
               </div>
               <div class="flex-grow-1 empresa-meta-dashboard">
@@ -3181,7 +3181,7 @@ add_shortcode( 'vx_perfil', function (): string {
         <button class="btn-vx btn-soft-accent btn-vx-sm btn-vx-icon-sm vx-fav-btn"
                 data-user-id="<?php echo $user_id; ?>"
                 data-activo="<?php echo $is_fav ? '1' : '0'; ?>"
-                <?php if ( $is_fav ) echo 'style="color:var(--rosa)"'; ?>
+                <?php if ( $is_fav ) echo 'style="color:var(--color-text-primary)"'; ?>
                 aria-label="<?php echo $is_fav ? 'Quitar de favoritos' : 'Guardar en favoritos'; ?>">
           <i class="ti <?php echo $is_fav ? 'ti-heart-filled' : 'ti-heart'; ?>"></i>
         </button>
@@ -3239,7 +3239,7 @@ add_shortcode( 'vx_perfil', function (): string {
           if ( $industria_user ) :
           ?>
           <p class="text-body-muted" style="font-size:13px;margin:2px 0 4px">
-            <i class="ti ti-briefcase me-1" style="font-size:12px;color:var(--color-primary)"></i><?php echo esc_html( $industria_user ); ?>
+            <i class="ti ti-briefcase me-1" style="font-size:12px;color:var(--color-primary-ink)"></i><?php echo esc_html( $industria_user ); ?>
           </p>
           <?php endif; ?>
 
@@ -3352,7 +3352,7 @@ add_shortcode( 'vx_perfil', function (): string {
             <div class="profile-company-meta-title"><?php echo esc_html( $emp_cargo ); ?></div>
             <?php endif; ?>
             <?php if ( $emp_industria ) : ?>
-            <div style="font-size:12px;color:var(--color-primary);font-weight:500;margin:3px 0">
+            <div style="font-size:12px;color:var(--color-primary-ink);font-weight:500;margin:3px 0">
               <i class="ti ti-briefcase me-1" style="font-size:11px"></i><?php echo esc_html( $emp_industria ); ?>
             </div>
             <?php endif; ?>
@@ -3597,7 +3597,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
                 </label>
                 <input type="file" id="vx-foto-input" accept="image/jpeg,image/png,image/webp" class="d-none" data-upload-type="foto" data-upload-container="editor-foto-wrap">
                 <p style="font-size:11px;color:var(--color-text-secondary);margin:4px 0 0"><i class="ti ti-info-circle" style="font-size:10px"></i> Máx. 15 MB · JPG, PNG o WebP · Se convierte automáticamente a WebP</p>
-                <p style="font-size:11px;color:var(--color-primary);margin:2px 0 0"><i class="ti ti-crop" style="font-size:10px"></i> Usa una imagen cuadrada con tu foto centrada para que se vea bien en el círculo.</p>
+                <p style="font-size:11px;color:var(--color-primary-ink);margin:2px 0 0"><i class="ti ti-crop" style="font-size:10px"></i> Usa una imagen cuadrada con tu foto centrada para que se vea bien en el círculo.</p>
                 <div class="vx-upload-progress d-none" style="margin-top:6px;min-width:180px">
                   <div style="height:3px;background:var(--color-border);border-radius:2px;overflow:hidden">
                     <div class="vx-progress-fill" style="height:100%;width:0%;background:var(--color-primary);transition:width 0.15s ease;border-radius:2px"></div>
@@ -3745,7 +3745,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
               <div class="mb-3">
                 <label class="d-flex align-items-start gap-3" style="cursor:pointer">
                   <input type="checkbox" name="comunidad_out2b"
-                    style="margin-top:3px;accent-color:var(--rosa);width:16px;height:16px;flex-shrink:0"
+                    style="margin-top:3px;accent-color:var(--color-text-primary);width:16px;height:16px;flex-shrink:0"
                     <?php checked( $is_out2b ); ?>>
                   <div>
                     <span class="fw-medium" style="font-size:14px">Soy parte de la comunidad LGBTQ+</span>
@@ -3756,7 +3756,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
               <div>
                 <label class="d-flex align-items-start gap-3" style="cursor:not-allowed;opacity:.7">
                   <input type="checkbox" disabled
-                    style="margin-top:3px;accent-color:var(--salvia);width:16px;height:16px;flex-shrink:0"
+                    style="margin-top:3px;accent-color:var(--color-text-primary);width:16px;height:16px;flex-shrink:0"
                     <?php checked( $is_senior ); ?>>
                   <div>
                     <span class="fw-medium" style="font-size:14px">Ejecutivo/a Senior</span>
@@ -3992,7 +3992,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
             </div>
 
             <div class="mb-3">
-              <label class="form-label-vx">Nombre de la empresa <span style="color:var(--rosa)">*</span></label>
+              <label class="form-label-vx">Nombre de la empresa <span style="color:var(--color-text-primary)">*</span></label>
               <input type="text" name="new_emp_nombre" class="form-control-vx" placeholder="Ej: Mi Empresa S.A.">
             </div>
             <div class="mb-3">

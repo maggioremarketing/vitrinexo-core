@@ -63,7 +63,7 @@ add_shortcode( 'vx_login', function (): string {
                         <!-- Recordar + recuperar -->
                         <div class="d-flex align-items-center justify-content-between mt-3 mb-1">
                             <label class="d-flex align-items-center gap-2" style="cursor:pointer;font-size:14px;color:var(--color-text-secondary)">
-                                <input type="checkbox" id="login-remember" name="remember" value="1" style="accent-color:var(--color-primary)">
+                                <input type="checkbox" id="login-remember" name="remember" value="1" style="accent-color:var(--color-primary-ink)">
                                 Recordar en este dispositivo
                             </label>
                         </div>
@@ -98,7 +98,7 @@ add_shortcode( 'vx_login', function (): string {
                             <input type="password" id="reg-password" name="password" class="vx-form__input" required minlength="8">
                         </div>
                         <div class="vx-form__group">
-                            <label class="vx-form__label" for="reg-pais">País <span style="color:var(--rosa)">*</span></label>
+                            <label class="vx-form__label" for="reg-pais">País <span style="color:var(--color-text-primary)">*</span></label>
                             <select id="reg-pais" name="pais" class="vx-form__input" required>
                                 <option value="">Selecciona tu país</option>
                                 <?php foreach ( vx_get_paises_latam() as $p ) : ?>
@@ -108,27 +108,27 @@ add_shortcode( 'vx_login', function (): string {
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-telefono">
-                                Teléfono <span style="color:var(--rosa)">*</span>
+                                Teléfono <span style="color:var(--color-text-primary)">*</span>
                                 <small class="text-muted">(necesario para coordinar eventos)</small>
                             </label>
                             <?php echo vx_phone_input_html( 'reg-telefono', 'telefono', '' ); ?>
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-empresa">
-                                Empresa <span style="color:var(--rosa)">*</span>
+                                Empresa <span style="color:var(--color-text-primary)">*</span>
                                 <small class="text-muted">(ayuda a verificar tu identidad)</small>
                             </label>
                             <input type="text" id="reg-empresa" name="empresa" class="vx-form__input" required placeholder="Nombre de tu empresa o negocio">
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-cargo">
-                                Cargo <span style="color:var(--rosa)">*</span>
+                                Cargo <span style="color:var(--color-text-primary)">*</span>
                             </label>
                             <input type="text" id="reg-cargo" name="cargo" class="vx-form__input" required placeholder="Tu cargo o rol en la empresa">
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-linkedin">
-                                LinkedIn <span style="color:var(--rosa)">*</span>
+                                LinkedIn <span style="color:var(--color-text-primary)">*</span>
                             </label>
                             <input type="url" id="reg-linkedin" name="linkedin" class="vx-form__input" required placeholder="https://linkedin.com/in/tu-perfil">
                         </div>
@@ -136,7 +136,7 @@ add_shortcode( 'vx_login', function (): string {
                         <div class="vx-form__group mt-3">
                             <label class="d-flex align-items-start gap-2" style="cursor:pointer;font-size:14px;line-height:1.5">
                                 <input type="checkbox" id="reg-terminos" name="terminos" required
-                                       style="margin-top:3px;accent-color:var(--color-primary);flex-shrink:0">
+                                       style="margin-top:3px;accent-color:var(--color-primary-ink);flex-shrink:0">
                                 <span>
                                     He leído y acepto los
                                     <a href="#" class="link-primary-color fw-semibold"
@@ -230,7 +230,7 @@ add_shortcode( 'vx_confirmar_correo', function (): string {
         <div class="container-sm py-5">
             <div class="vx-flow-card text-center">
                 <div class="vx-flow-card__icon mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-primary)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-primary-ink)">
                       <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                       <path d="m3 7 9 6 9-6"/>
                       <path d="m9 14 2 2 4-4"/>
