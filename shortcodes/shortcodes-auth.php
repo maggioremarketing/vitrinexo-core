@@ -764,7 +764,7 @@ add_shortcode( 'vx_onboarding', function (): string {
     // Validar LinkedIn antes de enviar
     if (lin && !vxIsLinkedinUrl(lin)) {
       var linEl = document.getElementById('ob3-empresa-linkedin');
-      linEl.style.borderColor = 'var(--color-pink-500)';
+      linEl.style.borderColor = 'var(--rosa)';
       linEl.focus();
       var errEl = document.getElementById('ob3-error');
       if (errEl) { errEl.textContent = 'El enlace de LinkedIn debe ser de linkedin.com (ej: linkedin.com/company/tuempresa)'; errEl.classList.remove('d-none'); }
@@ -986,7 +986,7 @@ function vx_render_member_card( array $m, int $viewer_id = 0, ?array $only_offer
         $vo = VX_User::get( $viewer_id );
         if ( $vo && in_array( $uid, (array) $vo->get_favoritos(), true ) ) {
             $is_fav    = true;
-            $fav_style = ' style="color:var(--color-pink-500)"';
+            $fav_style = ' style="color:var(--rosa)"';
         }
     }
     $fav_icon = $is_fav ? 'ti-heart-filled' : 'ti-heart';
@@ -2589,7 +2589,7 @@ add_shortcode( 'vx_configuracion', function (): string {
                   </button>
 
                   <!-- Formulario cambio de email (oculto hasta clic) -->
-                  <div id="vx-change-email-form" class="mt-3 p-3" style="display:none;background:var(--color-ice-500);border-radius:var(--radius-sm)">
+                  <div id="vx-change-email-form" class="mt-3 p-3" style="display:none;background:var(--hueso-2);border-radius:var(--radius-sm)">
                     <p class="cta-card__desc mb-3">
                       <i class="ti ti-info-circle me-1 ic-primary"></i>
                       Se enviará un enlace de confirmación al nuevo email. El cambio solo se aplica cuando hagas clic en ese enlace.
@@ -2843,8 +2843,8 @@ add_shortcode( 'vx_configuracion', function (): string {
             </div>
 
             <!-- Borrar cuenta -->
-            <div class="card-vx" style="border-left:3px solid var(--color-pink-500)">
-              <h2 class="section-title-sm mb-1" style="color:var(--color-pink-600)">
+            <div class="card-vx" style="border-left:3px solid var(--rosa)">
+              <h2 class="section-title-sm mb-1" style="color:var(--rosa-hover)">
                 <i class="ti ti-trash me-2"></i>Eliminar mi cuenta
               </h2>
               <p class="cta-card__desc mb-3">
@@ -2872,7 +2872,7 @@ add_shortcode( 'vx_configuracion', function (): string {
               </div>
               <div id="vx-delete-msg" class="d-none mt-3 small"></div>
               <button type="button" class="btn-vx btn-vx-sm mt-3" id="vx-btn-delete-account"
-                      style="background:var(--color-pink-500);color:#fff;border:none">
+                      style="background:var(--rosa);color:#fff;border:none">
                 <i class="ti ti-trash me-1"></i>Eliminar mi cuenta definitivamente
               </button>
               <p class="text-xs-muted mt-2">Si tienes dudas, escríbenos a hola@vitrinexo.com antes de proceder.</p>
@@ -3181,7 +3181,7 @@ add_shortcode( 'vx_perfil', function (): string {
         <button class="btn-vx btn-soft-accent btn-vx-sm btn-vx-icon-sm vx-fav-btn"
                 data-user-id="<?php echo $user_id; ?>"
                 data-activo="<?php echo $is_fav ? '1' : '0'; ?>"
-                <?php if ( $is_fav ) echo 'style="color:var(--color-pink-500)"'; ?>
+                <?php if ( $is_fav ) echo 'style="color:var(--rosa)"'; ?>
                 aria-label="<?php echo $is_fav ? 'Quitar de favoritos' : 'Guardar en favoritos'; ?>">
           <i class="ti <?php echo $is_fav ? 'ti-heart-filled' : 'ti-heart'; ?>"></i>
         </button>
@@ -3745,7 +3745,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
               <div class="mb-3">
                 <label class="d-flex align-items-start gap-3" style="cursor:pointer">
                   <input type="checkbox" name="comunidad_out2b"
-                    style="margin-top:3px;accent-color:var(--color-pink-500);width:16px;height:16px;flex-shrink:0"
+                    style="margin-top:3px;accent-color:var(--rosa);width:16px;height:16px;flex-shrink:0"
                     <?php checked( $is_out2b ); ?>>
                   <div>
                     <span class="fw-medium" style="font-size:14px">Soy parte de la comunidad LGBTQ+</span>
@@ -3756,7 +3756,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
               <div>
                 <label class="d-flex align-items-start gap-3" style="cursor:not-allowed;opacity:.7">
                   <input type="checkbox" disabled
-                    style="margin-top:3px;accent-color:var(--color-green-500);width:16px;height:16px;flex-shrink:0"
+                    style="margin-top:3px;accent-color:var(--salvia);width:16px;height:16px;flex-shrink:0"
                     <?php checked( $is_senior ); ?>>
                   <div>
                     <span class="fw-medium" style="font-size:14px">Ejecutivo/a Senior</span>
@@ -3992,7 +3992,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
             </div>
 
             <div class="mb-3">
-              <label class="form-label-vx">Nombre de la empresa <span style="color:var(--color-pink-500)">*</span></label>
+              <label class="form-label-vx">Nombre de la empresa <span style="color:var(--rosa)">*</span></label>
               <input type="text" name="new_emp_nombre" class="form-control-vx" placeholder="Ej: Mi Empresa S.A.">
             </div>
             <div class="mb-3">
@@ -4497,7 +4497,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
         // Fix: validar nombre antes de enviar
         const nombreEl = form.querySelector( '[name="emp_nombre"]' );
         if ( ! nombreEl || ! nombreEl.value.trim() ) {
-          if ( nombreEl ) { nombreEl.style.borderColor = 'var(--color-pink-500)'; nombreEl.focus(); }
+          if ( nombreEl ) { nombreEl.style.borderColor = 'var(--rosa)'; nombreEl.focus(); }
           vxShowError( 'El nombre de la empresa es obligatorio.' );
           return;
         }
@@ -4590,7 +4590,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
         const nombre = nombreInput ? nombreInput.value.trim() : '';
 
         if ( ! nombre ) {
-          if ( nombreInput ) { nombreInput.style.borderColor = 'var(--color-pink-500)'; nombreInput.focus(); }
+          if ( nombreInput ) { nombreInput.style.borderColor = 'var(--rosa)'; nombreInput.focus(); }
           vxShowError( 'El nombre de la empresa es obligatorio.' );
           return;
         }
@@ -4749,8 +4749,8 @@ add_shortcode( 'vx_4dinner', function (): string {
     $api_base   = rest_url( VX_REST_NAMESPACE . '/' );
 
     $gradients = [
-        'linear-gradient(135deg,var(--color-green-600),var(--color-green-400))',
-        'linear-gradient(135deg,var(--color-purple-600),var(--color-purple-400))',
+        'linear-gradient(135deg,var(--salvia-hover),var(--salvia))',
+        'linear-gradient(135deg,var(--lavanda-hover),var(--lavanda))',
         'linear-gradient(135deg,#f59e0b,#f97316)',
         'linear-gradient(135deg,#0ea5e9,#6366f1)',
     ];
@@ -4840,7 +4840,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                 <div class="card-vx d-flex gap-4 align-items-start flex-wrap" <?php echo $completo ? 'style="opacity:.7"' : ''; ?>>
                     <div class="text-center event-date-col">
                         <div class="subsection-label" style="margin-bottom:2px"><?php echo esc_html( strtoupper( date_i18n( 'M', $fecha_ts ) ) ); ?></div>
-                        <div class="stat-num-vx <?php echo $completo ? '' : 'stat-num-vx--success'; ?> event-date-day" <?php echo $completo ? 'style="color:var(--color-ice-700)"' : ''; ?>><?php echo esc_html( date_i18n( 'j', $fecha_ts ) ); ?></div>
+                        <div class="stat-num-vx <?php echo $completo ? '' : 'stat-num-vx--success'; ?> event-date-day" <?php echo $completo ? 'style="color:var(--linea)"' : ''; ?>><?php echo esc_html( date_i18n( 'j', $fecha_ts ) ); ?></div>
                         <div class="text-xs-muted"><?php echo esc_html( strtoupper( date_i18n( 'D', $fecha_ts ) ) ); ?></div>
                     </div>
                     <div class="event-card-body">
@@ -4894,7 +4894,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                                 <?php endif; ?>
                                 <?php endforeach; ?>
                                 <?php if ( count( $asignados ) > 8 ) : ?>
-                                <div class="av" style="background:var(--color-ice-600);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--color-text-secondary)">+<?php echo count($asignados)-8; ?></div>
+                                <div class="av" style="background:var(--linea);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--color-text-secondary)">+<?php echo count($asignados)-8; ?></div>
                                 <?php endif; ?>
                             </div>
                             <span class="text-sm-muted">
@@ -4943,8 +4943,8 @@ add_shortcode( 'vx_4dinner', function (): string {
                 <div class="col-12 col-lg-8">
                     <div class="card-vx">
                         <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="icon-box icon-box--sm icon-box--green" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--color-green-100);border-radius:10px;flex-shrink:0">
-                                <i class="ti ti-tools-kitchen-2" style="font-size:22px;color:var(--color-green-600)"></i>
+                            <div class="icon-box icon-box--sm icon-box--green" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--salvia-suave);border-radius:10px;flex-shrink:0">
+                                <i class="ti ti-tools-kitchen-2" style="font-size:22px;color:var(--salvia-hover)"></i>
                             </div>
                             <div>
                                 <h2 class="subsection-title" style="margin:0">Quiero participar en un 4Dinner</h2>
@@ -5023,7 +5023,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                                     if(formArea){
                                         formArea.innerHTML = '<div class="text-center py-4">'
                                             + '<div style="font-size:48px;margin-bottom:12px"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i></div>'
-                                            + '<h3 style="color:var(--color-green-700);margin-bottom:8px">¡Interés registrado!</h3>'
+                                            + '<h3 style="color:var(--salvia-presion);margin-bottom:8px">¡Interés registrado!</h3>'
                                             + '<p style="color:var(--color-text-secondary);max-width:440px;margin:0 auto 16px">Tu solicitud fue recibida. El equipo de Vitrinexo te asignará a la próxima mesa disponible en tu ciudad.</p>'
                                             + '<div class="alert-vx alert-info d-inline-flex gap-2 align-items-start text-start" style="max-width:440px">'
                                             + '<i class="ti ti-bell" style="font-size:18px;flex-shrink:0;margin-top:1px"></i>'

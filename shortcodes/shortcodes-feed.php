@@ -298,7 +298,7 @@ add_shortcode( 'vx_feed', function (): string {
                   placeholder="¿Qué ofreces o qué estás buscando? Sé específico para conectar mejor…"
                   style="resize:vertical"></textarea>
         <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
-          <span id="vx-pub-chars" style="font-size:11px;color:var(--color-ice-700)">0 / 1500</span>
+          <span id="vx-pub-chars" style="font-size:11px;color:var(--linea)">0 / 1500</span>
           <div class="d-flex gap-2">
             <button type="button" class="btn-vx btn-ghost-vx btn-vx-sm"
                     onclick="document.getElementById('panel-nueva-pub').style.display='none';document.getElementById('btn-nueva-pub').style.display=''">

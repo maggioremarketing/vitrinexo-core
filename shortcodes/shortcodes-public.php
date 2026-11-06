@@ -688,11 +688,11 @@ add_shortcode( 'vx_blog', function (): string {
     ] );
 
     $gradients = [
-        'linear-gradient(135deg,var(--color-purple-600),var(--color-purple-400))',
-        'linear-gradient(135deg,var(--color-pink-600),var(--color-pink-400))',
+        'linear-gradient(135deg,var(--lavanda-hover),var(--lavanda))',
+        'linear-gradient(135deg,var(--rosa-hover),var(--rosa))',
         'linear-gradient(135deg,#f59e0b,#f97316)',
         'linear-gradient(135deg,#0ea5e9,#6366f1)',
-        'linear-gradient(135deg,var(--color-green-700),var(--color-cyan-600))',
+        'linear-gradient(135deg,var(--salvia-presion),var(--coral))',
         'linear-gradient(135deg,#be185d,#ec4899)',
     ];
 
@@ -753,7 +753,7 @@ add_shortcode( 'vx_blog', function (): string {
         $feat_cat   = $featured['categories'][0] ?? 'Blog';
         $feat_style = $featured['thumbnail']
             ? 'background:url(' . esc_url( $featured['thumbnail'] ) . ') center/cover no-repeat'
-            : 'background:linear-gradient(135deg,var(--color-cyan-700),var(--color-green-600))';
+            : 'background:linear-gradient(135deg,var(--coral-hover),var(--salvia-hover))';
     ?>
     <!-- Page header -->
     <div class="page-header-vx">

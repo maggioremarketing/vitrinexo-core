@@ -98,7 +98,7 @@ add_shortcode( 'vx_login', function (): string {
                             <input type="password" id="reg-password" name="password" class="vx-form__input" required minlength="8">
                         </div>
                         <div class="vx-form__group">
-                            <label class="vx-form__label" for="reg-pais">País <span style="color:var(--color-pink-500)">*</span></label>
+                            <label class="vx-form__label" for="reg-pais">País <span style="color:var(--rosa)">*</span></label>
                             <select id="reg-pais" name="pais" class="vx-form__input" required>
                                 <option value="">Selecciona tu país</option>
                                 <?php foreach ( vx_get_paises_latam() as $p ) : ?>
@@ -108,27 +108,27 @@ add_shortcode( 'vx_login', function (): string {
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-telefono">
-                                Teléfono <span style="color:var(--color-pink-500)">*</span>
+                                Teléfono <span style="color:var(--rosa)">*</span>
                                 <small class="text-muted">(necesario para coordinar eventos)</small>
                             </label>
                             <?php echo vx_phone_input_html( 'reg-telefono', 'telefono', '' ); ?>
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-empresa">
-                                Empresa <span style="color:var(--color-pink-500)">*</span>
+                                Empresa <span style="color:var(--rosa)">*</span>
                                 <small class="text-muted">(ayuda a verificar tu identidad)</small>
                             </label>
                             <input type="text" id="reg-empresa" name="empresa" class="vx-form__input" required placeholder="Nombre de tu empresa o negocio">
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-cargo">
-                                Cargo <span style="color:var(--color-pink-500)">*</span>
+                                Cargo <span style="color:var(--rosa)">*</span>
                             </label>
                             <input type="text" id="reg-cargo" name="cargo" class="vx-form__input" required placeholder="Tu cargo o rol en la empresa">
                         </div>
                         <div class="vx-form__group">
                             <label class="vx-form__label" for="reg-linkedin">
-                                LinkedIn <span style="color:var(--color-pink-500)">*</span>
+                                LinkedIn <span style="color:var(--rosa)">*</span>
                             </label>
                             <input type="url" id="reg-linkedin" name="linkedin" class="vx-form__input" required placeholder="https://linkedin.com/in/tu-perfil">
                         </div>
