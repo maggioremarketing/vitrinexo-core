@@ -368,7 +368,7 @@ class VX_Email_Templates
         }
 
         $content .= '<div style="text-align:center;margin:28px 0;">'
-            . self::btn( home_url( '/matches/' ), 'Ver todos mis matches' )
+            . self::btn( home_url( '/nexos/' ), 'Ver todos mis nexos' )
             . '</div>';
 
         return self::wrapper( $content );

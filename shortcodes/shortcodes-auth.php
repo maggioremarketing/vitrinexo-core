@@ -1316,10 +1316,10 @@ add_shortcode( 'vx_dashboard', function (): string {
           </a>
         </div>
         <div class="col-6 col-md-3">
-          <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>" class="text-decoration-none d-block h-100">
+          <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>" class="text-decoration-none d-block h-100">
             <div class="stat-card-vx stat-card-vx--link h-100">
               <div class="stat-num-vx stat-num-vx--accent"><?php echo $nm; ?></div>
-              <div class="stat-label-vx">Matches nuevos <i class="ti ti-arrow-right stat-arrow"></i></div>
+              <div class="stat-label-vx">Nexos nuevos <i class="ti ti-arrow-right stat-arrow"></i></div>
             </div>
           </a>
         </div>
@@ -1457,7 +1457,7 @@ add_shortcode( 'vx_dashboard', function (): string {
               <span class="tag-vx tag-seeks"><?php echo esc_html( $tag ); ?></span>
               <?php endforeach; ?>
             </div>
-            <a href="<?php echo esc_url( home_url( '/match-seeks/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
+            <a href="<?php echo esc_url( home_url( '/nexos-que-busco/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
           </div>
         </div>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2">
@@ -1481,7 +1481,7 @@ add_shortcode( 'vx_dashboard', function (): string {
               <span class="tag-vx tag-offers"><?php echo esc_html( $tag ); ?></span>
               <?php endforeach; ?>
             </div>
-            <a href="<?php echo esc_url( home_url( '/match-offers/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
+            <a href="<?php echo esc_url( home_url( '/nexos-que-ofrezco/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
           </div>
         </div>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2">
@@ -1811,7 +1811,7 @@ add_shortcode( 'vx_matches', function (): string {
       <div class="container">
         <div class="page-header-vx__inner">
           <div>
-            <h1 class="page-header-vx__title">Mis matches</h1>
+            <h1 class="page-header-vx__title">Mis nexos</h1>
             <p class="page-header-vx__lead">Perfiles que coinciden con lo que ofreces y con lo que buscas.</p>
           </div>
           <div class="d-flex gap-2 flex-wrap align-items-center">
@@ -1837,7 +1837,7 @@ add_shortcode( 'vx_matches', function (): string {
           </div>
           <div class="d-flex align-items-center gap-2">
             <span class="badge-vx badge-neutral"><?php echo $seeks_total; ?> matches</span>
-            <a href="<?php echo esc_url( home_url( '/match-seeks/' ) ); ?>" class="btn-vx btn-soft-accent btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
+            <a href="<?php echo esc_url( home_url( '/nexos-que-busco/' ) ); ?>" class="btn-vx btn-soft-accent btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
           </div>
         </div>
         <?php if ( $seeks_users ) : ?>
@@ -1863,7 +1863,7 @@ add_shortcode( 'vx_matches', function (): string {
           </div>
           <div class="d-flex align-items-center gap-2">
             <span class="badge-vx badge-neutral"><?php echo $offers_total; ?> matches</span>
-            <a href="<?php echo esc_url( home_url( '/match-offers/' ) ); ?>" class="btn-vx btn-soft-primary btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
+            <a href="<?php echo esc_url( home_url( '/nexos-que-ofrezco/' ) ); ?>" class="btn-vx btn-soft-primary btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
           </div>
         </div>
         <?php if ( $offers_users ) : ?>
@@ -1927,7 +1927,7 @@ add_shortcode( 'vx_match_seeks', function (): string {
     <main>
     <div class="container py-4">
       <div class="d-flex align-items-center justify-content-between gap-3 mb-4 flex-wrap">
-        <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm"><i class="ti ti-arrow-left me-1"></i> Volver a mis matches</a>
+        <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm"><i class="ti ti-arrow-left me-1"></i> Volver a mis nexos</a>
         <span class="badge-vx badge-neutral"><i class="ti ti-users me-1"></i><?php echo $total; ?> matches</span>
       </div>
 
@@ -1998,7 +1998,7 @@ add_shortcode( 'vx_match_offers', function (): string {
     <main>
     <div class="container py-4">
       <div class="d-flex align-items-center justify-content-between gap-3 mb-4 flex-wrap">
-        <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm"><i class="ti ti-arrow-left me-1"></i> Volver a mis matches</a>
+        <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm"><i class="ti ti-arrow-left me-1"></i> Volver a mis nexos</a>
         <span class="badge-vx badge-neutral"><i class="ti ti-users me-1"></i><?php echo $total; ?> matches</span>
       </div>
 

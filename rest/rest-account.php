@@ -795,7 +795,7 @@ function vx_dispatch_match_notifications( int $user_id ): void
         VX_Notification::create(
             (int) $cid,
             'match_nuevo',
-            home_url( '/matches/' ),
+            home_url( '/nexos/' ),
             $user_id,
             [ 'actor_name' => $user->get_nombre_completo() ]
         );

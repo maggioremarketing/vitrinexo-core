@@ -1439,7 +1439,7 @@ function vx_create_pages(): void {
         'onboarding'               => [ 'title' => 'Completa tu perfil',         'shortcode' => '[vx_onboarding]' ],
         'dashboard'                => [ 'title' => 'Dashboard',                  'shortcode' => '[vx_dashboard]' ],
         'directorio'               => [ 'title' => 'Directorio',                 'shortcode' => '[vx_directorio]' ],
-        'matches'                  => [ 'title' => 'Mis matches',                'shortcode' => '[vx_matches]' ],
+        'matches'                  => [ 'title' => 'Mis nexos',                'shortcode' => '[vx_matches]' ],
         'match-seeks'              => [ 'title' => 'Ofrecen lo que buscas',      'shortcode' => '[vx_match_seeks]' ],
         'match-offers'             => [ 'title' => 'Buscan lo que ofreces',      'shortcode' => '[vx_match_offers]' ],
         'perfil'                   => [ 'title' => 'Perfil',                     'shortcode' => '[vx_perfil]' ],

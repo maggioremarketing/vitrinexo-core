@@ -67,7 +67,7 @@ class VX_Matches
     }
 
     /**
-     * Devuelve matches nuevos del usuario desde una fecha determinada.
+     * Devuelve nexos nuevos del usuario desde una fecha determinada.
      * Usado para el resumen semanal.
      *
      * @param int $user_id

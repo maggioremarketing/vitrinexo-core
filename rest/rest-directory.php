@@ -38,8 +38,8 @@ add_action( 'rest_api_init', function () {
         ],
     ] );
 
-    // GET /matches/busca — mis seek_tags ∩ offer_tags de otros
-    register_rest_route( VX_REST_NAMESPACE, '/matches/busca', [
+    // GET /nexos/busca — mis seek_tags ∩ offer_tags de otros
+    register_rest_route( VX_REST_NAMESPACE, '/nexos/busca', [
         'methods'             => 'GET',
         'callback'            => 'vx_rest_matches_seeks',
         'permission_callback' => 'is_user_logged_in',
@@ -48,8 +48,8 @@ add_action( 'rest_api_init', function () {
         ],
     ] );
 
-    // GET /matches/ofrece — mis offer_tags ∩ seek_tags de otros
-    register_rest_route( VX_REST_NAMESPACE, '/matches/ofrece', [
+    // GET /nexos/ofrece — mis offer_tags ∩ seek_tags de otros
+    register_rest_route( VX_REST_NAMESPACE, '/nexos/ofrece', [
         'methods'             => 'GET',
         'callback'            => 'vx_rest_matches_offers',
         'permission_callback' => 'is_user_logged_in',

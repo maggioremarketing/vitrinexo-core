@@ -37,7 +37,7 @@ add_shortcode( 'vx_landing', function (): string {
               <div class="row g-3 text-start">
                 <?php
                 $vx_home_links = [
-                    [ '/matches/',    'ti-sparkles',        'Mis matches',    'Personas que ofrecen lo que buscas y viceversa.' ],
+                    [ '/nexos/',    'ti-sparkles',        'Mis nexos',    'Personas que ofrecen lo que buscas y viceversa.' ],
                     [ '/conexiones/', 'ti-users-group',     'Mis conexiones', 'Tu red y las solicitudes pendientes.' ],
                     [ '/4dinner/',    'ti-tools-kitchen-2', '4Dinner',        'Cenas de networking en tu ciudad.' ],
                     [ '/blog/',       'ti-news',            'Blog',           'Ideas y casos B2B de la comunidad.' ],
