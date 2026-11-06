@@ -312,7 +312,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       <!-- Qué ofreces -->
       <div class="mb-4">
         <div class="d-flex align-items-center gap-2 mb-2">
-          <span class="badge-vx" style="background:var(--salvia-suave);color:var(--salvia-presion);font-size:11px;font-weight:700">OFRECES</span>
+          <span class="badge-vx" style="background:var(--salvia-suave);color:var(--color-text-primary);font-size:11px;font-weight:700">OFRECES</span>
           <span style="font-size:12px;color:var(--color-text-secondary)">Elige los que apliquen.¿En qué puedes ayudar a otros?</span>
         </div>
         <div class="d-flex flex-wrap gap-2 mb-2" id="tags-offer">
@@ -5023,7 +5023,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                                     if(formArea){
                                         formArea.innerHTML = '<div class="text-center py-4">'
                                             + '<div style="font-size:48px;margin-bottom:12px"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i></div>'
-                                            + '<h3 style="color:var(--salvia-presion);margin-bottom:8px">¡Interés registrado!</h3>'
+                                            + '<h3 style="color:var(--color-text-primary);margin-bottom:8px">¡Interés registrado!</h3>'
                                             + '<p style="color:var(--color-text-secondary);max-width:440px;margin:0 auto 16px">Tu solicitud fue recibida. El equipo de Vitrinexo te asignará a la próxima mesa disponible en tu ciudad.</p>'
                                             + '<div class="alert-vx alert-info d-inline-flex gap-2 align-items-start text-start" style="max-width:440px">'
                                             + '<i class="ti ti-bell" style="font-size:18px;flex-shrink:0;margin-top:1px"></i>'
