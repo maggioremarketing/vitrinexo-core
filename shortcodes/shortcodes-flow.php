@@ -18,7 +18,7 @@ add_shortcode( 'vx_login', function (): string {
             <div class="vx-auth-card">
 
                 <div class="vx-auth-card__logo mb-4">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" height="40">
+                    <img src="<?php echo esc_url( vx_logo_url() ); ?>" alt="Vitrinexo" height="40">
                 </div>
 
                 <!-- Tabs -->

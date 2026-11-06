@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // [vx_landing] — página de inicio pública
 add_shortcode( 'vx_landing', function (): string {
-    $logo_url     = get_template_directory_uri() . '/assets/img/vitrinexo.svg';
+    $logo_url     = vx_logo_url();
     $is_logged    = is_user_logged_in();
     $registro_url = home_url( '/login/?tab=registro' );
     $cta_label    = 'Quiero ser Pionero';

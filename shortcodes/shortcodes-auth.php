@@ -69,7 +69,7 @@ add_shortcode( 'vx_onboarding', function (): string {
 <!-- NAV CON PROGRESO — 5 pasos -->
 <nav class="ob-nav">
   <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="d-flex align-items-center gap-2 text-decoration-none">
-    <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/vitrinexo.svg' ) ); ?>" width="90" alt="Vitrinexo">
+    <img src="<?php echo esc_url( function_exists( 'vx_logo_url' ) ? vx_logo_url() : get_theme_file_uri( 'assets/img/vitrinexo.svg' ) ); ?>" width="90" alt="Vitrinexo">
   </a>
 
   <div class="ob-steps d-none d-md-flex" id="ob-steps-indicator">
