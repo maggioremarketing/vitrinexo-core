@@ -69,7 +69,7 @@ add_shortcode( 'vx_landing', function (): string {
         <div class="container">
             <div class="hero-content">
                 <img width="200" src="<?php echo esc_url( $logo_url ); ?>" alt="Vitrinexo" />
-                <h1 class="my-4">Tu <strong>vitrina</strong> para construir<br><strong>nexos</strong> de negocio.</h1>
+                <h1 class="my-4"><?php echo function_exists( 'vx_tagline_html' ) ? vx_tagline_html() : 'Tu <strong>vitrina</strong> para construir <strong>nexos</strong> de negocio.'; ?></h1>
                 <div class="mt-5">
                     <p>Muestra lo que haces y encuentra lo que necesitas. <span class="vx-name-regular">Vitrinexo</span> es la vitrina de servicios profesionales donde tu empresa gana visibilidad y oportunidades de negocio, sin publicidad y entre pares.</p>
                 </div>
@@ -222,7 +222,7 @@ add_shortcode( 'vx_landing', function (): string {
             <div class="section-landing-head">
                 <span class="section-landing-label">Experiencia presencial</span>
                 <h2 class="section-landing-title">Vitrinexo <strong>4Dinner</strong></h2>
-                <p class="section-landing-lead">Cenas de networking en formato íntimo:<span class="vx-br-mobile"><br></span> 4 personas, 1 mesa, 1 conversación real.<br>Miércoles 8pm hora local, simultáneamente en múltiples ciudades.</p>
+                <p class="section-landing-lead">Cenas de networking en formato íntimo:<span class="vx-br-mobile"><br></span> 4 personas, 1 mesa, 1 conversación real.<br>Miércoles 20:00 hora local, simultáneamente en múltiples ciudades.</p>
             </div>
             <!-- Imagen nocturna: ahora debajo del texto de 4Dinner -->
             <div class="vx-nocturna-banner">
@@ -508,7 +508,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
               4 personas.<br>1 mesa.<br><em style="font-style:italic">1 conversación real.</em>
             </h1>
             <p style="font-size:1rem;color:var(--color-text-primary);line-height:1.7;max-width:480px;margin-bottom:2rem">
-              Cada miércoles a las 8pm, cuatro miembros de Vitrinexo se sientan a cenar en una ciudad de Hispanoamérica. Sin agenda formal, sin pitches. Solo personas que ya se conocen por sus fichas y quieren dar el paso a lo presencial.
+              Cada miércoles a las 20:00, cuatro miembros de Vitrinexo se sientan a cenar en una ciudad de Hispanoamérica. Sin agenda formal, sin pitches. Solo personas que ya se conocen por sus fichas y quieren dar el paso a lo presencial.
             </p>
             <div class="d-flex gap-3 flex-wrap">
               <a href="<?php echo esc_url( $registro_url ); ?>" class="btn-vx btn-vx-lg btn-4dinner-cta">
@@ -527,7 +527,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
                   <div class="stat-label-hero">personas por mesa</div>
                 </div>
                 <div class="col-4">
-                  <div class="stat-num-hero">8pm</div>
+                  <div class="stat-num-hero">20:00</div>
                   <div class="stat-label-hero">hora local, miércoles</div>
                 </div>
                 <div class="col-4">
@@ -638,7 +638,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
               <div>
                 <div class="card-title-sm" style="margin-bottom:3px"><?php echo esc_html( $dinner->get_ciudad() ); ?></div>
                 <div class="text-sm-muted">
-                  <i class="ti ti-users me-1"></i><?php echo esc_html( $cupos . ( $cupos === 1 ? ' cupo libre' : ' cupos libres' ) ); ?> · 8pm
+                  <i class="ti ti-users me-1"></i><?php echo esc_html( $cupos . ( $cupos === 1 ? ' cupo libre' : ' cupos libres' ) ); ?> · 20:00
                 </div>
                 <?php if ( $cupos > 0 ) : ?>
                 <span class="badge-vx badge-primary mt-2">Disponible</span>

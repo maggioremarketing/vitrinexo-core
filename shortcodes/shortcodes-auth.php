@@ -4789,7 +4789,7 @@ add_shortcode( 'vx_4dinner', function (): string {
             <div class="row g-4 align-items-center">
                 <div class="col-12 col-md-7">
                     <p class="text-md-muted" style="line-height:1.7;margin:0">
-                        Cada miércoles a las 8pm, 4 miembros de la red Vitrinexo se sientan a cenar en una ciudad distinta. Sin agenda, sin pitches formales. Solo conversación real entre personas que ya se conocen por sus fichas. Cada quien paga su consumo.
+                        Cada miércoles a las 20:00, 4 miembros de la red Vitrinexo se sientan a cenar en una ciudad distinta. Sin agenda, sin pitches formales. Solo conversación real entre personas que ya se conocen por sus fichas. Cada quien paga su consumo.
                     </p>
                 </div>
                 <div class="col-12 col-md-5">
@@ -4799,7 +4799,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                             <div class="stat-label-vx">personas por mesa</div>
                         </div>
                         <div class="col-4 text-center">
-                            <div class="stat-num-vx stat-num-vx--primary stat-num-vx--md">8pm</div>
+                            <div class="stat-num-vx stat-num-vx--primary stat-num-vx--md">20:00</div>
                             <div class="stat-label-vx">hora local, miércoles</div>
                         </div>
                         <div class="col-4 text-center">
@@ -5365,7 +5365,7 @@ add_shortcode( 'vx_mis_eventos', function (): string {
                                 <i class="ti ti-clock" style="color:var(--mantequilla-presion);font-size:18px;flex-shrink:0"></i>
                                 <div>
                                     <span style="font-weight:600"><?php echo esc_html( date_i18n( 'l j \d\e F \d\e Y', $pd_fecha ) ); ?></span>
-                                    <span style="color:var(--color-text-secondary)"> · 8:00 PM hora local</span>
+                                    <span style="color:var(--color-text-secondary)"> · 20:00 hora local</span>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center gap-2">

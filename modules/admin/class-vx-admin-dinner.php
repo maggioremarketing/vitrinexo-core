@@ -228,7 +228,7 @@ class VX_Admin_Dinner
         // Fecha de la cena
         echo '<tr><th><label>Fecha de la cena</label></th><td>';
         echo '<input type="date" name="' . VX_Dinner_Meta::FECHA . '" value="' . esc_attr( $fecha_val ) . '" class="regular-text">';
-        echo '<p class="description">La cena es a las 8:00 PM hora local.</p>';
+        echo '<p class="description">La cena es a las 20:00 hora local.</p>';
         echo '</td></tr>';
 
         // Deadline

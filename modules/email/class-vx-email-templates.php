@@ -577,7 +577,7 @@ class VX_Email_Templates
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu invitación</p>'
             . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
-            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
+            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>'
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
             . self::p( '4 personas, 1 mesa, sin agenda formal. Solo una conversación real entre miembros verificados de Vitrinexo.' )
@@ -628,7 +628,7 @@ class VX_Email_Templates
             . '<ul style="margin:0;padding-left:18px;color:#14161F;font-size:14px;line-height:1.8;">'
             . '<li>El equipo de Vitrinexo revisa los interesados y arma las mesas.</li>'
             . '<li>Si quedas seleccionado, recibirás una <strong>invitación oficial</strong> con todos los detalles.</li>'
-            . '<li>La cena es el <strong>miércoles a las 8pm</strong>, hora local.</li>'
+            . '<li>La cena es el <strong>miércoles a las 20:00</strong>, hora local.</li>'
             . '</ul>'
             . '</div>'
             . '<div style="text-align:center;margin:28px 0;">'
@@ -662,7 +662,7 @@ class VX_Email_Templates
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu cena</p>'
             . '<p style="margin:0 0 14px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
-            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
+            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>'
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
             . $mesa_html
@@ -695,7 +695,7 @@ class VX_Email_Templates
             . '</div>'
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Detalles del evento</p>'
-            . ( $fecha_str ? '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>' : '' )
+            . ( $fecha_str ? '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>' : '' )
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
             . '<div style="background:#CBE5D8;border-radius:8px;padding:14px 16px;margin:20px 0;">'
@@ -803,7 +803,7 @@ class VX_Email_Templates
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
             . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
-            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 8:00 PM</p>'
+            . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>'
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( $dinner['restaurante'] ?? '' ) . ' · ' . esc_html( $dinner['direccion'] ?? '' ) . '</p>'
             . '</div>'
             . '<p style="font-size:14px;font-weight:600;color:#14161F;margin:20px 0 8px;">Tus comensales:</p>'
