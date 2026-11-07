@@ -7,9 +7,13 @@ add_action( 'rest_api_init', function () {
     register_rest_route( VX_REST_NAMESPACE, '/stats/inscritos', [
         'methods'             => 'GET',
         'callback'            => function() {
-            $counts   = count_users();
-            $total    = max( 0, ( $counts['total_users'] ?? 0 ) - 2 ); // restar los 2 admins
-            $cupo     = 100;
+            // Contaba count_users() menos dos administradores escritos a mano,
+            // asi que la cifra publica incluia perfiles pendientes y
+            // rechazados, y se descuadraba el dia que hubiera un tercer
+            // administrador. Ahora cuenta Pioneros aprobados, que es lo que la
+            // frase de al lado promete.
+            $total    = vx_pioneros_aprobados();
+            $cupo     = vx_pioneros_cupo();
             $restante = max( 0, $cupo - $total );
             return new WP_REST_Response( [
                 'inscritos' => $total,

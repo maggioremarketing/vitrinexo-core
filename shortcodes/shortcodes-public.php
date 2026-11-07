@@ -64,16 +64,21 @@ add_shortcode( 'vx_landing', function (): string {
     ob_start();
     ?>
 
-    <!-- ── Hero con canvas animado ── -->
+    <!-- ── Hero ── -->
     <section class="network-hero light">
         <div class="container">
             <div class="hero-content">
                 <img width="200" src="<?php echo esc_url( $logo_url ); ?>" alt="Vitrinexo" />
-                <h1 class="my-4"><?php echo function_exists( 'vx_tagline_html' ) ? vx_tagline_html() : 'Tu <strong>vitrina</strong> para construir <strong>nexos</strong> de negocio.'; ?></h1>
-                <div class="mt-5">
-                    <p>Muestra lo que haces y encuentra lo que necesitas. <span class="vx-name-regular">Vitrinexo</span> es la vitrina de servicios profesionales donde tu empresa gana visibilidad y oportunidades de negocio, sin publicidad y entre pares.</p>
+                <p class="vx-hero-tagline"><?php echo function_exists( 'vx_tagline_html' ) ? wp_kses( vx_tagline_html(), [ 'strong' => [] ] ) : ''; ?></p>
+                <h1 class="my-4">Networking servido<br><strong>a tu mesa.</strong></h1>
+                <div class="mt-4">
+                    <p>Cuéntanos qué haces o qué buscas, y siéntate a conversar.</p>
                 </div>
-                <a class="btn-vx btn-primary-vx btn-vx-lg btn rounded-pill mt-4" href="#afiliado-original"><?php echo esc_html( $cta_label ); ?></a>
+                <div class="vx-hero-acciones mt-4">
+                    <a class="btn-vx btn-primary-vx btn-vx-lg" href="#afiliado-original"><?php echo esc_html( $cta_label ); ?></a>
+                    <a class="btn-vx btn-ghost-vx btn-vx-lg" href="#como-funciona">Cómo funciona</a>
+                </div>
+                <p class="vx-hero-nota">Sin publicidad y sin comisión por conectar.</p>
                 <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-portada.svg' ) ); ?>" alt="Diez retratos ilustrados en dos filas; uno es un lugar libre dibujado con línea punteada." class="hero-feature-img mt-5 img-fluid" />
             </div>
         </div>
@@ -83,37 +88,109 @@ add_shortcode( 'vx_landing', function (): string {
     <section class="section-landing" id="el-problema">
         <div class="container">
             <div class="section-landing-head">
-                <span class="section-landing-label">El problema</span>
+                <span class="section-landing-label">Para hacer negocios, hay que ir a todos los eventos</span>
                 <h2 class="section-landing-title">Mucho evento, <strong>poco nexo.</strong></h2>
-                <p class="section-landing-lead"><strong>Inscribirse en asociaciones, ir a diplomados, tomar cafés que nunca se concretan.</strong> Caro, lento y siempre con esa incómoda barrera de parecer fuera de lugar al ofrecer servicios de inmediato.</p>
             </div>
             <div class="problem-grid">
                 <div class="step-card">
                     <div class="step-card__icon"><i class="ti ti-cash-off"></i></div>
-                    <h3 class="step-card__title">Caro e ineficiente</h3>
-                    <p class="step-card__desc">Membresías, eventos, viajes. El retorno sobre el tiempo invertido en el networking tradicional es bajo y casi imposible de medir.</p>
+                    <h3 class="step-card__title">Caro y poco medible</h3>
+                    <p class="step-card__desc">El networking tradicional cuesta membresías, viajes y tardes enteras, y nadie sabe decir qué devolvió.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-card__icon"><i class="ti ti-mood-empty"></i></div>
-                    <h3 class="step-card__title">A veces incómodo</h3>
-                    <p class="step-card__desc">No todo el mundo tiene una personalidad extrovertida y vendedora. El formato tradicional penaliza a quienes prefieren que su trabajo hable por ellos.</p>
+                    <h3 class="step-card__title">Favorece a los extrovertidos</h3>
+                    <p class="step-card__desc">Gana quien habla más fuerte, y deja fuera a quien prefiere que su trabajo hable por él.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-card__icon"><i class="ti ti-brand-linkedin"></i></div>
-                    <h3 class="step-card__title">LinkedIn no convierte</h3>
-                    <p class="step-card__desc">Ya nadie responde mensajes de desconocidos porque sabe que le van a querer vender algo. El medio mató al mensaje.</p>
+                    <h3 class="step-card__title">Las plataformas de empleo no venden servicios</h3>
+                    <p class="step-card__desc">Están hechas para buscar trabajo, no para que una empresa le ofrezca algo a otra.</p>
                 </div>
-            </div><!-- /.problem-grid -->
+            </div>
 
-            <!-- Banner Vitrinexo cambia el contexto -->
             <div class="vx-context-banner">
                 <div class="vx-context-banner__content">
-                    <h3 class="vx-context-banner__title"><span class="vx-name-regular">Vitrinexo</span> cambia el contexto</h3>
-                    <p class="vx-context-banner__desc">Aquí todos están para hacer negocios, eso lo hace legítimo desde el inicio. No hay que disculparse por ofrecer lo que haces.</p>
+                    <h3 class="vx-context-banner__title"><span class="vx-name-regular">Vitrinexo</span> conecta los puntos para ti</h3>
+                    <p class="vx-context-banner__desc">Acá todos llegan a hacer negocios. Muestras lo que ofreces, ves lo que buscan otras empresas y escribes directo a quien te interesa.</p>
                 </div>
                 <img class="vx-context-banner__img" src="<?php echo esc_url( vx_asset_url( 'marca/retratos-banner.svg' ) ); ?>" alt="Ocho retratos ilustrados en dos filas de cuatro, todos distintos y todos presentes." />
             </div>
+        </div>
+    </section>
 
+    <!-- ── Comunidades: las cinco mesas ── -->
+    <section class="section-landing" id="comunidades">
+        <div class="container">
+            <div class="section-landing-head">
+                <span class="section-landing-label">Una plataforma, cinco mesas</span>
+                <h2 class="section-landing-title">Elige dónde <strong>sentarte.</strong></h2>
+            </div>
+            <div class="multiverse-grid">
+                <div class="multiverse-card multiverse-card--main">
+                    <span class="multiverse-card__label">La marca madre</span>
+                    <h3 class="multiverse-card__title">Vitrinexo</h3>
+                    <p class="multiverse-card__desc">El directorio completo de empresas de servicios verificadas.</p>
+                    <p class="vx-mesa-nexo"><span>Se conectan por</span> Lo que ofrecen y lo que buscan</p>
+                </div>
+                <div class="multiverse-card multiverse-card--woman">
+                    <span class="multiverse-card__label">Comunidad</span>
+                    <h3 class="multiverse-card__title">Vitrinexo <em>Woman</em></h3>
+                    <p class="multiverse-card__desc">Empresas lideradas por mujeres, que se encuentran para hacer crecer sus negocios entre pares.</p>
+                    <p class="vx-mesa-nexo"><span>Se conectan por</span> Liderazgo compartido</p>
+                </div>
+                <div class="multiverse-card multiverse-card--out2b">
+                    <span class="multiverse-card__label">Comunidad</span>
+                    <h3 class="multiverse-card__title">Vitrinexo <em>LGBTQ+</em></h3>
+                    <p class="multiverse-card__desc">Afinidad para entrar, negocio para quedarse.</p>
+                    <p class="vx-mesa-nexo"><span>Se conectan por</span> Afinidad y confianza</p>
+                </div>
+                <div class="multiverse-card multiverse-card--senior">
+                    <span class="multiverse-card__label">Comunidad</span>
+                    <h3 class="multiverse-card__title">Vitrinexo <em>Senior</em></h3>
+                    <p class="multiverse-card__desc">Ejecutivos con trayectoria. Su recorrido es la ventaja que traen a la mesa.</p>
+                    <p class="vx-mesa-nexo"><span>Se conectan por</span> Experiencia y criterio</p>
+                </div>
+                <div class="multiverse-card multiverse-card--dinner" id="for-dinner">
+                    <span class="multiverse-card__label">En persona</span>
+                    <h3 class="multiverse-card__title">Vitrinexo <em>4Dinner</em></h3>
+                    <p class="multiverse-card__desc">Cuatro personas, una mesa. Vitrinexo arma cada mesa para conversar de trabajo, los miércoles a las 20:00 hora local.</p>
+                    <p class="vx-mesa-nexo"><span>Se conectan por</span> Conversación cara a cara</p>
+                </div>
+            </div>
+            <p class="vx-mesas-pie">Woman, LGBTQ+ y Senior son comunidades dentro de <span class="vx-name-regular">Vitrinexo</span>. Un miembro puede estar en varias.</p>
+
+            <div class="vx-nocturna-banner">
+                <img class="vx-nocturna-banner__img" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/6-La-experiencia presencial-EP-2-nocturna.jpeg" alt="Cuatro personas cenando en una terraza de noche, con velas sobre la mesa." />
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Antes y ahora ── -->
+    <section class="section-landing section-landing--alt" id="antes-ahora">
+        <div class="container">
+            <div class="section-landing-head">
+                <span class="section-landing-label">Otra forma de hacer networking</span>
+                <h2 class="section-landing-title">Menos cóctel, <strong>más conversación.</strong></h2>
+            </div>
+            <div class="vx-contraste">
+                <div class="vx-contraste__col vx-contraste__col--antes">
+                    <h3 class="vx-contraste__titulo">Antes</h3>
+                    <ul class="vx-contraste__lista">
+                        <li>Eventos caros y difíciles de medir.</li>
+                        <li>Gana quien habla más fuerte.</li>
+                        <li>Mensajes de venta que nadie responde.</li>
+                    </ul>
+                </div>
+                <div class="vx-contraste__col vx-contraste__col--ahora">
+                    <h3 class="vx-contraste__titulo">Ahora</h3>
+                    <ul class="vx-contraste__lista">
+                        <li>Tu perfil trabaja mientras tú trabajas.</li>
+                        <li>Todos los miembros están verificados.</li>
+                        <li>Una mesa de cuatro para conversar de trabajo.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -122,114 +199,67 @@ add_shortcode( 'vx_landing', function (): string {
         <div class="container">
             <div class="section-landing-head">
                 <span class="section-landing-label">Cómo funciona</span>
-                <h2 class="section-landing-title">Dinos qué ofreces. Dinos qué buscas.<br><strong>Vitrinexo conecta los puntos para ti.</strong></h2>
-                <p class="section-landing-lead">Cada empresa y persona tiene un perfil con información verificada.</p>
+                <h2 class="section-landing-title">Tres pasos para <strong>sentarte a la mesa.</strong></h2>
             </div>
-            <div class="problem-grid">
+            <div class="problem-grid problem-grid--tres">
                 <div class="step-card">
                     <div class="step-card__num">01</div>
                     <div class="step-card__icon"><i class="ti ti-id-badge-2"></i></div>
-                    <h3 class="step-card__title">Crea tu ficha</h3>
-                    <p class="step-card__desc">Publicas quién eres, qué haces y qué buscas.</p>
+                    <h3 class="step-card__title">Crea tu perfil</h3>
+                    <p class="step-card__desc">Lo que ofreces y lo que buscas.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-card__num">02</div>
                     <div class="step-card__icon"><i class="ti ti-shield-check"></i></div>
-                    <h3 class="step-card__title">Verificamos tus datos</h3>
-                    <p class="step-card__desc">En menos de un día hábil tu perfil estará visible para todos los miembros.</p>
+                    <h3 class="step-card__title">Te verificamos</h3>
+                    <p class="step-card__desc">Revisamos cada perfil para que cada conexión sea con una empresa real, lista para tejer redes contigo.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-card__num">03</div>
-                    <div class="step-card__icon"><i class="ti ti-search"></i></div>
-                    <h3 class="step-card__title">Vitrinea el directorio</h3>
-                    <p class="step-card__desc">Identifica oportunidades y comienza a conectar.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-card__num">04</div>
                     <div class="step-card__icon"><i class="ti ti-heart-handshake"></i></div>
-                    <h3 class="step-card__title">Haz negocios</h3>
-                    <p class="step-card__desc">Contacto directo, sin intermediarios ni comisiones.</p>
+                    <h3 class="step-card__title">Siéntate a la mesa</h3>
+                    <p class="step-card__desc">Escribe directo o súmate a una cena 4Dinner: <span class="vx-name-regular">Vitrinexo</span> la organiza y arma cada mesa para reunir a los invitados ideales.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- ── La pared del directorio, entre Cómo funciona y Para quién es ── -->
-    <div class="section-landing" style="padding-top:0">
+    <!-- ── Perfiles: la pared del directorio ── -->
+    <section class="section-landing" id="perfiles">
         <div class="container">
+            <div class="section-landing-head">
+                <span class="section-landing-label">Perfiles</span>
+                <h2 class="section-landing-title">Un encuentro tiene <strong>muchas caras.</strong></h2>
+                <p class="section-landing-lead">Un nexo se arma con muchas aristas: personas de distintos rubros que se unen por un fin común. Cada perfil dice qué ofrece y qué busca, y detrás de cada cara hay una empresa verificada.</p>
+            </div>
             <div class="vx-img-banner">
                 <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-mosaico.svg' ) ); ?>" alt="Una pared de treinta retratos ilustrados, todos distintos; uno es un lugar libre dibujado con línea punteada." />
             </div>
         </div>
-    </div>
-
-    <!-- ── Para quién es ── -->
-    <section class="section-landing" id="para-quien">
-        <div class="container">
-            <div class="audience-block">
-                <div class="section-landing-head">
-                    <span class="section-landing-label">Para quién es</span>
-                    <h2 class="section-landing-title">Hecho para empresas de servicios B2B en <strong>expansión</strong></h2>
-                    <p class="section-landing-lead">¿Quieres crecer más allá de tus fronteras?<br><span class="vx-name">Vitrinexo</span> es para ti.</p>
-                </div>
-                <div class="audience-chips">
-                    <?php
-                    $rubros = [ 'Marketing y publicidad','Tecnología y software','Consultoría y estrategia','Diseño y creatividad','Legal y ética','Contabilidad y finanzas','Recursos humanos','Logística','Salud y bienestar','Educación y capacitación','Construcción e ingeniería','Producción audiovisual','Traducción y localización' ];
-                    foreach ( $rubros as $rubro ) :
-                    ?><span class="audience-chip"><?php echo esc_html( $rubro ); ?></span><?php endforeach; ?>
-                </div>
-            </div>
-        </div>
     </section>
 
-    <!-- ── El multiverso ── -->
-    <section class="section-landing" id="el-multiverso">
+    <!-- ── Preguntas frecuentes, de la misma fuente que la página completa ── -->
+    <?php $vx_faqs = function_exists( 'vx_faq_destacadas' ) ? vx_faq_destacadas( 8 ) : []; ?>
+    <?php if ( $vx_faqs ) : ?>
+    <section class="section-landing section-landing--alt" id="preguntas">
         <div class="container">
             <div class="section-landing-head">
-                <span class="section-landing-label">El multiverso</span>
-                <h2 class="section-landing-title">Una plataforma.<br><strong>Muchas comunidades.</strong></h2>
-                <p class="section-landing-lead"><span class="vx-name">Vitrinexo</span> no es una sola comunidad. Hay subcomunidades verticales dentro de la misma plataforma, cada una con su propia afinidad y propósito.</p>
+                <span class="section-landing-label">Preguntas frecuentes</span>
+                <h2 class="section-landing-title">Lo que <strong>nos preguntan.</strong></h2>
+                <p class="section-landing-lead">Todo lo que necesitas saber antes de poner tu empresa en vitrina. Si te queda una duda, escríbenos a <a class="link-primary-color" href="mailto:hola@vitrinexo.com">hola@vitrinexo.com</a>.</p>
             </div>
-            <div class="multiverse-grid">
-                <div class="multiverse-card multiverse-card--main">
-                    <span class="multiverse-card__label">Plataforma principal</span>
-                    <h3 class="multiverse-card__title">Vitrinexo</h3>
-                    <p class="multiverse-card__desc">El directorio B2B completo. La vitrina donde cada empresa de servicios se muestra y encuentra aliados, clientes y proveedores.</p>
-                </div>
-                <div class="multiverse-card multiverse-card--out2b">
-                    <span class="multiverse-card__label">Comunidad vertical</span>
-                    <h3 class="multiverse-card__title">Vitrinexo <em>LGBTQ+</em></h3>
-                    <p class="multiverse-card__desc">Para líderes y ejecutivos LGBTQ+ en el mundo empresarial.</p>
-                </div>
-                <div class="multiverse-card multiverse-card--woman">
-                    <span class="multiverse-card__label">Comunidad vertical</span>
-                    <h3 class="multiverse-card__title">Vitrinexo <em>Woman</em></h3>
-                    <p class="multiverse-card__desc">Mujeres en posiciones de liderazgo empresarial.</p>
-                </div>
-                <div class="multiverse-card multiverse-card--senior">
-                    <span class="multiverse-card__label">Comunidad vertical</span>
-                    <h3 class="multiverse-card__title">Vitrinexo <em>Senior</em></h3>
-                    <p class="multiverse-card__desc">Ejecutivos con trayectoria consolidada: experiencia como ventaja competitiva.</p>
-                </div>
+            <div class="vx-faq vx-faq--portada">
+                <?php foreach ( $vx_faqs as $vx_faq ) : ?>
+                <details class="vx-faq__item">
+                    <summary class="vx-faq__q"><span><?php echo esc_html( $vx_faq->post_title ); ?></span><i class="ti ti-chevron-down vx-faq__chev" aria-hidden="true"></i></summary>
+                    <div class="vx-faq__a"><?php echo wp_kses_post( wpautop( $vx_faq->post_content ) ); ?></div>
+                </details>
+                <?php endforeach; ?>
             </div>
+            <p class="vx-faq__mas"><a class="btn-vx btn-ghost-vx" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Ver todas las preguntas</a></p>
         </div>
     </section>
-
-    <!-- ── 4Dinner ── -->
-    <section class="section-landing section-landing--alt section-landing--simple" id="for-dinner">
-        <div class="container">
-            <div class="section-landing-head">
-                <span class="section-landing-label">Experiencia presencial</span>
-                <h2 class="section-landing-title">Vitrinexo <strong>4Dinner</strong></h2>
-                <p class="section-landing-lead">Cenas de networking en formato íntimo:<span class="vx-br-mobile"><br></span> 4 personas, 1 mesa, 1 conversación real.<br>Miércoles 20:00 hora local, simultáneamente en múltiples ciudades.</p>
-            </div>
-            <!-- Imagen nocturna: ahora debajo del texto de 4Dinner -->
-            <div class="vx-nocturna-banner">
-                <img class="vx-nocturna-banner__img" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/6-La-experiencia presencial-EP-2-nocturna.jpeg" alt="Vitrinexo 4Dinner" />
-            </div>
-        </div>
-    </section>
+    <?php endif; ?>
 
     <!-- ── Miembro Pionero ── -->
     <?php if ( ! $is_logged ) : ?>
@@ -237,14 +267,15 @@ add_shortcode( 'vx_landing', function (): string {
         <div class="container">
             <div class="founder-block">
                 <div>
-                    <span class="badge-vx badge-founder mb-3 d-inline-flex"><i class="ti ti-star"></i> Miembro Pionero · Gratis 3 meses</span>
-                    <h2 class="section-landing-title mb-3">Sé parte desde <strong>el primer día.</strong></h2>
-                    <p class="section-landing-lead mb-4">Los 100 Miembros Pioneros acceden a beneficios especiales.</p>
-                    <ul class="founder-benefits">
-                        <li><i class="ti ti-circle-check"></i><span><strong>3 meses gratis</strong> desde el lanzamiento.</span></li>
-                        <li><i class="ti ti-circle-check"></i><span>Distintivo <strong>"Miembro Pionero"</strong> visible en tu ficha para siempre.</span></li>
-                        <li><i class="ti ti-circle-check"></i><span>Sin compromiso. Si no te convence, simplemente no renuevas.</span></li>
-                    </ul>
+                    <span class="badge-vx badge-founder mb-3 d-inline-flex"><i class="ti ti-star"></i> Miembro Pionero</span>
+                    <h2 class="section-landing-title mb-3">Los primeros 100 se quedan con <strong>el distintivo.</strong></h2>
+                    <p class="section-landing-lead mb-4">Los Miembros Pioneros abren la mesa: con sus perfiles se arma el directorio desde el primer día, y su distintivo lo recuerda para siempre. Es una fecha de corte, no una promoción.</p>
+                    <dl class="vx-pionero-datos">
+                        <div><dt>Cupos</dt><dd><?php echo esc_html( (string) vx_pioneros_cupo() ); ?> miembros aprobados</dd></div>
+                        <div><dt>Distintivo</dt><dd>Miembro Pionero, permanente</dd></div>
+                        <div><dt>Membresía</dt><dd>Vence a los 3 meses de la aprobación</dd></div>
+                        <div><dt>Ingreso</dt><dd>Solo con perfil verificado</dd></div>
+                    </dl>
                 </div>
                 <div class="founder-form-card">
                     <div id="founderFormView">
@@ -254,10 +285,10 @@ add_shortcode( 'vx_landing', function (): string {
                         <div id="founderCounter" style="margin-bottom:16px">
                             <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
                                 <span style="font-size:13px;color:var(--color-text-muted)">Miembros Pioneros</span>
-                                <span id="founderCountText" style="font-size:13px;font-weight:600;color:var(--color-primary-ink)">0 / 100</span>
+                                <span id="founderCountText" style="font-size:13px;font-weight:600;color:var(--color-primary-ink)"><?php echo esc_html( vx_pioneros_aprobados() . ' / ' . vx_pioneros_cupo() ); ?></span>
                             </div>
                             <div style="background:var(--celeste-suave);border-radius:999px;height:6px;overflow:hidden">
-                                <div id="founderProgressBar" style="height:100%;width:0%;background:var(--color-primary);border-radius:999px;transition:width .6s ease"></div>
+                                <div id="founderProgressBar" style="height:100%;width:<?php echo esc_attr( (string) min( 100, round( vx_pioneros_aprobados() / max( 1, vx_pioneros_cupo() ) * 100 ) ) ); ?>%;background:var(--color-primary);border-radius:999px;transition:width .6s ease"></div>
                             </div>
                             <p id="founderCountSub" style="font-size:12px;color:var(--color-text-muted);margin:4px 0 0"></p>
                         </div>

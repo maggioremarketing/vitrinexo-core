@@ -119,26 +119,9 @@ add_shortcode( 'vx_faq', function (): string {
       <?php endforeach; endif; ?>
     </div>
 
-    <style>
-      .vx-faq{max-width:820px;margin:0 auto}
-      .vx-faq__search{position:relative;margin-bottom:1.75rem}
-      .vx-faq__search .ti{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--color-text-secondary,var(--tinta-2));font-size:18px}
-      .vx-faq__search input{width:100%;padding:13px 16px 13px 42px;border:1px solid var(--color-border,var(--linea));border-radius:12px;font-size:15px;background:var(--blanco);transition:border-color .15s,box-shadow .15s}
-      .vx-faq__search input:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px color-mix(in srgb, var(--color-primary) 35%, transparent)}
-      .vx-faq__cat{margin-bottom:2rem}
-      .vx-faq__cat-title{font-size:1.05rem;font-weight:700;color:var(--color-primary-ink);margin:0 0 .5rem;padding-bottom:.4rem;border-bottom:2px solid var(--color-primary,var(--coral))}
-      .vx-faq__item{border:1px solid var(--color-border,var(--linea));border-radius:12px;margin-bottom:.6rem;background:var(--blanco);overflow:hidden}
-      .vx-faq__item[open]{border-color:var(--color-primary)}
-      .vx-faq__q{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;font-weight:600;color:var(--color-text-primary,var(--tinta));user-select:none}
-      .vx-faq__q::-webkit-details-marker{display:none}
-      .vx-faq__q:hover{background:var(--color-primary-soft)}
-      .vx-faq__chev{transition:transform .2s;color:var(--color-primary-ink);flex-shrink:0}
-      .vx-faq__item[open] .vx-faq__chev{transform:rotate(180deg)}
-      .vx-faq__a{padding:0 18px 16px;color:var(--color-text-secondary,var(--tinta-2));line-height:1.6}
-      .vx-faq__a p{margin:0 0 .6rem}
-      .vx-faq__a p:last-child{margin-bottom:0}
-      .vx-faq__empty,.vx-faq__none{color:var(--color-text-secondary,var(--tinta-2));text-align:center;padding:1rem 0}
-    </style>
+    <?php /* Los estilos viven en assets/css/style.css del tema: la portada
+       muestra las mismas preguntas y necesitaba los mismos estilos, y dos
+       copias de una hoja se separan igual que dos copias de un texto. */ ?>
 
     <script>
     (function(){
@@ -169,3 +152,67 @@ add_shortcode( 'vx_faq', function (): string {
     <?php
     return ob_get_clean();
 } );
+
+/* ════════════════════════════════════════════════════════════════════════
+   Preguntas destacadas en la portada
+   ════════════════════════════════════════════════════════════════════════ */
+
+/**
+ * La portada muestra unas pocas preguntas y la página completa las muestra
+ * todas. Salen de la misma fuente a propósito: la propuesta traía diez
+ * preguntas escritas aparte, y dos copias de la misma respuesta se separan
+ * sin que nadie lo note, que es exactamente el problema que las páginas
+ * legales tuvieron durante meses.
+ *
+ * Se eligen marcando «Destacada en la portada» en la pregunta. Mientras no
+ * haya ninguna marcada, la portada muestra las primeras publicadas, así que
+ * la sección nunca sale vacía.
+ */
+add_action( 'add_meta_boxes', function () {
+    add_meta_box(
+        'vx_faq_destacada',
+        'Portada',
+        function ( $post ) {
+            $on = get_post_meta( $post->ID, '_vx_faq_destacada', true );
+            wp_nonce_field( 'vx_faq_destacada', 'vx_faq_destacada_nonce' );
+            echo '<label><input type="checkbox" name="vx_faq_destacada" value="1" ' . checked( $on, '1', false ) . '> Destacada en la portada</label>';
+            echo '<p class="description">La portada muestra las destacadas. Si no hay ninguna, muestra las primeras publicadas.</p>';
+        },
+        'vx_faq',
+        'side'
+    );
+} );
+
+add_action( 'save_post_vx_faq', function ( $post_id ) {
+    if ( ! isset( $_POST['vx_faq_destacada_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( sanitize_key( $_POST['vx_faq_destacada_nonce'] ), 'vx_faq_destacada' ) ) return;
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+    if ( empty( $_POST['vx_faq_destacada'] ) ) delete_post_meta( $post_id, '_vx_faq_destacada' );
+    else update_post_meta( $post_id, '_vx_faq_destacada', '1' );
+} );
+
+/**
+ * Las preguntas de la portada.
+ *
+ * @return WP_Post[]
+ */
+function vx_faq_destacadas( int $cuantas = 8 ): array {
+    $marcadas = get_posts( [
+        'post_type'      => 'vx_faq',
+        'posts_per_page' => $cuantas,
+        'orderby'        => 'menu_order date',
+        'order'          => 'ASC',
+        'meta_key'       => '_vx_faq_destacada',
+        'meta_value'     => '1',
+    ] );
+    if ( $marcadas ) return $marcadas;
+
+    return get_posts( [
+        'post_type'      => 'vx_faq',
+        'posts_per_page' => $cuantas,
+        'orderby'        => 'menu_order date',
+        'order'          => 'ASC',
+    ] );
+}
