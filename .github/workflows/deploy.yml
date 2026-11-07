@@ -16,10 +16,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pruebas de sistema
-        # Si el sistema de diseño no se cumple, no se publica. La paleta se lee
-        # de la copia de pruebas-colores.mjs, porque acá el tema no está al lado.
+        # Si el sistema de diseño no se cumple, no se publica. Estas dos no
+        # necesitan el tema, así que corren antes de clonar nada y fallan rápido.
         run: |
-          node pruebas-colores.mjs
           node pruebas-emojis.mjs
           php pruebas-vencimiento.php
 
@@ -28,6 +27,18 @@ jobs:
         # cualquier cambio del plugin puede llegar al área de miembros, que es
         # casi todo lo que el plugin renderiza.
         run: git clone --depth 1 https://github.com/maggioremarketing/vitrinexo-theme.git ../vitrinexo-theme
+
+      - name: Prueba de colores
+        # Va después del clonado a propósito. La prueba compara su copia de la
+        # paleta contra el :root del tema solo cuando el tema está al lado;
+        # corriendo antes leía la copia y la daba por buena, así que la copia
+        # podía quedarse atrás sin que nadie se enterara, y se quedó atrás seis
+        # colores. Acá sí compara: si el tema repinta, este deploy frena hasta
+        # que la copia se ponga al día.
+        #
+        # Antes de npm ci, que se demora, para que un color fuera de la paleta
+        # falle en segundos.
+        run: node pruebas-colores.mjs
 
       - name: Dependencias del tema
         working-directory: ../vitrinexo-theme

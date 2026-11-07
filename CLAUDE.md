@@ -53,6 +53,13 @@ vitrinexo-core/
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
 
+Antes del rsync corren, en este orden: `pruebas-emojis.mjs` y `pruebas-vencimiento.php` (no necesitan
+el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
+La prueba de colores va después del clonado porque compara su copia de la paleta contra el `:root` del
+tema, y eso solo puede hacerlo con el tema presente. **Si el tema repinta, el deploy del plugin frena
+hasta que la copia de `pruebas-colores.mjs` se ponga al día**: es a propósito, una copia que se
+desincroniza en silencio deja pasar colores que ya no existen.
+
 ```yaml
 # Secrets requeridos en el repo
 SSH_HOST: 195.200.3.42
