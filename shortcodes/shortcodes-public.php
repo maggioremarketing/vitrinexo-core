@@ -111,7 +111,7 @@ add_shortcode( 'vx_landing', function (): string {
                     <h3 class="vx-context-banner__title"><span class="vx-name-regular">Vitrinexo</span> cambia el contexto</h3>
                     <p class="vx-context-banner__desc">Aquí todos están para hacer negocios, eso lo hace legítimo desde el inicio. No hay que disculparse por ofrecer lo que haces.</p>
                 </div>
-                <img class="vx-context-banner__img" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/2-EPR-5-elegida.png" alt="Vitrinexo cambia el contexto" />
+                <img class="vx-context-banner__img" src="<?php echo esc_url( vx_asset_url( 'marca/retratos-banner.svg' ) ); ?>" alt="Ocho retratos ilustrados en dos filas de cuatro, todos distintos y todos presentes." />
             </div>
 
         </div>
