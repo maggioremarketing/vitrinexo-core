@@ -15,6 +15,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Pruebas de sistema
+        # Si el sistema de diseño no se cumple, no se publica. La paleta se lee
+        # de la copia de pruebas-colores.mjs, porque acá el tema no está al lado.
+        run: |
+          node pruebas-colores.mjs
+          node pruebas-emojis.mjs
+
       - name: Configurar SSH key
         run: |
           mkdir -p ~/.ssh
