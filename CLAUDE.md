@@ -54,7 +54,7 @@ vitrinexo-core/
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
 
 Antes del rsync corren, en este orden: `pruebas-emojis.mjs`, `pruebas-vencimiento.php`,
-`pruebas-correos.php` y `pruebas-estados-vacios.php` (ninguna necesita el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
+`pruebas-correos.php`, `pruebas-estados-vacios.php` y `pruebas-admin.php` (ninguna necesita el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
 La prueba de colores va después del clonado porque compara su copia de la paleta contra el `:root` del
 tema, y eso solo puede hacerlo con el tema presente. **Si el tema repinta, el deploy del plugin frena
 hasta que la copia de `pruebas-colores.mjs` se ponga al día**: es a propósito, una copia que se
@@ -122,8 +122,21 @@ con datos nunca dibuja su estado vacío, así que ninguna prueba de pantalla pue
 leen de `vx_render_empty_state()`, no están copiados en la prueba, y un contador de iconos avisa si la
 lectura se saltó alguno.
 
-Las tres (`pruebas-comun-voz.php` tiene la lista; las otras dos la usan) comparten un solo archivo de
-reglas. **Si se agrega una palabra prohibida en el tema, se agrega también en `pruebas-comun-voz.php`**:
+Y **wp-admin**, que lo mide `pruebas-admin.php`. Es la única que lee el archivo en vez de lo
+renderizado, y por una razón: una pantalla de admin no se puede dibujar sin WordPress entero, porque
+no es una función que devuelva HTML sino un callback colgado de un hook que escribe con `echo`. No lo
+lee como texto, lo **tokeniza**: PHP sabe cuál de sus pedazos es código y cuál es texto, y se le
+pregunta a él. Se miden los literales entrecomillados y el HTML que está fuera de `<?php`, que es lo
+que termina impreso. `preg_match` y `offers_matches` son identificadores, `match ( true )` es una
+palabra reservada y los comentarios son comentarios, así que las tres trampas que obligaron a escribir
+la regla de «nunca sobre el archivo» las descarta el tokenizador solo, sin una lista de excepciones
+que alguien tendría que mantener. Lo que cuesta: un texto armado concatenando en tiempo de ejecución
+se mide en pedazos, y uno que viene de la base de datos no se mide. Los archivos se descubren solos
+(todo lo que esté en `modules/admin` y `cpts`, más lo que llame a `add_menu_page` y compañía) y un
+piso de diez avisa si el descubrimiento se rompe.
+
+Las cuatro (`pruebas-comun-voz.php` tiene la lista; las otras tres la usan) comparten un solo archivo
+de reglas. **Si se agrega una palabra prohibida en el tema, se agrega también en `pruebas-comun-voz.php`**:
 entre el tema y el plugin la lista está repetida a propósito, porque el plugin se despliega solo y no
 puede depender de que el tema esté al lado para saber cómo se habla. Dentro del plugin, una sola copia.
 
@@ -138,4 +151,3 @@ no a la pieza: «ejecutivos senior» (el cargo, en minúscula) y «profesionales
 ## Pendientes
 
 - Integración de pagos con Stripe
-- Contenido de la sección 4Dinner
