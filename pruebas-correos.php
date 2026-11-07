@@ -51,39 +51,9 @@ require_once __DIR__ . '/modules/users/class-vx-user-meta.php';
 require_once __DIR__ . '/helpers/helper-profile-fields.php';
 require_once __DIR__ . '/modules/email/class-vx-email-templates.php';
 
-/**
- * Las palabras que no se dicen, con el porque de cada una.
- *
- * Es la misma lista que `pruebas/pantalla/vocabulario.mjs` del tema. Esta
- * repetida a proposito: el plugin se despliega solo y no puede depender de que
- * el tema este al lado para saber como se habla. Si una se agrega alla, se
- * agrega aca.
- */
-$PROHIBIDAS = [
-    [ '/\becosistemas?\b/iu', 'no significa nada' ],
-    [ '/\bsinergias?\b/iu',   'no significa nada' ],
-    [ '/\bsoluci[oó]n(es)?\b/iu', 'no significa nada' ],
-    [ '/\bpartners?\b/iu',    'esta en ingles y ya hay palabra' ],
-    [ '/\bmatch(es)?\b/iu',   'es de las aplicaciones de citas' ],
-    [ '/\bearly adopters?\b/iu', 'se dice Miembro Pionero' ],
-    [ '/\bbadges?\b/iu',      'se dice distintivo' ],
-    [ '/VITRINEXO/u',         'el nombre en caja alta grita' ],
-    [ '/\b(ten[ée]s|pod[ée]s|quer[ée]s|sab[ée]s)\b/iu', 'se trata de tu: «tienes» y «puedes», nunca «tenes» ni «podes»' ],
-    [ '/\bsos\s+(un|una|el|la|miembro)\b/iu', 'se trata de tu: «eres», nunca «sos»' ],
-    [ '/\bplataforma\s+(latinoamericana|latina)\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
-    [ '/\b(red|directorio|comunidad)\s+latinoamericana\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
-];
-
-/** Las piezas de la linea, que nunca se nombran sin la marca madre adelante. */
-$PIEZAS = [ '4Dinner', 'Woman', 'Senior', 'LGBTQ\+' ];
-
-/**
- * «senior» y «LGBTQ+» tambien son español corriente, y ahi nombran a la gente
- * y no a la pieza. Igual que en el tema: la caja distingue al adjetivo del
- * nombre propio, y a la sigla se le tacha el uso donde modifica a un
- * sustantivo de personas.
- */
-$GENTE = '/\b(persona|personas|profesionales?|ejecutivos?|empresarios?|socios?|miembros?)\s+LGBTQ\+/u';
+// Las reglas viven en pruebas-comun-voz.php, que las comparte con las otras
+// pruebas de copy del plugin.
+require_once __DIR__ . '/pruebas-comun-voz.php';
 
 /**
  * Datos de relleno para todas las plantillas a la vez.
@@ -152,23 +122,7 @@ foreach ( $plantillas as $nombre ) {
         continue;
     }
 
-    $texto = html_entity_decode( strip_tags( $html ), ENT_QUOTES, 'UTF-8' );
-    $texto = trim( preg_replace( '/\s+/u', ' ', $texto ) );
-
-    foreach ( $PROHIBIDAS as [ $patron, $porque ] ) {
-        if ( preg_match( $patron, $texto, $m ) ) {
-            $fallos[] = "$nombre dice «{$m[0]}»: $porque";
-        }
-    }
-
-    $plano = preg_replace( $GENTE, '', $texto );
-    foreach ( $PIEZAS as $pieza ) {
-        if ( preg_match( '/(?<!Vitrinexo )\b' . $pieza . '/u', $plano, $m, PREG_OFFSET_CAPTURE ) ) {
-            $desde = max( 0, $m[0][1] - 32 );
-            $cerca = ( $desde ? '…' : '' ) . trim( substr( $plano, $desde, ( $m[0][1] - $desde ) + strlen( $m[0][0] ) + 24 ) ) . '…';
-            $fallos[] = "$nombre dice «{$cerca}»: las piezas llevan la marca madre adelante, se escribe «Vitrinexo {$m[0][0]}»";
-        }
-    }
+    $fallos = array_merge( $fallos, vx_voz_revisar( $nombre, $html ) );
 }
 
 // ── Informe ──────────────────────────────────────────────────────────────────

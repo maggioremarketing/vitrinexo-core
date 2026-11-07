@@ -53,8 +53,8 @@ vitrinexo-core/
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
 
-Antes del rsync corren, en este orden: `pruebas-emojis.mjs`, `pruebas-vencimiento.php` y
-`pruebas-correos.php` (ninguna necesita el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
+Antes del rsync corren, en este orden: `pruebas-emojis.mjs`, `pruebas-vencimiento.php`,
+`pruebas-correos.php` y `pruebas-estados-vacios.php` (ninguna necesita el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
 La prueba de colores va después del clonado porque compara su copia de la paleta contra el `:root` del
 tema, y eso solo puede hacerlo con el tema presente. **Si el tema repinta, el deploy del plugin frena
 hasta que la copia de `pruebas-colores.mjs` se ponga al día**: es a propósito, una copia que se
@@ -114,9 +114,18 @@ renderizado. En el código los identificadores siguen siendo cortos (`vx_landing
 Esa prueba mide páginas. Los correos no son una página —no los sirve el sitio ni los abre Playwright—
 y por eso los mide `pruebas-correos.php` acá en el plugin: renderiza las veinticuatro plantillas y les
 pasa el mismo vocabulario y la misma regla. Es el texto que más lejos llega, porque le llega a cada
-miembro sin que entre al sitio. **Si se agrega una palabra prohibida en el tema, se agrega también en
-`pruebas-correos.php`**: la lista está repetida a propósito, porque el plugin se despliega solo y no
-puede depender de que el tema esté al lado para saber cómo se habla.
+miembro sin que entre al sitio.
+
+Lo mismo pasa con los **estados vacíos**, que los mide `pruebas-estados-vacios.php`. Un estado vacío
+es lo que ve quien todavía no tiene nada, y el banco local tiene seis miembros con datos: una pantalla
+con datos nunca dibuja su estado vacío, así que ninguna prueba de pantalla puede verlos. Los tipos se
+leen de `vx_render_empty_state()`, no están copiados en la prueba, y un contador de iconos avisa si la
+lectura se saltó alguno.
+
+Las tres (`pruebas-comun-voz.php` tiene la lista; las otras dos la usan) comparten un solo archivo de
+reglas. **Si se agrega una palabra prohibida en el tema, se agrega también en `pruebas-comun-voz.php`**:
+entre el tema y el plugin la lista está repetida a propósito, porque el plugin se despliega solo y no
+puede depender de que el tema esté al lado para saber cómo se habla. Dentro del plugin, una sola copia.
 
 - **Vitrinexo LGBTQ+** — comunidad LGBTQ+ en el mundo empresarial
 - **Vitrinexo Woman** — mujeres líderes

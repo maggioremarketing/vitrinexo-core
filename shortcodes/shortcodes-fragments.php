@@ -41,7 +41,7 @@ function vx_render_empty_state( string $tipo ): string
         'notificaciones' => [
             'icon'    => 'ti-bell',
             'title'   => 'Sin notificaciones',
-            'desc'    => 'Aquí verás las actividades recientes: conexiones, visitas y matches.',
+            'desc'    => 'Aquí verás las actividades recientes: conexiones, visitas y nexos.',
             'cta'     => null,
         ],
         'directorio' => [
