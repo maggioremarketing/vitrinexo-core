@@ -743,7 +743,7 @@ function vx_admin_tags_page(): void {
         'Marketing digital','Diseño y branding','Desarrollo web','Consultoría',
         'Ventas B2B','CRM','Automatización','Legal','Finanzas','RRHH',
         'Data e inteligencia','Logística','Producción audiovisual','Real estate',
-        'Partners tecnológicos','Alianzas comerciales','E-commerce','SaaS',
+        'Alianzas tecnológicas','Alianzas comerciales','E-commerce','SaaS',
         'Transformación digital','Startups','Venture capital','Exportaciones',
     ];
     $saved = get_option( 'vx_tags_preset', null );

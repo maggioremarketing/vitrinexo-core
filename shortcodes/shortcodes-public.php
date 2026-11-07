@@ -22,7 +22,7 @@ add_shortcode( 'vx_landing', function (): string {
             <div class="hero-content" style="max-width:760px;margin:0 auto;text-align:center">
               <img width="170" src="<?php echo esc_url( $logo_url ); ?>" alt="Vitrinexo" />
               <h1 class="my-4">Hola de nuevo<?php echo $vx_nombre ? ', <strong>' . esc_html( $vx_nombre ) . '</strong>' : ''; ?>.</h1>
-              <p class="mb-4" style="font-size:1.05rem;color:var(--color-text-secondary)">Tu vitrina está activa. Explora el directorio, revisa tus matches y sigue construyendo nexos de negocio.</p>
+              <p class="mb-4" style="font-size:1.05rem;color:var(--color-text-secondary)">Tu vitrina está activa. Explora el directorio, revisa tus nexos y sigue construyendo negocio.</p>
 
               <form action="<?php echo esc_url( home_url( '/directorio/' ) ); ?>" method="get" class="d-flex gap-2 justify-content-center flex-wrap mb-4" style="max-width:540px;margin-left:auto;margin-right:auto">
                 <input type="text" name="q" class="form-control-vx" placeholder="Buscar empresa, industria, tags..." style="flex:1;min-width:240px" />

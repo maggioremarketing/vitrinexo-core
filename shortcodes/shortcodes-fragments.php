@@ -35,7 +35,7 @@ function vx_render_empty_state( string $tipo ): string
         'matches' => [
             'icon'    => 'ti-sparkles',
             'title'   => 'Sin matches por ahora',
-            'desc'    => 'Completa tus tags de "ofrece" y "busca" para que el algoritmo encuentre tus matches.',
+            'desc'    => 'Completa lo que ofreces y lo que buscas para que Vitrinexo encuentre tus nexos.',
             'cta'     => [ 'Editar mi perfil', '/editar-perfil/' ],
         ],
         'notificaciones' => [

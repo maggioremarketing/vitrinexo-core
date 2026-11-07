@@ -855,7 +855,7 @@ function vx_get_tags_preset(): array {
         'Marketing digital','Diseño y branding','Desarrollo web','Consultoría',
         'Ventas B2B','CRM','Automatización','Legal','Finanzas','RRHH',
         'Data e inteligencia','Logística','Producción audiovisual','Real estate',
-        'Partners tecnológicos','Alianzas comerciales','E-commerce','SaaS',
+        'Alianzas tecnológicas','Alianzas comerciales','E-commerce','SaaS',
         'Transformación digital','Startups','Venture capital','Exportaciones',
     ];
     $saved = get_option( 'vx_tags_preset', null );
@@ -1286,7 +1286,8 @@ add_shortcode( 'vx_dashboard', function (): string {
               <?php
               $nm = count( $seeks_matches ) + count( $offers_matches );
               $np = count( $pending_recv );
-              $lead = 'Tienes ' . $nm . ' match' . ( $nm !== 1 ? 'es' : '' ) . ' nuevo' . ( $nm !== 1 ? 's' : '' );
+              // «match» esta prohibido: es de las aplicaciones de citas.
+              $lead = 'Tienes ' . $nm . ' nexo' . ( $nm !== 1 ? 's' : '' ) . ' nuevo' . ( $nm !== 1 ? 's' : '' );
               if ( $np > 0 ) $lead .= ' y ' . $np . ' solicitud' . ( $np !== 1 ? 'es' : '' ) . ' de conexión pendiente' . ( $np !== 1 ? 's' : '' );
               $lead .= '.';
               echo esc_html( $lead );
@@ -1777,7 +1778,7 @@ function vx_matches_empty_state( string $tipo ): string {
         'seeks'  => [ 'Nadie ofrece lo que buscas aún', 'Agrega tags de búsqueda en tu perfil para ver coincidencias.' ],
         'offers' => [ 'Nadie busca lo que ofreces aún', 'Agrega tags de oferta en tu perfil para ver coincidencias.' ],
     ];
-    [ $title, $desc ] = $msgs[ $tipo ] ?? [ 'Sin matches', '' ];
+    [ $title, $desc ] = $msgs[ $tipo ] ?? [ 'Sin nexos', '' ];
     return '<div class="empty-state-vx py-5 text-center">
       <div class="empty-state-vx__icon"><i class="ti ti-sparkles"></i></div>
       <p class="empty-state-vx__title">' . esc_html( $title ) . '</p>
@@ -1836,7 +1837,7 @@ add_shortcode( 'vx_matches', function (): string {
             <p class="cta-card__desc">Su oferta coincide con lo que declaraste buscar.</p>
           </div>
           <div class="d-flex align-items-center gap-2">
-            <span class="badge-vx badge-neutral"><?php echo $seeks_total; ?> matches</span>
+            <span class="badge-vx badge-neutral"><?php echo $seeks_total; ?> <?php echo 1 === $seeks_total ? 'nexo' : 'nexos'; ?></span>
             <a href="<?php echo esc_url( home_url( '/nexos-que-busco/' ) ); ?>" class="btn-vx btn-soft-accent btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
           </div>
         </div>
@@ -1862,7 +1863,7 @@ add_shortcode( 'vx_matches', function (): string {
             <p class="cta-card__desc">Su búsqueda coincide con lo que declaraste ofrecer.</p>
           </div>
           <div class="d-flex align-items-center gap-2">
-            <span class="badge-vx badge-neutral"><?php echo $offers_total; ?> matches</span>
+            <span class="badge-vx badge-neutral"><?php echo $offers_total; ?> <?php echo 1 === $offers_total ? 'nexo' : 'nexos'; ?></span>
             <a href="<?php echo esc_url( home_url( '/nexos-que-ofrezco/' ) ); ?>" class="btn-vx btn-soft-primary btn-vx-sm">Ver todos <i class="ti ti-arrow-right ms-1"></i></a>
           </div>
         </div>
@@ -4858,7 +4859,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                         </div>
                         <div class="d-flex flex-wrap gap-3 mb-2 text-sm-muted">
                             <span><i class="ti ti-map-pin me-1 <?php echo ( $completo || $deadline_passed ) ? '' : 'ic-success'; ?>"></i><?php echo esc_html( $dinner->get_ciudad() . ', ' . $dinner->get_pais() ); ?></span>
-                            <span><i class="ti ti-clock me-1 <?php echo ( $completo || $deadline_passed ) ? '' : 'ic-success'; ?>"></i>8:00 pm</span>
+                            <span><i class="ti ti-clock me-1 <?php echo ( $completo || $deadline_passed ) ? '' : 'ic-success'; ?>"></i>20:00 hora local</span>
                             <?php if ( $deadline_ts && ! $user_asig ) : ?>
                             <span style="color:<?php echo $deadline_passed ? 'var(--terracota-presion)' : 'var(--mantequilla-presion)'; ?>">
                                 <i class="ti ti-calendar-x me-1"></i>

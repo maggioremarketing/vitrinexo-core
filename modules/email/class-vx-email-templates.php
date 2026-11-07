@@ -456,7 +456,7 @@ class VX_Email_Templates
         $content .= '<div style="text-align:center;margin:28px 0;">'
             . self::btn( $url, 'Revisar validaciones pendientes' )
             . '</div>'
-            . self::p( '<small style="color:#5C5F6B;">Este recordatorio se envía cada mañana a las 9 AM solo si hay validaciones pendientes. No recibirás este email cuando todo esté al día.</small>' );
+            . self::p( '<small style="color:#5C5F6B;">Este recordatorio se envía cada mañana a las 09:00 solo si hay validaciones pendientes. No recibirás este email cuando todo esté al día.</small>' );
 
         return self::wrapper( $content );
     }

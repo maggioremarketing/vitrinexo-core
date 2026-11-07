@@ -94,7 +94,7 @@ Configurables en Vitrinexo → Planes (`vx_get_planes()`). Defaults: Gratuito, M
 - **LGBTQ+** — comunidad LGBTQ+
 - **Woman** — mujeres líderes
 - **Senior** — ejecutivos con trayectoria
-- **Vitrinexo 4Dinner** — cenas de networking (4 personas, miércoles 8pm)
+- **Vitrinexo 4Dinner** — cenas de networking (4 personas, miércoles 20:00 hora local)
 
 ## Pendientes
 
