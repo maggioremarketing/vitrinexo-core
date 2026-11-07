@@ -74,7 +74,7 @@ add_shortcode( 'vx_landing', function (): string {
                     <p>Muestra lo que haces y encuentra lo que necesitas. <span class="vx-name-regular">Vitrinexo</span> es la vitrina de servicios profesionales donde tu empresa gana visibilidad y oportunidades de negocio, sin publicidad y entre pares.</p>
                 </div>
                 <a class="btn-vx btn-primary-vx btn-vx-lg btn rounded-pill mt-4" href="#afiliado-original"><?php echo esc_html( $cta_label ); ?></a>
-                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/1-principal-la-elegida-por-mi.png" alt="Vitrinexo" class="hero-feature-img mt-5 img-fluid" />
+                <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-portada.svg' ) ); ?>" alt="Diez retratos ilustrados en dos filas; uno es un lugar libre dibujado con línea punteada." class="hero-feature-img mt-5 img-fluid" />
             </div>
         </div>
     </section>
@@ -155,11 +155,11 @@ add_shortcode( 'vx_landing', function (): string {
         </div>
     </section>
 
-    <!-- ── Imagen 3-CF-3 entre Cómo funciona y Para quién es ── -->
+    <!-- ── La pared del directorio, entre Cómo funciona y Para quién es ── -->
     <div class="section-landing" style="padding-top:0">
         <div class="container">
             <div class="vx-img-banner">
-                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/3-CF-3.png" alt="Vitrinexo" />
+                <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-mosaico.svg' ) ); ?>" alt="Una pared de treinta retratos ilustrados, todos distintos; uno es un lugar libre dibujado con línea punteada." />
             </div>
         </div>
     </div>
