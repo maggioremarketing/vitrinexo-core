@@ -22,6 +22,21 @@ jobs:
           node pruebas-colores.mjs
           node pruebas-emojis.mjs
 
+      - name: Clonar el tema al lado
+        # El banco vive en el tema y necesita a los dos. Acá no hay condición:
+        # cualquier cambio del plugin puede llegar al área de miembros, que es
+        # casi todo lo que el plugin renderiza.
+        run: git clone --depth 1 https://github.com/maggioremarketing/vitrinexo-theme.git ../vitrinexo-theme
+
+      - name: Dependencias del tema
+        working-directory: ../vitrinexo-theme
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Pruebas del área de miembros
+        run: bash ../vitrinexo-theme/banco/ci.sh
+
       - name: Configurar SSH key
         run: |
           mkdir -p ~/.ssh
