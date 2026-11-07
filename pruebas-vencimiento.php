@@ -3,8 +3,15 @@
  * Que el vencimiento del plan sea uno solo: el que está guardado.
  *
  * El meta vx_plan_vencimiento es un timestamp y 0 significa sin vencimiento.
- * Lo escribe la aprobación, tres meses desde ese día, y lo puede corregir un
- * administrador. Todo lo demás lo lee.
+ * Lo escribe la aprobación y lo puede corregir un administrador. Todo lo demás
+ * lo lee.
+ *
+ * La aprobación escribe 0. El período gratuito de los Pioneros no termina en
+ * una fecha por miembro sino cuando el programa llega a sus 100, y ahí se
+ * avisa y se fija el plazo; una fecha por cabeza no puede expresar eso, porque
+ * el momento depende de cuántos entraron y no de cuándo entró cada uno. Antes
+ * escribía tres meses desde la aprobación, y estas comprobaciones medían esa
+ * regla. Se reescribieron con ella.
  *
  * Había dos formas de romper eso y las dos estaban pasando. La aprobación
  * guardaba 'Y-m-d' mientras cada lector hacía (int), así que '2026-02-07'
@@ -101,12 +108,8 @@ function celda( int $uid ): string {
     return VX_Admin_Users::render_column( '', 'vx_vencimiento', $uid );
 }
 function dia( int $ts ): string { return date( 'Y-m-d', $ts ); }
-function en_tres_meses( int $desde ): string {
-    return ( new DateTime( '@' . $desde ) )->setTimezone( new DateTimeZone( 'America/Santiago' ) )
-        ->modify( '+3 months' )->format( 'Y-m-d' );
-}
 
-// ── La aprobación escribe un timestamp, no una fecha escrita ────────────────
+// ── La aprobación escribe un timestamp, y hoy escribe el 0 ─────────────────
 
 comprobar( 'la aprobación guarda un timestamp', function () {
     miembro( 1, 0 );
@@ -117,12 +120,14 @@ comprobar( 'la aprobación guarda un timestamp', function () {
     return null;
 } );
 
-comprobar( 'la aprobación vence a los tres meses', function () {
+comprobar( 'la aprobación no le pone fecha a nadie', function () {
     miembro( 1, 0 );
     VX_Verification::activate_account( 1 );
-    $esperado = en_tres_meses( time() );
-    $visto    = dia( (int) $GLOBALS['meta'][1][ VENC ] );
-    return $visto === $esperado ? null : "venció el $visto y no el $esperado";
+    if ( ! metadata_exists( 'user', 1, VENC ) ) {
+        return 'no dejó el meta escrito, y la celda necesita distinguir una cuenta sin fecha de un plan que no vence';
+    }
+    $v = (int) $GLOBALS['meta'][1][ VENC ];
+    return 0 === $v ? null : 'guardó ' . dia( $v ) . ' en vez de sin vencimiento';
 } );
 
 comprobar( 'la aprobación respeta una fecha ya guardada', function () {
@@ -142,22 +147,23 @@ comprobar( 'la aprobación respeta el sin vencimiento', function () {
 // ── La columna del panel lee, y solo lee ────────────────────────────────────
 
 comprobar( 'el panel muestra la fecha guardada', function () {
+    // La que pone un administrador a mano, que hoy es la única que existe:
+    // la aprobación ya no escribe ninguna.
     miembro( 1, 0 );
-    VX_Verification::activate_account( 1 );
+    $GLOBALS['meta'][1][ VENC ] = time() + 40 * DAY_IN_SECONDS;
     $guardada = date( 'd/m/Y', (int) $GLOBALS['meta'][1][ VENC ] );
     return str_contains( celda( 1 ), $guardada ) ? null : "no muestra $guardada";
 } );
 
-comprobar( 'el panel no cuenta desde el registro', function () {
-    // El caso que se veía mal: registrado hace 60 días, aprobado hoy. Contando
-    // desde el registro la fecha cae antes de la real, nunca después.
+comprobar( 'el panel no se inventa una fecha', function () {
+    // Registrado hace 60 días y todavía sin aprobar. La celda no tiene ninguna
+    // fecha que mostrar, y no debe fabricar una: ni la del registro ni la de
+    // tres meses después, que es lo que hacía. Se busca cualquier d/m/Y, para
+    // que la comprobación no dependa de con qué fórmula se la inventaría.
     miembro( 1, 60 );
-    VX_Verification::activate_account( 1 );
-    $desde_el_registro = date( 'd/m/Y', strtotime( $GLOBALS['usuarios'][1]->user_registered ) + 90 * DAY_IN_SECONDS );
-    $real              = date( 'd/m/Y', (int) $GLOBALS['meta'][1][ VENC ] );
-    $celda             = celda( 1 );
-    if ( str_contains( $celda, $desde_el_registro ) ) return "muestra $desde_el_registro, contada desde el registro";
-    return str_contains( $celda, $real ) ? null : "no muestra $real";
+    $celda = celda( 1 );
+    if ( preg_match( '#\d{2}/\d{2}/\d{4}#', $celda, $m ) ) return "se inventó la fecha {$m[0]}";
+    return str_contains( $celda, 'Por aprobar' ) ? null : 'no dice que la cuenta está por aprobar';
 } );
 
 comprobar( 'dibujar la celda no guarda nada', function () {
@@ -168,16 +174,20 @@ comprobar( 'dibujar la celda no guarda nada', function () {
 } );
 
 comprobar( 'sin fecha guardada la celda lo dice', function () {
+    // Y lo dice distinto de «Sin vencimiento»: una cuenta por aprobar todavía
+    // no tiene plan, y un plan que no vence sí lo tiene. Confundirlas es
+    // decirle al administrador que ya decidió algo que no decidió nadie.
     miembro( 1, 60 );
     $celda = celda( 1 );
-    return str_contains( $celda, 'estimado' ) ? null : 'no avisa que la fecha es estimada';
+    if ( str_contains( $celda, 'Sin vencimiento' ) ) return 'confunde una cuenta por aprobar con un plan que no vence';
+    return str_contains( $celda, 'Por aprobar' ) ? null : 'no dice que la cuenta está por aprobar';
 } );
 
-comprobar( 'un plan sin vencimiento no sale estimado', function () {
+comprobar( 'un plan sin vencimiento no se confunde con uno por aprobar', function () {
     miembro( 1, 60 );
     $GLOBALS['meta'][1][ VENC ] = 0;
     $celda = celda( 1 );
-    if ( str_contains( $celda, 'estimado' ) ) return 'trata el 0 como si no hubiera fecha';
+    if ( str_contains( $celda, 'Por aprobar' ) ) return 'trata el 0 como si no hubiera nada guardado';
     return str_contains( $celda, 'Sin vencimiento' ) ? null : 'no dice que el plan no vence';
 } );
 

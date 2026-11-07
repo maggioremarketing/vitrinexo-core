@@ -129,6 +129,8 @@ $vx_modules = [
     'migraciones/2026-11-07-faq-precio-cenas.php',
     'migraciones/2026-11-07-faq-voz.php',
     'migraciones/2026-11-07-faq-badge.php',
+    'migraciones/2026-11-07-pioneros-sin-vencimiento.php',
+    'migraciones/2026-11-07-faq-periodo-gratuito.php',
 ];
 
 foreach ( $vx_modules as $file ) {

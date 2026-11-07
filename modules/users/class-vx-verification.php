@@ -110,19 +110,25 @@ class VX_Verification
             update_user_meta( $user_id, 'vx_es_fundador', 1 );
         }
 
-        // ── Vencimiento automático: 3 meses desde la aprobación ───────────
-        // El meta es un timestamp, no una fecha escrita: todo el plugin lo lee
-        // con (int), así que un 'Y-m-d' acá se convertía en el año y dejaba a
-        // cada miembro aprobado con un vencimiento de 1970.
+        // ── El plan gratuito no vence en una fecha, vence en un número ────
         //
-        // La condición mira si el meta existe, no si está vacío: 0 es un valor
-        // legítimo y significa sin vencimiento, y con empty() la aprobación lo
-        // pisaba.
+        // Antes esto escribía tres meses desde la aprobación. Esa ya no es la
+        // regla: el período gratuito de los Pioneros termina cuando el
+        // programa llega a sus 100 miembros, y ahí se les avisa y se les da un
+        // plazo antes de cobrar. Una fecha por miembro no puede expresar eso,
+        // porque el momento no depende de cuándo entró cada uno sino de
+        // cuántos entraron en total.
+        //
+        // Así que se escribe 0, que en este meta significa sin vencimiento, y
+        // no se deja sin escribir: el meta tiene que existir. La columna del
+        // admin distingue «no hay fecha guardada» de «no vence», y el cron de
+        // avisos excluye el 0, así que un miembro sin vencimiento no recibe
+        // correos diciéndole que su membresía está por terminar.
+        //
+        // La condición mira si el meta existe, no si está vacío, porque 0 es
+        // un valor legítimo y con empty() la aprobación lo pisaba.
         if ( ! metadata_exists( 'user', $user_id, VX_User_Meta::PLAN_VENCIMIENTO ) ) {
-            $vencimiento = ( new DateTime( 'now', new DateTimeZone( 'America/Santiago' ) ) )
-                ->modify( '+3 months' )
-                ->setTime( 23, 59, 59 );
-            update_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, $vencimiento->getTimestamp() );
+            update_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, 0 );
         }
 
         $user = VX_User::get( $user_id );

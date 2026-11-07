@@ -162,38 +162,37 @@ class VX_Admin_Users
                 $user = get_userdata( $user_id );
                 if ( $user && in_array( 'administrator', (array) $user->roles, true ) ) return '<span style="color:#5C5F6B;font-size:12px">-</span>';
 
-                // La fecha que vale es la guardada. La escribe la aprobación,
-                // tres meses desde ese día, y la puede corregir un administrador
-                // con el input de abajo. Acá solo se lee: esta celda calculaba la
-                // suya desde el registro y la guardaba mientras se dibujaba, así
-                // que la tabla mostraba un vencimiento que nadie había decidido y
-                // además lo dejaba escrito. Para quien se aprobó semanas después
-                // de registrarse, esa fecha caía antes de la real.
+                // La fecha que vale es la guardada. Hoy la aprobación escribe
+                // 0, que es sin vencimiento, porque el plan gratuito no termina
+                // en una fecha por miembro sino cuando el programa llega a 100;
+                // la puede corregir un administrador con el input de abajo. Acá
+                // solo se lee: esta celda calculaba la suya desde el registro y
+                // la guardaba mientras se dibujaba, así que la tabla mostraba un
+                // vencimiento que nadie había decidido y además lo dejaba
+                // escrito. Para quien se aprobó semanas después de registrarse,
+                // esa fecha caía antes de la real.
                 $meta_existe = metadata_exists( 'user', $user_id, VX_User_Meta::PLAN_VENCIMIENTO );
                 $expiry_ts   = $meta_existe
                     ? VX_Membership::parse_expiry( get_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, true ) )
                     : 0;
 
-                // Sin fecha guardada queda la cuenta por aprobar. La celda estima
-                // desde el registro para que se vea de qué orden sería, y lo dice,
-                // porque es una cuenta pendiente y no una fecha ya decidida.
-                $estimado = false;
-                if ( ! $meta_existe && $user ) {
-                    $expiry_ts = strtotime( $user->user_registered . ' +3 months' );
-                    $estimado  = true;
-                }
+                // Sin fecha guardada queda la cuenta por aprobar. Antes la celda
+                // estimaba tres meses desde el registro; esa estimación ya no
+                // existe porque la regla ya no es una fecha, y estimar una fecha
+                // que el sistema no va a escribir es inventar.
+                $por_aprobar = ! $meta_existe;
 
-                $expiry_date = ( ! $estimado && $expiry_ts > 0 ) ? date( 'Y-m-d', $expiry_ts ) : '';
+                $expiry_date = ( ! $por_aprobar && $expiry_ts > 0 ) ? date( 'Y-m-d', $expiry_ts ) : '';
                 $diff        = $expiry_ts - time();
 
-                if ( $estimado ) {
-                    $label = date_i18n( 'd/m/Y', $expiry_ts ) . ' (estimado)';
+                if ( $por_aprobar ) {
+                    $label = 'Por aprobar';
                     $color = '#5C5F6B';
-                    $title = 'Estimado desde la fecha de registro. Esta cuenta todavía no tiene vencimiento guardado: se fija al aprobarla, tres meses desde la aprobación.';
+                    $title = 'Esta cuenta todavía no tiene vencimiento guardado. Se escribe al aprobarla, y hoy se escribe sin vencimiento: el plan gratuito de los Pioneros termina cuando el programa llega a 100 miembros, no en una fecha por miembro.';
                 } elseif ( $expiry_ts <= 0 ) {
                     $label = 'Sin vencimiento';
                     $color = '#5C5F6B';
-                    $title = 'Este plan no vence.';
+                    $title = 'Este plan no vence. Al llegar a 100 miembros se avisa y se fija el plazo desde acá.';
                 } elseif ( $diff < 0 ) {
                     $label = date_i18n( 'd/m/Y', $expiry_ts );
                     $color = '#AD4319';
