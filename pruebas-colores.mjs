@@ -42,15 +42,19 @@ const literalPermitido = ( ruta ) => SIN_HOJA_DE_ESTILO.some( ( [ p ] ) => ruta.
  * se desincroniza en silencio es peor que no tener copia, porque deja pasar
  * colores que ya no existen.
  */
+// Una fila por familia, en el orden del tema: base, hover, presión, suave y
+// tinta. Las seis tintas de familia (lavanda para abajo) faltaban acá: el tema
+// las agregó para tener un color de texto que llegue al contraste dentro de
+// cada familia, y esta copia se quedó con la paleta de antes.
 const COPIA = [
   '#FFFFFF', '#F4F1EC', '#EFE8DE', '#E6E2DB', '#14161F', '#5C5F6B',
-  '#FF7A4D', '#F26A3B', '#E55F31', '#AD4319', '#FFE3D8',
-  '#CBC3FF', '#B9B2E9', '#A6A0D2', '#EAE7FF',
-  '#F4C6DC', '#DEB4C9', '#C7A3B6', '#FBE8F1',
-  '#A9C6E8', '#9AB4D4', '#8BA3C0', '#DDE8F6',
-  '#7DBF9E', '#72AE91', '#689D85', '#CBE5D8',
-  '#F2EC79', '#DCD770', '#C6C167', '#FAF7C9',
-  '#C58D78', '#B3816F', '#A27566', '#E8D1C9',
+  '#FF7A4D', '#F26A3B', '#E55F31', '#FFE3D8', '#AD4319',
+  '#CBC3FF', '#B9B2E9', '#A6A0D2', '#EAE7FF', '#6A6686',
+  '#F4C6DC', '#DEB4C9', '#C7A3B6', '#FBE8F1', '#7D6571',
+  '#A9C6E8', '#9AB4D4', '#8BA3C0', '#DDE8F6', '#5A697B',
+  '#7DBF9E', '#72AE91', '#689D85', '#CBE5D8', '#456A58',
+  '#F2EC79', '#DCD770', '#C6C167', '#FAF7C9', '#73703A',
+  '#C58D78', '#B3816F', '#A27566', '#E8D1C9', '#775548',
 ];
 
 const fallos = [];

@@ -19,7 +19,11 @@ Vitrinexo es una plataforma B2B de directorio de servicios profesionales. Empres
 ## Stack
 
 - WordPress 7.0, PHP, Bootstrap 5.3.3, Tabler Icons 3.19.0, fuente Switzer Variable
-- Colores: `#00aeb8` (teal), `#1a2335` (navy)
+- Colores: los tokens del tema (`--coral`, `--hueso`, `--tinta`, y las familias lavanda, rosa, celeste,
+  salvia, mantequilla y terracota, cada una con hover, presión, suave y tinta). El teal `#00aeb8` y el
+  navy `#1a2335` son de antes del repintado y ya no existen en la paleta
+- En el plugin se escribe `var(--token)`. El hexadecimal literal vale solo donde la hoja del tema no
+  carga: correos, pantallas de wp-admin y páginas de `wp_die()`. Lo mide `pruebas-colores.mjs`
 - REST namespace: `vitrinexo/v1`
 - Email: FluentSMTP + Resend desde `hola@vitrinexo.com`
 
