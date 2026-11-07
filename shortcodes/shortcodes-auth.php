@@ -225,7 +225,11 @@ add_shortcode( 'vx_onboarding', function (): string {
       <div class="ob-upload-row">
         <div class="logo-upload-zone" id="logo-zone" onclick="document.getElementById('logo-input').click()" style="cursor:pointer">
           <i class="ti ti-building ob-logo-placeholder" id="logo-empresa-icon"<?php echo $ob3_logo_url ? ' style="display:none"' : ''; ?>></i>
-          <img src="<?php echo esc_url( $ob3_logo_url ); ?>" alt="Logo empresa" id="logo-empresa-preview"
+          <?php /* Sin logo va SIN atributo src, no con src vacío: un src=""
+                   hace que el navegador vuelva a pedir la página entera como
+                   si fuera la imagen. El hueco de la foto, unas líneas más
+                   arriba, ya se escribía así. */ ?>
+          <img <?php echo $ob3_logo_url ? 'src="' . esc_url( $ob3_logo_url ) . '" ' : ''; ?>alt="Logo empresa" id="logo-empresa-preview"
                style="<?php echo $ob3_logo_url ? 'width:100%;height:100%;object-fit:contain;border-radius:inherit' : 'display:none;width:100%;height:100%;object-fit:contain;border-radius:inherit'; ?>">
           <div class="logo-upload-overlay"><i class="ti ti-camera"></i></div>
         </div>
@@ -303,7 +307,7 @@ add_shortcode( 'vx_onboarding', function (): string {
     <div class="ob-card">
       <div class="ob-step-eyebrow">Paso 4 de 6</div>
       <h2 class="ob-title">¿Qué ofreces y qué buscas?</h2>
-      <p class="ob-lead">Estas etiquetas son el motor del sistema de matches. Selecciona las que aplican o escribe las tuyas. Puedes editarlas cuando quieras.</p>
+      <p class="ob-lead">Estas etiquetas son el motor del sistema de nexos. Selecciona las que aplican o escribe las tuyas. Puedes editarlas cuando quieras.</p>
 
       <?php
       $tags_preset_ob = vx_get_tags_preset();
@@ -416,7 +420,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       <div class="ob-success-icon mx-auto mb-3"><i class="ti ti-check ob-success-check"></i></div>
       <div class="ob-step-eyebrow">¡Todo listo!</div>
       <h2 class="ob-title">Ya estás en la red.<br><strong class="text-primary-color">Encuentra tus próximos nexos.</strong></h2>
-      <p class="ob-lead">Tu perfil aparece en el directorio y tus tags ya están activos para los matches.</p>
+      <p class="ob-lead">Tu perfil aparece en el directorio y tus etiquetas ya están activas para los nexos.</p>
       <div class="ob-success-actions">
         <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>" class="btn-vx btn-primary-vx btn-vx-lg">
           Ir al dashboard <i class="ti ti-arrow-right ms-1"></i>
