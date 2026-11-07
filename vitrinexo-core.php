@@ -127,6 +127,8 @@ $vx_modules = [
     // dice. Cada una se guarda a sí misma en una opción y no vuelve a correr.
     'migraciones/2026-11-07-faq-marca-madre.php',
     'migraciones/2026-11-07-faq-precio-cenas.php',
+    'migraciones/2026-11-07-faq-voz.php',
+    'migraciones/2026-11-07-faq-badge.php',
 ];
 
 foreach ( $vx_modules as $file ) {
