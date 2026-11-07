@@ -120,6 +120,12 @@ $vx_modules = [
     'shortcodes/shortcodes-flow.php',
     'shortcodes/shortcodes-fragments.php',
     'shortcodes/shortcodes-faq.php',
+
+    // Migraciones de contenido. Son de una sola vez y se quedan en el árbol
+    // con su fecha, porque lo que arreglan vive en la base de datos y no acá:
+    // borrarlas sería perder el registro de por qué el contenido dice lo que
+    // dice. Cada una se guarda a sí misma en una opción y no vuelve a correr.
+    'migraciones/2026-11-07-faq-marca-madre.php',
 ];
 
 foreach ( $vx_modules as $file ) {

@@ -35,7 +35,9 @@ add_action( 'init', function () {
         'show_in_rest'  => true,
         'menu_icon'     => 'dashicons-editor-help',
         'menu_position' => 26,
-        'supports'      => [ 'title', 'editor', 'page-attributes' ],
+        // Con revisiones: esto es contenido que se escribe a mano y hasta hoy
+        // no guardaba historial, así que una edición mala no se podía deshacer.
+        'supports'      => [ 'title', 'editor', 'page-attributes', 'revisions' ],
         'has_archive'   => false,
         'rewrite'       => false,
         'hierarchical'  => false,
