@@ -16,11 +16,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pruebas de sistema
-        # Si el sistema de diseño no se cumple, no se publica. Estas dos no
+        # Si el sistema de diseño no se cumple, no se publica. Estas tres no
         # necesitan el tema, así que corren antes de clonar nada y fallan rápido.
+        #
+        # La de correos mide las veinticuatro plantillas contra el vocabulario
+        # de la marca y contra la regla de la marca madre. Va acá y no con el
+        # banco porque un correo no es una página: no lo sirve el sitio y
+        # Playwright no lo abre, así que se renderiza en PHP y se lee el HTML.
         run: |
           node pruebas-emojis.mjs
           php pruebas-vencimiento.php
+          php pruebas-correos.php
 
       - name: Clonar el tema al lado
         # El banco vive en el tema y necesita a los dos. Acá no hay condición:

@@ -53,8 +53,8 @@ vitrinexo-core/
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
 
-Antes del rsync corren, en este orden: `pruebas-emojis.mjs` y `pruebas-vencimiento.php` (no necesitan
-el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
+Antes del rsync corren, en este orden: `pruebas-emojis.mjs`, `pruebas-vencimiento.php` y
+`pruebas-correos.php` (ninguna necesita el tema), después se clona el tema al lado, y recién ahí `pruebas-colores.mjs` y el banco del tema.
 La prueba de colores va después del clonado porque compara su copia de la paleta contra el `:root` del
 tema, y eso solo puede hacerlo con el tema presente. **Si el tema repinta, el deploy del plugin frena
 hasta que la copia de `pruebas-colores.mjs` se ponga al día**: es a propósito, una copia que se
@@ -110,6 +110,13 @@ conversación: se escribe Vitrinexo 4Dinner, nunca 4Dinner a secas. Lo dice el m
 `estrategia-linea-de-producto` y lo mide `pruebas/pantalla/vocabulario.mjs` del tema, sobre el texto
 renderizado. En el código los identificadores siguen siendo cortos (`vx_landing_4dinner`,
 `comunidad-card--woman`): la regla es sobre el habla, no sobre los nombres de variable.
+
+Esa prueba mide páginas. Los correos no son una página —no los sirve el sitio ni los abre Playwright—
+y por eso los mide `pruebas-correos.php` acá en el plugin: renderiza las veinticuatro plantillas y les
+pasa el mismo vocabulario y la misma regla. Es el texto que más lejos llega, porque le llega a cada
+miembro sin que entre al sitio. **Si se agrega una palabra prohibida en el tema, se agrega también en
+`pruebas-correos.php`**: la lista está repetida a propósito, porque el plugin se despliega solo y no
+puede depender de que el tema esté al lado para saber cómo se habla.
 
 - **Vitrinexo LGBTQ+** — comunidad LGBTQ+ en el mundo empresarial
 - **Vitrinexo Woman** — mujeres líderes
