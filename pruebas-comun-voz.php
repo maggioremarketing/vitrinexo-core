@@ -37,22 +37,37 @@ const VX_VOZ_PROHIBIDAS = [
     [ '/\bplataforma\s+(latinoamericana|latina)\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
     [ '/\b(red|directorio|comunidad)\s+latinoamericana\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
 
-    // Las dos de arriba piden un sustantivo al lado y estas no, a proposito.
-    // «latinoamericano» es español corriente y describe a una persona o a una
-    // empresa sin decir nada de la marca, asi que prohibirlo entero marcaria
-    // en rojo la ficha de un miembro. «Hispanoamerica» y «continental» no:
-    // en este producto no aparecen nunca para otra cosa que para decir de
-    // que region es Vitrinexo, que es justo lo que no se dice.
-    //
-    // Las tres veces que se escribieron lo confirman. La landing del evento
-    // decia que la cena es «en una ciudad de Hispanoamerica», su tarjeta se
-    // titulaba «Continental y local», y el blog hablaba del «ecosistema de
-    // servicios B2B en Hispanoamerica». Ninguna prueba vio una sola: las dos
-    // del blog ademas llevaban «ecosistema», que si estaba prohibida desde el
-    // principio, y siguieron en produccion porque /blog/ no era una ruta que
-    // alguien abriera.
-    [ '/\bhispanoam[eé]rica(nas?|nos?)?\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
+    // «continental» va sola, sin sustantivo al lado, al reves que las dos de
+    // arriba. Se escribio porque la tarjeta de la landing del evento se
+    // titulaba «Continental y local», y no aparece en ninguna otra parte de
+    // los dos repos: no hay uso legitimo que proteger.
     [ '/\bcontinental(es)?\b/iu', 'no se dice que la marca sea de una region: se dice en que ciudades hay mesa hoy' ],
+
+    // «Hispanoamerica» si lleva sustantivo, y el contraejemplo lo dio el
+    // propio manual. Nacio sola, como «continental», y al medirla salio roja
+    // en cinco frases del manual que dicen justo lo que el criterio permite:
+    // «el lanzamiento es en Hispanoamerica y en español», «el español es el de
+    // la region», «en Hispanoamerica ese signo nombra siete monedas
+    // distintas». Ninguna declara de que region es la marca: dicen donde hay
+    // comunidad hoy, que es la mitad permitida del criterio. Prohibir el
+    // nombre entero obligaba a reescribir cinco frases correctas para esquivar
+    // una palabra, y eso es lo que enseña a ignorar la prueba.
+    //
+    // Hace falta decir lo que esta version NO caza, porque es facil suponer lo
+    // contrario leyendo de donde salio. Ninguna de las tres frases que la
+    // hicieron nacer: «una ciudad de Hispanoamerica» en la landing del evento,
+    // «servicios B2B en Hispanoamerica» en el blog y «directivas
+    // hispanoamericanas» en Vitrinexo Woman pasan las tres en verde con esta
+    // linea puesta. Y pasan bien: medidas contra el criterio, ninguna declara
+    // que Vitrinexo sea de una region. Se cambiaron por como se leen, que es
+    // una decision de redaccion, y las decisiones de redaccion no las toma una
+    // prueba. Lo unico que esta linea impide es la forma que si lo declara,
+    // «red hispanoamericana», que hasta hoy no se escribio nunca.
+    //
+    // Lo que si incumplia era el blog, y por otra palabra: decia «ecosistema»,
+    // prohibida desde el primer dia. Nadie la vio durante meses porque /blog/
+    // no estaba en la lista de rutas que las pruebas abren.
+    [ '/\b(plataforma|red|directorio|comunidad)\s+hispanoamericanas?\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
 ];
 
 /** Las piezas de la linea, que nunca se nombran sin la marca madre adelante. */
