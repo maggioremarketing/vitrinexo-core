@@ -388,8 +388,10 @@ class VX_Cron
         $now = time();
 
         foreach ( $users as $uid ) {
-            $vencimiento = (int) get_user_meta( $uid, VX_User_Meta::PLAN_VENCIMIENTO, true );
-            if ( 0 === $vencimiento ) continue;
+            // Por el parser y no con (int): si quedó guardada una fecha escrita,
+            // un (int) la lee como el año y este cron da el plan por vencido.
+            $vencimiento = VX_Membership::parse_expiry( get_user_meta( $uid, VX_User_Meta::PLAN_VENCIMIENTO, true ) );
+            if ( $vencimiento <= 0 ) continue;
 
             // Ya venció → marcar
             if ( $vencimiento < $now ) {

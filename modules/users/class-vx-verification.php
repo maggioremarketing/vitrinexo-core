@@ -111,12 +111,18 @@ class VX_Verification
         }
 
         // ── Vencimiento automático: 3 meses desde la aprobación ───────────
-        $vencimiento = ( new DateTime( 'now', new DateTimeZone( 'America/Santiago' ) ) )
-            ->modify( '+3 months' )
-            ->format( 'Y-m-d' );
-        $vencimiento_actual = get_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, true );
-        if ( empty( $vencimiento_actual ) ) {
-            update_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, $vencimiento );
+        // El meta es un timestamp, no una fecha escrita: todo el plugin lo lee
+        // con (int), así que un 'Y-m-d' acá se convertía en el año y dejaba a
+        // cada miembro aprobado con un vencimiento de 1970.
+        //
+        // La condición mira si el meta existe, no si está vacío: 0 es un valor
+        // legítimo y significa sin vencimiento, y con empty() la aprobación lo
+        // pisaba.
+        if ( ! metadata_exists( 'user', $user_id, VX_User_Meta::PLAN_VENCIMIENTO ) ) {
+            $vencimiento = ( new DateTime( 'now', new DateTimeZone( 'America/Santiago' ) ) )
+                ->modify( '+3 months' )
+                ->setTime( 23, 59, 59 );
+            update_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, $vencimiento->getTimestamp() );
         }
 
         $user = VX_User::get( $user_id );

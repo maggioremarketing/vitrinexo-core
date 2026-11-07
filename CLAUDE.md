@@ -40,7 +40,7 @@ vitrinexo-core/
 │   │   └── class-vx-email-templates.php ← templates HTML + tpl_notificacion_admin()
 │   └── users/
 │       ├── class-vx-user-meta.php       ← constantes de meta keys
-│       └── class-vx-verification.php    ← activate_account(): pionero auto + vencimiento 90 días
+│       └── class-vx-verification.php    ← activate_account(): pionero auto + vencimiento 3 meses
 └── shortcodes/
     └── shortcodes-public.php            ← landing page + formulario de registro
 ```
@@ -69,7 +69,9 @@ El workflow tiene **retry automático** (espera 90s si el primer intento falla).
 5. Al aprobar → `VX_Verification::activate_account()`:
    - `vx_estado = 'activo'`
    - Si activos ≤ 100 → `vx_es_fundador = 1` (Pionero automático)
-   - Vencimiento = hoy + 90 días
+   - Vencimiento = aprobación + 3 meses, guardado como **timestamp** en `vx_plan_vencimiento` (0 = sin vencimiento)
+
+El vencimiento se escribe una sola vez, al aprobar, y después solo lo cambia un administrador. Todo lo demás lo lee con `VX_Membership::parse_expiry()`, que es lo único que sabe interpretar el meta. Nadie recalcula la fecha por su cuenta.
 
 ## Panel admin (users.php)
 
@@ -77,6 +79,7 @@ Columnas: Nombre de usuario, Nombre, Empresa, Cargo, Teléfono, Correo, Estado, 
 
 - Los administradores muestran "—" en Plan/Vencimiento/Pionero
 - Plan y Vencimiento usan `window.location` con nonce en URL (no `<form>`) para no interferir con el bulk delete de WordPress
+- La columna Vencimiento **solo lee** el meta. Si no hay fecha guardada (cuenta sin aprobar) estima desde el registro y lo dice en la celda, pero no guarda nada: dibujar una tabla no decide un vencimiento
 
 ## Planes
 

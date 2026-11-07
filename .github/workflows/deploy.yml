@@ -21,6 +21,7 @@ jobs:
         run: |
           node pruebas-colores.mjs
           node pruebas-emojis.mjs
+          php pruebas-vencimiento.php
 
       - name: Clonar el tema al lado
         # El banco vive en el tema y necesita a los dos. Acá no hay condición:

@@ -162,28 +162,53 @@ class VX_Admin_Users
                 $user = get_userdata( $user_id );
                 if ( $user && in_array( 'administrator', (array) $user->roles, true ) ) return '<span style="color:#5C5F6B;font-size:12px">-</span>';
 
-                $expiry_ts   = (int) get_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, true );
-                $meta_exists = metadata_exists( 'user', $user_id, VX_User_Meta::PLAN_VENCIMIENTO );
+                // La fecha que vale es la guardada. La escribe la aprobación,
+                // tres meses desde ese día, y la puede corregir un administrador
+                // con el input de abajo. Acá solo se lee: esta celda calculaba la
+                // suya desde el registro y la guardaba mientras se dibujaba, así
+                // que la tabla mostraba un vencimiento que nadie había decidido y
+                // además lo dejaba escrito. Para quien se aprobó semanas después
+                // de registrarse, esa fecha caía antes de la real.
+                $meta_existe = metadata_exists( 'user', $user_id, VX_User_Meta::PLAN_VENCIMIENTO );
+                $expiry_ts   = $meta_existe
+                    ? VX_Membership::parse_expiry( get_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, true ) )
+                    : 0;
 
-                if ( ! $meta_exists && $user ) {
-                    $expiry_ts = strtotime( $user->user_registered ) + ( 90 * DAY_IN_SECONDS );
-                    update_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, $expiry_ts );
+                // Sin fecha guardada queda la cuenta por aprobar. La celda estima
+                // desde el registro para que se vea de qué orden sería, y lo dice,
+                // porque es una cuenta pendiente y no una fecha ya decidida.
+                $estimado = false;
+                if ( ! $meta_existe && $user ) {
+                    $expiry_ts = strtotime( $user->user_registered . ' +3 months' );
+                    $estimado  = true;
                 }
 
-                $expiry_date = ( $expiry_ts > 86400 ) ? date( 'Y-m-d', $expiry_ts ) : '';
-                $diff        = $expiry_ts > 86400 ? ( $expiry_ts - time() ) : 0;
+                $expiry_date = ( ! $estimado && $expiry_ts > 0 ) ? date( 'Y-m-d', $expiry_ts ) : '';
+                $diff        = $expiry_ts - time();
 
-                if ( ! $expiry_date ) {
-                    $label = '-'; $color = '#5C5F6B';
+                if ( $estimado ) {
+                    $label = date_i18n( 'd/m/Y', $expiry_ts ) . ' (estimado)';
+                    $color = '#5C5F6B';
+                    $title = 'Estimado desde la fecha de registro. Esta cuenta todavía no tiene vencimiento guardado: se fija al aprobarla, tres meses desde la aprobación.';
+                } elseif ( $expiry_ts <= 0 ) {
+                    $label = 'Sin vencimiento';
+                    $color = '#5C5F6B';
+                    $title = 'Este plan no vence.';
                 } elseif ( $diff < 0 ) {
-                    $label = '' . date_i18n( 'd/m/Y', $expiry_ts ); $color = '#AD4319';
+                    $label = date_i18n( 'd/m/Y', $expiry_ts );
+                    $color = '#AD4319';
+                    $title = 'Venció el ' . date_i18n( 'd/m/Y', $expiry_ts ) . '.';
                 } elseif ( $diff < 7 * DAY_IN_SECONDS ) {
-                    $label = date_i18n( 'd/m/Y', $expiry_ts ); $color = '#C6C167';
+                    $label = date_i18n( 'd/m/Y', $expiry_ts );
+                    $color = '#C6C167';
+                    $title = 'Vence esta semana.';
                 } else {
-                    $label = date_i18n( 'd/m/Y', $expiry_ts ); $color = '#689D85';
+                    $label = date_i18n( 'd/m/Y', $expiry_ts );
+                    $color = '#689D85';
+                    $title = 'Vence el ' . date_i18n( 'd/m/Y', $expiry_ts ) . '.';
                 }
 
-                $html  = '<span style="font-size:12px;color:' . $color . ';font-weight:500;white-space:nowrap">' . $label . '</span>';
+                $html  = '<span title="' . esc_attr( $title ) . '" style="font-size:12px;color:' . $color . ';font-weight:500;white-space:nowrap">' . esc_html( $label ) . '</span>';
                 $html .= '<div class="vx-edit-control" style="gap:3px;align-items:center">';
                 $nonce_url = wp_nonce_url( admin_url( 'users.php?action=vx_set_vencimiento&user_id=' . $user_id ), 'vx_set_vencimiento_' . $user_id );
                 $html .= '<input type="date" value="' . esc_attr( $expiry_date ) . '" onchange="window.location=\'' . esc_js( $nonce_url ) . '&vencimiento=\'+this.value" style="font-size:11px;padding:2px 4px;border:1px solid #E6E2DB;border-radius:4px;color:#14161F">';
@@ -204,52 +229,11 @@ class VX_Admin_Users
                 return '<span style="color:#5C5F6B;font-size:12px">-</span><br>'
                      . '<a href="' . esc_url( $add_url ) . '" style="font-size:10px;color:#C6C167;margin-top:3px;display:block">Dar</a>';
 
-            case 'vx_plan':
-                $es_fundador = (bool) get_user_meta( $user_id, VX_User_Meta::ES_FUNDADOR, true );
-                $plan        = get_user_meta( $user_id, VX_User_Meta::PLAN, true ) ?: 'gratuito';
-                $expiry_ts   = (int) get_user_meta( $user_id, VX_User_Meta::PLAN_VENCIMIENTO, true );
-                $expiry_date = $expiry_ts ? date( 'Y-m-d', $expiry_ts ) : '';
-
-                // Distintivo Pionero
-                $html = $es_fundador
-                    ? '<span style="background:#FAF7C9;color:#14161F;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:700;margin-bottom:4px;display:inline-block">Pionero</span><br>'
-                    : '';
-
-                // Nombre del plan
-                $html .= '<span style="font-weight:600;color:#14161F">' . esc_html( ucfirst( $plan ) ) . '</span>';
-
-                // Fecha de vencimiento editable inline
-                $nonce = wp_create_nonce( 'vx_set_vencimiento_' . $user_id );
-                if ( $expiry_ts ) {
-                    $diff      = $expiry_ts - time();
-                    $color_exp = $diff < 0 ? '#AD4319' : ( $diff < 7 * DAY_IN_SECONDS ? '#C6C167' : '#689D85' );
-                    $label     = $diff < 0 ? 'Venció: ' : 'Vence: ';
-                    $html .= '<br><small style="color:' . $color_exp . ';font-weight:500">' . $label . date_i18n( 'd/m/Y', $expiry_ts ) . '</small>';
-                } else {
-                    $html .= '<br><small style="color:#5C5F6B">Sin vencimiento</small>';
-                }
-
-                // Formulario de fecha inline
-                $html .= '<form method="post" action="' . esc_url( admin_url( 'users.php' ) ) . '" style="margin-top:5px;display:flex;gap:4px;align-items:center">';
-                $html .= '<input type="hidden" name="action" value="vx_set_vencimiento">';
-                $html .= '<input type="hidden" name="user_id" value="' . $user_id . '">';
-                $html .= wp_nonce_field( 'vx_set_vencimiento_' . $user_id, '_wpnonce', true, false );
-                $html .= '<input type="date" name="vencimiento" value="' . esc_attr( $expiry_date ) . '" style="font-size:11px;padding:2px 4px;border:1px solid #E6E2DB;border-radius:4px;color:#14161F">';
-                $html .= '<button type="submit" class="button button-small" style="font-size:11px;padding:1px 6px">Guardar</button>';
-                $html .= '</form>';
-
-                // Toggle distintivo Pionero
-                if ( $es_fundador ) {
-                    $rm_url = wp_nonce_url( admin_url( 'users.php?action=vx_quitar_pionero&user_id=' . $user_id ), 'vx_quitar_pionero_' . $user_id );
-                    $html .= '<a href="' . esc_url( $rm_url ) . '" style="font-size:10px;color:#AD4319;display:block;margin-top:3px" onclick="return confirm(\'¿Quitar distintivo Pionero?\')">Quitar distintivo</a>';
-                } else {
-                    $add_url = wp_nonce_url( admin_url( 'users.php?action=vx_dar_pionero&user_id=' . $user_id ), 'vx_dar_pionero_' . $user_id );
-                    $html .= '<a href="' . esc_url( $add_url ) . '" style="font-size:10px;color:#C6C167;display:block;margin-top:3px">Dar distintivo</a>';
-                }
-
-                return $html;
-
-                return $html;
+            // Acá vivía un segundo case 'vx_plan', copia vieja de la columna de
+            // más arriba. PHP se queda con el primero, así que no se dibujaba
+            // nunca: leía el vencimiento por su cuenta y lo editaba con un
+            // <form> anidado, que es justo lo que rompe el borrado masivo de
+            // WordPress. Se saca para que una sola celda lea la fecha.
 
             case 'vx_comunidades':
                 $coms = [];

@@ -39,7 +39,36 @@ class VX_Membership
 
     public function get_expiry(): int
     {
-        return (int) get_user_meta( $this->user_id, VX_Membership_Meta::PLAN_VENCIMIENTO, true );
+        return self::parse_expiry( get_user_meta( $this->user_id, VX_Membership_Meta::PLAN_VENCIMIENTO, true ) );
+    }
+
+    /**
+     * Convierte el valor guardado en vx_plan_vencimiento a timestamp.
+     *
+     * El meta es un timestamp y 0 significa sin vencimiento, pero hubo un
+     * periodo en que la aprobación escribía 'Y-m-d'. Un (int) sobre esa cadena
+     * devuelve el año: '2026-02-07' queda en 2026, una fecha de 1970, y el
+     * miembro aparece vencido en todas partes. Por eso toda lectura pasa por
+     * acá y entiende las dos formas. Una fecha sin hora se cierra al final del
+     * día, igual que cuando un administrador la edita en el panel.
+     *
+     * @param mixed $guardado Valor crudo del user meta
+     * @return int Timestamp, o 0 si no hay vencimiento
+     */
+    public static function parse_expiry( $guardado ): int
+    {
+        if ( is_numeric( $guardado ) ) return (int) $guardado;
+        if ( ! is_string( $guardado ) ) return 0;
+
+        $guardado = trim( $guardado );
+        if ( '' === $guardado ) return 0;
+
+        if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $guardado ) ) {
+            $guardado .= ' 23:59:59';
+        }
+
+        $ts = strtotime( $guardado );
+        return $ts ? (int) $ts : 0;
     }
 
     public function get_gateway_customer_id(): string
