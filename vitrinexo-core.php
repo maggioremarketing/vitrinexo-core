@@ -22,7 +22,7 @@ if ( ! is_admin() ) {
     @ini_set( 'display_startup_errors', '0' );
 }
 
-define( 'VX_VERSION',        '1.0.5' );
+define( 'VX_VERSION',        '1.0.6' );
 define( 'VX_PLUGIN_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'VX_PLUGIN_URL',     plugin_dir_url( __FILE__ ) );
 define( 'VX_REST_NAMESPACE', 'vitrinexo/v1' );
@@ -126,6 +126,7 @@ $vx_modules = [
     // borrarlas sería perder el registro de por qué el contenido dice lo que
     // dice. Cada una se guarda a sí misma en una opción y no vuelve a correr.
     'migraciones/2026-11-07-faq-marca-madre.php',
+    'migraciones/2026-11-07-faq-precio-cenas.php',
 ];
 
 foreach ( $vx_modules as $file ) {
@@ -1485,8 +1486,20 @@ function vx_create_pages(): void {
                 'post_type'    => 'page',
             ] );
         } else {
-            // Actualizar el shortcode si cambió (útil cuando se refactoriza la estructura)
-            if ( trim( $existing->post_content ) !== $data['shortcode'] ) {
+            // El título se compara aparte, y eso es el arreglo.
+            //
+            // Antes la condición miraba solo el shortcode y arrastraba el
+            // título de pasada. Un cambio de nombre no mueve el shortcode, así
+            // que renombrar una página acá no la renombraba en producción:
+            // esta lista decía «Vitrinexo 4Dinner: Sobre el evento» y el sitio
+            // seguía sirviendo «4Dinner — Sobre el evento», con la marca madre
+            // ausente y una raya larga que el proyecto no usa, en la pestaña
+            // del navegador y en el resultado de Google. Lo encontró la
+            // comprobación de vocabulario cuando empezó a mirar el título.
+            $cambia_contenido = trim( $existing->post_content ) !== $data['shortcode'];
+            $cambia_titulo    = $existing->post_title !== $data['title'];
+
+            if ( $cambia_contenido || $cambia_titulo ) {
                 wp_update_post( [
                     'ID'           => $existing->ID,
                     'post_content' => $data['shortcode'],
