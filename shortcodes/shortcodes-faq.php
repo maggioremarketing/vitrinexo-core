@@ -124,14 +124,14 @@ add_shortcode( 'vx_faq', function (): string {
       .vx-faq__search{position:relative;margin-bottom:1.75rem}
       .vx-faq__search .ti{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--color-text-secondary,var(--tinta-2));font-size:18px}
       .vx-faq__search input{width:100%;padding:13px 16px 13px 42px;border:1px solid var(--color-border,var(--linea));border-radius:12px;font-size:15px;background:var(--blanco);transition:border-color .15s,box-shadow .15s}
-      .vx-faq__search input:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(44,206,214,.15)}
+      .vx-faq__search input:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px color-mix(in srgb, var(--color-primary) 35%, transparent)}
       .vx-faq__cat{margin-bottom:2rem}
       .vx-faq__cat-title{font-size:1.05rem;font-weight:700;color:var(--color-primary-ink);margin:0 0 .5rem;padding-bottom:.4rem;border-bottom:2px solid var(--color-primary,var(--coral))}
       .vx-faq__item{border:1px solid var(--color-border,var(--linea));border-radius:12px;margin-bottom:.6rem;background:var(--blanco);overflow:hidden}
       .vx-faq__item[open]{border-color:var(--color-primary)}
       .vx-faq__q{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;font-weight:600;color:var(--color-text-primary,var(--tinta));user-select:none}
       .vx-faq__q::-webkit-details-marker{display:none}
-      .vx-faq__q:hover{background:rgba(44,206,214,.05)}
+      .vx-faq__q:hover{background:var(--color-primary-soft)}
       .vx-faq__chev{transition:transform .2s;color:var(--color-primary-ink);flex-shrink:0}
       .vx-faq__item[open] .vx-faq__chev{transform:rotate(180deg)}
       .vx-faq__a{padding:0 18px 16px;color:var(--color-text-secondary,var(--tinta-2));line-height:1.6}

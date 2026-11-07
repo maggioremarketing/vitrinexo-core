@@ -406,7 +406,7 @@ function vx_admin_stripe_manual_page(): void {
   .checklist { list-style:none; padding-left:0; }
   .checklist li { padding: 5px 0; padding-left: 28px; position: relative; }
   .checklist li::before { content: ''; position: absolute; left: 4px; top: 10px; width: 11px; height: 11px; border: 1.5px solid #5C5F6B; border-radius: 2px; }
-  .print-btn { position:fixed; top:20px; right:20px; background:#FF7A4D; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.15); z-index:999; }
+  .print-btn { position:fixed; top:20px; right:20px; background:#FF7A4D; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px color-mix(in srgb, var(--tinta, #14161F) 15%, transparent); z-index:999; }
   .print-btn:hover { background:#F26A3B; }
   .toc { background:#F4F1EC; border:1px solid #E6E2DB; border-radius:6px; padding:16px 20px; margin:20px 0 32px; }
   .toc h3 { margin:0 0 10px; font-size:13px; color:#5C5F6B; text-transform:uppercase; letter-spacing:.06em; }
