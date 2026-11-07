@@ -34,7 +34,7 @@ function vx_render_empty_state( string $tipo ): string
         ],
         'matches' => [
             'icon'    => 'ti-sparkles',
-            'title'   => 'Sin matches por ahora',
+            'title'   => 'Sin nexos por ahora',
             'desc'    => 'Completa lo que ofreces y lo que buscas para que Vitrinexo encuentre tus nexos.',
             'cta'     => [ 'Editar mi perfil', '/editar-perfil/' ],
         ],
@@ -53,7 +53,7 @@ function vx_render_empty_state( string $tipo ): string
         'dinners' => [
             'icon'    => 'ti-restaurant',
             'title'   => 'No hay eventos próximos',
-            'desc'    => 'Cuando se creen nuevos eventos 4Dinner recibirás una notificación.',
+            'desc'    => 'Cuando se creen nuevas cenas de Vitrinexo 4Dinner recibirás una notificación.',
             'cta'     => null,
         ],
         'comunidad' => [

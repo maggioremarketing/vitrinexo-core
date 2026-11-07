@@ -229,7 +229,7 @@ class VX_Cron
 
                 VX_Mailer::send(
                     $user->get_email(),
-                    'Mañana es tu 4Dinner en ' . $dinner->get_ciudad() . ' · Recordatorio',
+                    'Mañana es tu Vitrinexo 4Dinner en ' . $dinner->get_ciudad() . ' · Recordatorio',
                     'dinner_recordatorio',
                     [
                         'nombre'      => $user->get_nombre(),
@@ -356,7 +356,7 @@ class VX_Cron
 
             VX_Mailer::send(
                 $user->get_email(),
-                'Tus matches de la semana en Vitrinexo',
+                'Tus nexos de la semana en Vitrinexo',
                 'match_semanal',
                 [
                     'nombre'         => $user->get_nombre(),

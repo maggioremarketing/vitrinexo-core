@@ -44,7 +44,7 @@ class VX_Dinner_Assignment
         if ( $user ) {
             VX_Mailer::send(
                 $user->get_email(),
-                '¡Estás confirmado en el 4Dinner de ' . $dinner->get_ciudad() . '!',
+                '¡Estás confirmado en el Vitrinexo 4Dinner de ' . $dinner->get_ciudad() . '!',
                 'dinner_confirmacion',
                 array_merge(
                     VX_Dinner_Assignment::build_confirmation_data( $dinner_id ),
@@ -105,7 +105,7 @@ class VX_Dinner_Assignment
 
             $recipients[] = [
                 'to'      => $user->get_email(),
-                'subject' => '¡Tu mesa para el 4Dinner en ' . $dinner->get_ciudad() . ' está confirmada!',
+                'subject' => '¡Tu mesa para el Vitrinexo 4Dinner en ' . $dinner->get_ciudad() . ' está confirmada!',
                 'data'    => array_merge( $confirmation_data, [ 'usuario_nombre' => $user->get_nombre() ] ),
             ];
         }

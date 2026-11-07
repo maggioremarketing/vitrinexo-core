@@ -168,7 +168,7 @@ add_shortcode( 'vx_login', function (): string {
                             <p>Al crear una cuenta en Vitrinexo, aceptas quedar vinculado por estos Términos y Condiciones de Uso. Si no estás de acuerdo con alguna de las condiciones aquí establecidas, te pedimos que no uses la plataforma. Vitrinexo se reserva el derecho de modificar estos términos en cualquier momento, notificando los cambios a través de la plataforma.</p>
 
                             <h6 class="fw-semibold text-body-label mb-2 mt-4">2. Descripción del Servicio</h6>
-                            <p>Vitrinexo es una plataforma de networking B2B para profesionales y empresarios hispanohablantes. Facilita la conexión entre miembros a través de un directorio verificado, sistema de matches por afinidad de tags, y eventos presenciales como 4Dinner. El acceso completo está reservado para miembros verificados.</p>
+                            <p>Vitrinexo es una plataforma de networking B2B para profesionales y empresarios hispanohablantes. Facilita la conexión entre miembros a través de un directorio verificado, un sistema de nexos por afinidad de etiquetas, y eventos presenciales como Vitrinexo 4Dinner. El acceso completo está reservado para miembros verificados.</p>
 
                             <h6 class="fw-semibold text-body-label mb-2 mt-4">3. Registro y Cuenta</h6>
                             <p>Para usar Vitrinexo debes registrarte con datos verídicos y mantenerte como único responsable de la confidencialidad de tu contraseña. Vitrinexo puede rechazar o dar de baja cualquier cuenta que proporcione información falsa, incompleta o que infrinja estos términos. El registro implica la verificación de identidad profesional antes de acceder al directorio completo.</p>

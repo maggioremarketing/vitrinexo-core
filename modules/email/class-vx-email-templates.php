@@ -164,7 +164,7 @@ class VX_Email_Templates
 
         $steps = [
             [ '1', 'Completa tu perfil', 'Agrega tu foto, bio y empresa para causar buena impresión.' ],
-            [ '2', 'Define tus tags', 'Qué ofreces y qué buscas: son la clave del sistema de matches.' ],
+            [ '2', 'Define tus tags', 'Qué ofreces y qué buscas: son la clave de tus nexos.' ],
             [ '3', 'Explora el directorio', 'Mira quién ya está adentro y a quién te conviene escribirle.' ],
         ];
 
@@ -340,8 +340,8 @@ class VX_Email_Templates
             return '';
         }
 
-        $content = self::h1( "Tus nuevos matches de la semana, $nombre" )
-            . self::p( "Esta semana encontramos <strong>$total nuevos match" . ( $total > 1 ? 'es' : '' ) . "</strong> para ti." );
+        $content = self::h1( "Tus nuevos nexos de la semana, $nombre" )
+            . self::p( "Esta semana encontramos <strong>$total nuevo" . ( $total > 1 ? 's nexos' : ' nexo' ) . "</strong> para ti." );
 
         if ( ! empty( $seeks_matches ) ) {
             $content .= '<p style="font-size:13px;font-weight:700;color:#14161F;margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Ofrecen lo que buscas</p>';
@@ -384,10 +384,10 @@ class VX_Email_Templates
         $email       = esc_html( $d['email'] ?? '' );
         $approve_url = esc_url( $d['approve_url'] ?? '' );
 
-        $content = self::h1( 'Solicitud de verificación Senior' )
-            . self::p( "<strong>$nombre</strong> ($email) solicita el distintivo de la comunidad Senior." )
+        $content = self::h1( 'Solicitud de verificación de Vitrinexo Senior' )
+            . self::p( "<strong>$nombre</strong> ($email) solicita el distintivo de Vitrinexo Senior." )
             . '<div style="text-align:center;margin:28px 0;">'
-            . self::btn( $approve_url, 'Aprobar verificación Senior' )
+            . self::btn( $approve_url, 'Aprobar la verificación de Vitrinexo Senior' )
             . '</div>';
 
         return self::wrapper( $content );
@@ -434,7 +434,7 @@ class VX_Email_Templates
         // ── Sección solicitudes Senior ─────────────────────────────────────────
         if ( $n_senior > 0 ) {
             $content .= '<p style="font-size:13px;font-weight:700;color:#14161F;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px;">'
-                . 'Solicitudes Senior (' . $n_senior . ')</p>';
+                . 'Solicitudes de Vitrinexo Senior (' . $n_senior . ')</p>';
 
             $content .= '<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:16px;">';
             $content .= '<tr style="background:#F4F1EC;">'
@@ -534,7 +534,7 @@ class VX_Email_Templates
             . '<div style="text-align:center;margin:28px 0;">'
             . self::btn( $url, $cta_text )
             . '</div>'
-            . self::p( 'Si no renuevas, perderás acceso al directorio, tus conexiones y los próximos eventos 4Dinner.' );
+            . self::p( 'Si no renuevas, perderás acceso al directorio, tus conexiones y las próximas cenas de Vitrinexo 4Dinner.' );
 
         return self::wrapper( $content );
     }
@@ -572,11 +572,11 @@ class VX_Email_Templates
         $dinner    = $d['dinner'] ?? [];
         $fecha_str = ! empty( $dinner['fecha'] ) ? date_i18n( 'l j \d\e F \d\e Y', (int) $dinner['fecha'] ) : '';
 
-        $content = self::h1( "¡$nombre, tienes una invitación a un 4Dinner!" )
+        $content = self::h1( "¡$nombre, tienes una invitación a un Vitrinexo 4Dinner!" )
             . self::p( 'El equipo de Vitrinexo te ha reservado un cupo en la próxima cena. Aquí los detalles:' )
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu invitación</p>'
-            . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
+            . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">Vitrinexo 4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
             . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>'
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
@@ -622,7 +622,7 @@ class VX_Email_Templates
         $fecha_str = ! empty( $dinner['fecha'] ) ? date_i18n( 'l j \d\e F \d\e Y', (int) $dinner['fecha'] ) : '';
 
         $content = self::h1( "¡$nombre, recibimos tu interés!" )
-            . self::p( "Tu interés en el <strong>4Dinner $ciudad</strong>" . ( $fecha_str ? " del $fecha_str" : '' ) . " quedó registrado." )
+            . self::p( "Tu interés en el <strong>Vitrinexo 4Dinner $ciudad</strong>" . ( $fecha_str ? " del $fecha_str" : '' ) . " quedó registrado." )
             . '<div style="background:#FAF7C9;border:1px solid #F2EC79;border-radius:12px;padding:20px;margin:20px 0;">'
             . '<p style="margin:0 0 6px;font-size:13px;font-weight:700;color:#14161F;text-transform:uppercase;letter-spacing:.5px;">¿Qué sigue?</p>'
             . '<ul style="margin:0;padding-left:18px;color:#14161F;font-size:14px;line-height:1.8;">'
@@ -632,7 +632,7 @@ class VX_Email_Templates
             . '</ul>'
             . '</div>'
             . '<div style="text-align:center;margin:28px 0;">'
-            . self::btn( home_url( '/4dinner/' ), 'Ver próximos 4Dinners' )
+            . self::btn( home_url( '/4dinner/' ), 'Ver próximas cenas' )
             . '</div>'
             . self::p( '<small style="color:#5C5F6B;">¿No puedes asistir? Puedes retirar tu interés desde la página del evento.</small>' );
 
@@ -657,11 +657,11 @@ class VX_Email_Templates
               . '</div>'
             : '';
 
-        $content = self::h1( "¡$nombre, tu 4Dinner es $fecha_str!" )
+        $content = self::h1( "¡$nombre, tu Vitrinexo 4Dinner es $fecha_str!" )
             . self::p( 'Solo quedan <strong>24 horas</strong>. Aquí un recordatorio de los detalles:' )
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu cena</p>'
-            . '<p style="margin:0 0 14px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
+            . '<p style="margin:0 0 14px;font-size:20px;font-weight:700;">Vitrinexo 4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
             . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>'
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( ( $dinner['restaurante'] ?? '' ) . ( ! empty( $dinner['direccion'] ) ? ' · ' . $dinner['direccion'] : '' ) ) . '</p>'
             . '</div>'
@@ -688,7 +688,7 @@ class VX_Email_Templates
         $fecha_str   = ! empty( $dinner['fecha'] ) ? date_i18n( 'l j \d\e F', (int) $dinner['fecha'] ) : '';
 
         $content = self::h1( "¡$nombre, ya tienes mesa asignada!" )
-            . self::p( 'El equipo ya armó las mesas para el 4Dinner de <strong>' . esc_html( $dinner['ciudad'] ?? '' ) . '</strong>. Esta es tu asignación:' )
+            . self::p( 'El equipo ya armó las mesas para el Vitrinexo 4Dinner de <strong>' . esc_html( $dinner['ciudad'] ?? '' ) . '</strong>. Esta es tu asignación:' )
             . '<div style="background:#F4F1EC;border-radius:12px;padding:20px;margin:20px 0;border-left:4px solid #A9C6E8;text-align:center;">'
             . '<p style="margin:0 0 4px;font-size:12px;font-weight:700;color:#8BA3C0;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
             . '<p style="margin:0;font-size:28px;font-weight:700;color:#14161F;">' . $mesa_nombre . '</p>'
@@ -709,7 +709,7 @@ class VX_Email_Templates
     }
 
     /**
-     * Aprobación de badge Senior.
+     * Aprobación del distintivo de Vitrinexo Senior.
      * $data: nombre
      */
     private static function tpl_senior_aprobado( array $d ): string
@@ -719,12 +719,12 @@ class VX_Email_Templates
         $content = self::h1( "¡$nombre, eres parte de Vitrinexo Senior!" )
             . self::p( 'Tu solicitud para unirte a la comunidad <strong>Vitrinexo Senior</strong> fue aprobada. Ahora tienes acceso al directorio vertical de ejecutivos con trayectoria consolidada.' )
             . '<div style="background:#FAF7C9;border:1px solid #F2EC79;border-radius:12px;padding:20px;margin:20px 0;text-align:center;">'
-            . '<p style="margin:0;font-size:18px;font-weight:700;color:#14161F;">Distintivo Senior activado</p>'
+            . '<p style="margin:0;font-size:18px;font-weight:700;color:#14161F;">Distintivo de Vitrinexo Senior activado</p>'
             . '<p style="margin:6px 0 0;font-size:13px;color:#14161F;">Tu distintivo es visible en tu ficha de Vitrinexo.</p>'
             . '</div>'
-            . self::p( 'Explora los perfiles de tu comunidad, conecta con otros ejecutivos senior y participa en los próximos 4Dinners exclusivos.' )
+            . self::p( 'Explora los perfiles de tu comunidad, conecta con otros ejecutivos senior y participa en las próximas cenas de Vitrinexo 4Dinner.' )
             . '<div style="text-align:center;margin:28px 0;">'
-            . self::btn( home_url( '/comunidad-senior/' ), 'Ir a mi comunidad Senior' )
+            . self::btn( home_url( '/comunidad-senior/' ), 'Ir a Vitrinexo Senior' )
             . '</div>';
 
         return self::wrapper( $content );
@@ -799,17 +799,17 @@ class VX_Email_Templates
 
         $fecha_str = ! empty( $dinner['fecha'] ) ? date_i18n( 'l j \d\e F \d\e Y', $dinner['fecha'] ) : '';
 
-        $content = self::h1( "¡Tu mesa para el 4Dinner está confirmada, $nombre!" )
+        $content = self::h1( "¡Tu mesa para el Vitrinexo 4Dinner está confirmada, $nombre!" )
             . '<div style="background:#14161F;border-radius:12px;padding:20px;margin:20px 0;color:#fff;">'
             . '<p style="margin:0 0 4px;font-size:12px;color:#5C5F6B;text-transform:uppercase;letter-spacing:.5px;">Tu mesa</p>'
-            . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
+            . '<p style="margin:0 0 16px;font-size:20px;font-weight:700;">Vitrinexo 4Dinner ' . esc_html( $dinner['ciudad'] ?? '' ) . '</p>'
             . '<p style="margin:0 0 6px;font-size:14px;color:#E6E2DB;">Fecha: ' . $fecha_str . ' · 20:00</p>'
             . '<p style="margin:0;font-size:14px;color:#E6E2DB;">Lugar: ' . esc_html( $dinner['restaurante'] ?? '' ) . ' · ' . esc_html( $dinner['direccion'] ?? '' ) . '</p>'
             . '</div>'
             . '<p style="font-size:14px;font-weight:600;color:#14161F;margin:20px 0 8px;">Tus comensales:</p>'
             . $comensales_html
             . '<div style="text-align:center;margin:28px 0;">'
-            . self::btn( home_url( '/mis-eventos/' ), 'Ver mis detalles en Mis 4Dinners' )
+            . self::btn( home_url( '/mis-eventos/' ), 'Ver mis detalles en Mis cenas' )
             . '</div>'
             . self::p( 'No se requiere agenda. Es una cena informal. ¡Nos vemos ahí!' );
 

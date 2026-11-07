@@ -107,7 +107,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       <div class="ob-welcome-list">
         <div class="ob-welcome-item"><div class="ob-welcome-icon ob-welcome-icon--green"><i class="ti ti-user"></i></div>Datos básicos de tu perfil</div>
         <div class="ob-welcome-item"><div class="ob-welcome-icon ob-welcome-icon--cyan"><i class="ti ti-building"></i></div>Tu empresa y tu rol</div>
-        <div class="ob-welcome-item"><div class="ob-welcome-icon ob-welcome-icon--pink"><i class="ti ti-arrows-exchange"></i></div>Qué ofreces y qué buscas: la clave de los matches</div>
+        <div class="ob-welcome-item"><div class="ob-welcome-icon ob-welcome-icon--pink"><i class="ti ti-arrows-exchange"></i></div>Qué ofreces y qué buscas: la clave de los nexos</div>
         <div class="ob-welcome-item"><div class="ob-welcome-icon ob-welcome-icon--purple"><i class="ti ti-users"></i></div>Comunidades a las que quieres pertenecer</div>
       </div>
       <div class="ob-footer ob-footer--center">
@@ -370,7 +370,7 @@ add_shortcode( 'vx_onboarding', function (): string {
 
       <div class="community-toggle" id="com-out2b" onclick="obToggleCom(this)">
         <div class="community-toggle__icon community-toggle__icon--out2b"><i class="ti ti-rainbow ob-community-icon-i"></i></div>
-        <div><div class="community-toggle__title">LGBTQ+</div><div class="community-toggle__desc">Comunidad LGBTQ+ en el mundo empresarial</div></div>
+        <div><div class="community-toggle__title">Vitrinexo LGBTQ+</div><div class="community-toggle__desc">Para profesionales LGBTQ+ del mundo empresarial</div></div>
         <i class="ti ti-circle community-toggle__check"></i>
       </div>
       <?php $es_femenino = ( 'femenino' === $genero ); ?>
@@ -379,7 +379,7 @@ add_shortcode( 'vx_onboarding', function (): string {
            style="cursor:not-allowed<?php echo $es_femenino ? '' : ';opacity:.5'; ?>">
         <div class="community-toggle__icon community-toggle__icon--woman"><i class="ti ti-gender-female ob-community-icon-i"></i></div>
         <div>
-          <div class="community-toggle__title">Woman</div>
+          <div class="community-toggle__title">Vitrinexo Woman</div>
           <div class="community-toggle__desc">
             Mujeres en posiciones de liderazgo empresarial
             <?php if ( $es_femenino ) : ?>
@@ -394,7 +394,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       <div class="community-toggle community-toggle--locked" id="com-senior" onclick="obToggleSenior(this)" style="cursor:not-allowed">
         <div class="community-toggle__icon community-toggle__icon--senior"><i class="ti ti-award ob-community-icon-i"></i></div>
         <div>
-          <div class="community-toggle__title">Senior</div>
+          <div class="community-toggle__title">Vitrinexo Senior</div>
           <div class="community-toggle__desc">
             Ejecutivos con trayectoria consolidada
             <br><span style="color:var(--color-text-secondary);font-size:12px"><i class="ti ti-lock" style="font-size:11px"></i> Se asigna automáticamente con 45+ años o 20+ de experiencia</span>
@@ -553,7 +553,7 @@ add_shortcode( 'vx_onboarding', function (): string {
       return g ? g.value : '';
     })();
     if (genero !== 'femenino') {
-      alert('La comunidad Woman es exclusiva para mujeres. Indica tu género en el paso anterior para habilitarla.');
+      alert('Vitrinexo Woman es exclusiva para mujeres. Indica tu género en el paso anterior para habilitarla.');
       return;
     }
     // Obligatoria para femenino: siempre queda seleccionada, no se puede desmarcar.
@@ -976,7 +976,7 @@ function vx_render_member_card( array $m, int $viewer_id = 0, ?array $only_offer
         $badges .= ' <span class="founder-tooltip" data-tooltip="Miembro Pionero" tabindex="0"><i class="founder-tag ti ti-star"></i></span>';
     }
     if ( ! empty( $m['comunidades'] ) && in_array( 'senior', (array) $m['comunidades'], true ) ) {
-        $badges .= ' <span class="badge-vx badge-neutral" style="font-size:10px">Senior</span>';
+        $badges .= ' <span class="badge-vx badge-neutral" style="font-size:10px">Vitrinexo Senior</span>';
     }
 
     // Favorito
@@ -1351,7 +1351,7 @@ add_shortcode( 'vx_dashboard', function (): string {
           <div class="banner-4dinner__icon text-white"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i></div>
           <div>
             <div class="banner-4dinner__eyebrow">Próximo evento</div>
-            <div class="banner-4dinner__title">Habrá un <strong>4Dinner</strong> cerca tuyo</div>
+            <div class="banner-4dinner__title">Habrá un <strong>Vitrinexo 4Dinner</strong> cerca tuyo</div>
             <div class="banner-4dinner__meta">
               <i class="ti ti-map-pin"></i><?php echo esc_html( $dinner->get_ciudad() ); ?> &nbsp;·&nbsp;
               <i class="ti ti-calendar"></i><?php echo esc_html( date_i18n( 'j \de F', strtotime( $dinner->get_fecha() ) ) ); ?>
@@ -1548,9 +1548,9 @@ add_shortcode( 'vx_dashboard', function (): string {
           // out2b es opt-in (se puede unir). woman/senior son automáticas
           // (intrínsecas al perfil): no llevan botón "Unirse", solo una nota.
           $coms_display = [
-              'out2b'  => [ 'LGBTQ+', 'Comunidad LGBTQ+',      'comunidad-icon--out2b',  'ti-rainbow',       'comunidad-card--out2b',  '' ],
-              'woman'  => [ 'Woman',  'Empresarias líderes',   'comunidad-icon--woman',  'ti-gender-female', 'comunidad-card--woman',  'Automática · solo para mujeres' ],
-              'senior' => [ 'Senior', 'Trayectoria verificada', 'comunidad-icon--senior', 'ti-award',        'comunidad-card--senior', 'Automática · 45+ años o 20+ de experiencia' ],
+              'out2b'  => [ 'Vitrinexo LGBTQ+', 'Para profesionales LGBTQ+', 'comunidad-icon--out2b',  'ti-rainbow',       'comunidad-card--out2b',  '' ],
+              'woman'  => [ 'Vitrinexo Woman',  'Empresarias líderes',   'comunidad-icon--woman',  'ti-gender-female', 'comunidad-card--woman',  'Automática · solo para mujeres' ],
+              'senior' => [ 'Vitrinexo Senior', 'Trayectoria verificada', 'comunidad-icon--senior', 'ti-award',        'comunidad-card--senior', 'Automática · 45+ años o 20+ de experiencia' ],
           ];
           foreach ( $coms_display as $com_id => [ $com_name, $com_desc, $icon_cls, $icon, $card_cls, $auto_hint ] ) :
               $es_miembro    = $user->is_in_community( $com_id );
@@ -1929,7 +1929,7 @@ add_shortcode( 'vx_match_seeks', function (): string {
     <div class="container py-4">
       <div class="d-flex align-items-center justify-content-between gap-3 mb-4 flex-wrap">
         <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm"><i class="ti ti-arrow-left me-1"></i> Volver a mis nexos</a>
-        <span class="badge-vx badge-neutral"><i class="ti ti-users me-1"></i><?php echo $total; ?> matches</span>
+        <span class="badge-vx badge-neutral"><i class="ti ti-users me-1"></i><?php echo $total; ?> nexos</span>
       </div>
 
       <?php if ( $users ) : ?>
@@ -2000,7 +2000,7 @@ add_shortcode( 'vx_match_offers', function (): string {
     <div class="container py-4">
       <div class="d-flex align-items-center justify-content-between gap-3 mb-4 flex-wrap">
         <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm"><i class="ti ti-arrow-left me-1"></i> Volver a mis nexos</a>
-        <span class="badge-vx badge-neutral"><i class="ti ti-users me-1"></i><?php echo $total; ?> matches</span>
+        <span class="badge-vx badge-neutral"><i class="ti ti-users me-1"></i><?php echo $total; ?> nexos</span>
       </div>
 
       <?php if ( $users ) : ?>
@@ -2791,9 +2791,9 @@ add_shortcode( 'vx_configuracion', function (): string {
               <p class="cta-card__desc mb-4">Comunidades a las que perteneces en Vitrinexo.</p>
               <?php
               $coms_map = [
-                  'out2b'  => [ 'LGBTQ+',  'ti-rainbow',       'color:var(--lavanda-presion)' ],
-                  'woman'  => [ 'Woman',  'ti-gender-female', 'color:var(--rosa-presion)' ],
-                  'senior' => [ 'Senior', 'ti-award',         'color:var(--mantequilla-presion)' ],
+                  'out2b'  => [ 'Vitrinexo LGBTQ+',  'ti-rainbow',       'color:var(--lavanda-presion)' ],
+                  'woman'  => [ 'Vitrinexo Woman',  'ti-gender-female', 'color:var(--rosa-presion)' ],
+                  'senior' => [ 'Vitrinexo Senior', 'ti-award',         'color:var(--mantequilla-presion)' ],
               ];
               foreach ( $coms_map as $id => [ $nombre, $icon, $style ] ) :
                   $activa = $user->is_in_community( $id );
@@ -2812,7 +2812,7 @@ add_shortcode( 'vx_configuracion', function (): string {
               <?php endforeach; ?>
               <?php if ( ! $user->is_in_community( 'senior' ) ) : ?>
               <div class="mt-4 pt-3 border-top">
-                <p class="cta-card__desc mb-0"><i class="ti ti-award me-1"></i>La comunidad Senior se asigna automáticamente a partir de 45 años o 20 de experiencia.</p>
+                <p class="cta-card__desc mb-0"><i class="ti ti-award me-1"></i>Vitrinexo Senior se asigna automáticamente a partir de 45 años o 20 de experiencia.</p>
               </div>
               <?php endif; ?>
             </div>
@@ -3217,7 +3217,7 @@ add_shortcode( 'vx_perfil', function (): string {
             <span class="founder-tooltip ms-1" data-tooltip="Miembro Pionero" tabindex="0"><i class="founder-tag ti ti-star"></i></span>
             <?php endif; ?>
             <?php if ( $user->is_senior_verified() ) : ?>
-            <span class="badge-vx badge-neutral ms-1" style="font-size:11px">Senior</span>
+            <span class="badge-vx badge-neutral ms-1" style="font-size:11px">Vitrinexo Senior</span>
             <?php endif; ?>
           </h1>
 
@@ -3271,17 +3271,26 @@ add_shortcode( 'vx_perfil', function (): string {
               }
           }
           if ( $coms_activas ) :
+            // Cada pastilla va en su familia: el -suave de fondo y el -tinta
+            // encima, que es el peldaño calculado para dar 4,5 sobre ese
+            // fondo. Antes decía `var(--lavanda)22`, pegándole la opacidad a
+            // un var(), que no es CSS válido: el fondo se caía y el texto
+            // quedaba en lavanda sobre blanco, 1,64:1. Nadie lo había visto
+            // porque el perfil no se medía.
             $com_labels = [
-              'out2b'  => [ 'LGBTQ+',  'var(--lavanda)' ],
-              'woman'  => [ 'Woman',  'var(--rosa)' ],
-              'senior' => [ 'Senior', 'var(--mantequilla)' ],
+              'out2b'  => [ 'Vitrinexo LGBTQ+', 'lavanda' ],
+              'woman'  => [ 'Vitrinexo Woman',  'rosa' ],
+              'senior' => [ 'Vitrinexo Senior', 'mantequilla' ],
             ];
           ?>
           <div class="d-flex gap-1 flex-wrap mt-2">
             <?php foreach ( $coms_activas as $com ) :
-              [ $lbl, $color ] = $com_labels[ $com ] ?? [ ucfirst($com), 'var(--linea)' ];
+              [ $lbl, $fam ] = $com_labels[ $com ] ?? [ ucfirst($com), '' ];
+              $fondo  = $fam ? "var(--{$fam}-suave)" : 'var(--blanco)';
+              $tinta  = $fam ? "var(--{$fam}-tinta)" : 'var(--color-text-primary)';
+              $borde  = $fam ? "var(--{$fam})"       : 'var(--linea)';
             ?>
-            <span style="background:<?php echo esc_attr( $color ); ?>22;color:<?php echo esc_attr( $color ); ?>;border:1px solid <?php echo esc_attr( $color ); ?>;border-radius:999px;font-size:11px;font-weight:600;padding:2px 10px"><?php echo esc_html( $lbl ); ?></span>
+            <span style="background:<?php echo esc_attr( $fondo ); ?>;color:<?php echo esc_attr( $tinta ); ?>;border:1px solid <?php echo esc_attr( $borde ); ?>;border-radius:999px;font-size:11px;font-weight:600;padding:2px 10px"><?php echo esc_html( $lbl ); ?></span>
             <?php endforeach; ?>
           </div>
           <?php endif; ?>
@@ -3749,8 +3758,8 @@ add_shortcode( 'vx_editor_perfil', function (): string {
                     style="margin-top:3px;accent-color:var(--color-text-primary);width:16px;height:16px;flex-shrink:0"
                     <?php checked( $is_out2b ); ?>>
                   <div>
-                    <span class="fw-medium" style="font-size:14px">Soy parte de la comunidad LGBTQ+</span>
-                    <p class="text-sm-muted" style="margin:2px 0 0">Aparecer en la comunidad LGBTQ+</p>
+                    <span class="fw-medium" style="font-size:14px">Soy una persona LGBTQ+</span>
+                    <p class="text-sm-muted" style="margin:2px 0 0">Aparecer en Vitrinexo LGBTQ+</p>
                   </div>
                 </label>
               </div>
@@ -3760,7 +3769,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
                     style="margin-top:3px;accent-color:var(--color-text-primary);width:16px;height:16px;flex-shrink:0"
                     <?php checked( $is_senior ); ?>>
                   <div>
-                    <span class="fw-medium" style="font-size:14px">Ejecutivo/a Senior</span>
+                    <span class="fw-medium" style="font-size:14px">Ejecutivo/a senior</span>
                     <p class="text-sm-muted" style="margin:2px 0 0"><i class="ti ti-lock" style="font-size:11px"></i> Se asigna automáticamente con 45+ años o 20+ de experiencia</p>
                   </div>
                 </label>
@@ -4768,7 +4777,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                             <i class="ti ti-tools-kitchen-2 me-1"></i> Eventos presenciales
                         </span>
                     </div>
-                    <h1 class="page-header-vx__title">4Dinner</h1>
+                    <h1 class="page-header-vx__title">Vitrinexo 4Dinner</h1>
                     <p class="page-header-vx__lead">4 personas. 1 mesa. Una conversación que importa.</p>
                 </div>
                 <div class="d-flex gap-2 flex-wrap align-items-center">
@@ -4846,7 +4855,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                     </div>
                     <div class="event-card-body">
                         <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                            <h3 class="fw-semibold" style="font-size:15px;margin:0">4Dinner <?php echo esc_html( $dinner->get_ciudad() ); ?></h3>
+                            <h3 class="fw-semibold" style="font-size:15px;margin:0">Vitrinexo 4Dinner <?php echo esc_html( $dinner->get_ciudad() ); ?></h3>
                             <?php if ( $user_asig ) : ?>
                                 <span class="badge-vx badge-success">Confirmado</span>
                             <?php elseif ( $completo ) : ?>
@@ -4933,7 +4942,7 @@ add_shortcode( 'vx_4dinner', function (): string {
             <div class="empty-state-vx py-4">
                 <i class="ti ti-restaurant empty-state-vx__icon"></i>
                 <h2 class="empty-state-vx__title">No hay eventos próximos</h2>
-                <p class="empty-state-vx__desc">Cuando se creen nuevos eventos 4Dinner recibirás una notificación.</p>
+                <p class="empty-state-vx__desc">Cuando se creen nuevas cenas de Vitrinexo 4Dinner recibirás una notificación.</p>
             </div>
             <?php endif; ?>
         </section>
@@ -4948,7 +4957,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                                 <i class="ti ti-tools-kitchen-2" style="font-size:22px;color:var(--salvia-hover)"></i>
                             </div>
                             <div>
-                                <h2 class="subsection-title" style="margin:0">Quiero participar en un 4Dinner</h2>
+                                <h2 class="subsection-title" style="margin:0">Quiero participar en un Vitrinexo 4Dinner</h2>
                                 <p class="text-body-muted" style="margin:0">El equipo Vitrinexo te asignará a la próxima mesa disponible</p>
                             </div>
                         </div>
@@ -4989,7 +4998,7 @@ add_shortcode( 'vx_4dinner', function (): string {
                                     if ( $cupos === 0 ) continue;
                                 ?>
                                 <option value="<?php echo $d->get_id(); ?>">
-                                    <?php echo esc_html( date_i18n( 'd M', $d->get_fecha() ) . ' · 4Dinner ' . $d->get_ciudad() . ' (' . $cupos . ' cupo' . ( $cupos > 1 ? 's' : '' ) . ')' ); ?>
+                                    <?php echo esc_html( date_i18n( 'd M', $d->get_fecha() ) . ' · Vitrinexo 4Dinner ' . $d->get_ciudad() . ' (' . $cupos . ' cupo' . ( $cupos > 1 ? 's' : '' ) . ')' ); ?>
                                 </option>
                                 <?php endforeach; ?>
                             </select>
@@ -5114,7 +5123,7 @@ add_shortcode( 'vx_comunidad', function ( $atts ): string {
     // Acceso restringido: solo miembros de la comunidad (o administradores) pueden verla,
     // aunque tengan el enlace directo.
     if ( ! $is_member && ! current_user_can( 'manage_options' ) ) {
-        $com_label = [ 'out2b' => 'LGBTQ+', 'woman' => 'Woman', 'senior' => 'Senior' ][ $slug ] ?? '';
+        $com_label = [ 'out2b' => 'Vitrinexo LGBTQ+', 'woman' => 'Vitrinexo Woman', 'senior' => 'Vitrinexo Senior' ][ $slug ] ?? '';
         ob_start();
         ?>
         <div class="container py-5" style="max-width:560px">
@@ -5284,7 +5293,7 @@ add_shortcode( 'vx_mis_eventos', function (): string {
                             <i class="ti ti-tools-kitchen-2 me-1"></i> Historial
                         </span>
                     </div>
-                    <h1 class="page-header-vx__title">Mis 4Dinners</h1>
+                    <h1 class="page-header-vx__title">Mis cenas</h1>
                     <p class="page-header-vx__lead">Cenas de networking en las que participaste</p>
                 </div>
                 <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>" class="btn-vx btn-vx-sm btn-4dinner-ghost">
@@ -5321,7 +5330,7 @@ add_shortcode( 'vx_mis_eventos', function (): string {
     <div class="mb-5">
         <div class="d-flex align-items-center gap-2 mb-3">
             <span class="subsection-label">Confirmado</span>
-            <h2 class="subsection-title mb-0">Tu próximo 4Dinner</h2>
+            <h2 class="subsection-title mb-0">Tu próximo Vitrinexo 4Dinner</h2>
             <?php if ( $pd_dias === 0 ) : ?>
             <span class="badge-vx badge-4dinner-light" style="font-size:11px;font-weight:700">¡Es hoy!</span>
             <?php elseif ( $pd_dias === 1 ) : ?>
@@ -5343,7 +5352,7 @@ add_shortcode( 'vx_mis_eventos', function (): string {
                             <?php endif; ?>
                         </div>
                         <h3 style="margin:0;font-size:1.25rem;font-weight:700;color:var(--color-text-primary)">
-                            4Dinner <?php echo esc_html( $pd_ciudad ); ?>
+                            Vitrinexo 4Dinner <?php echo esc_html( $pd_ciudad ); ?>
                         </h3>
                     </div>
                     <!-- Fecha destacada -->
@@ -5461,12 +5470,12 @@ add_shortcode( 'vx_mis_eventos', function (): string {
     <?php if ( empty( $mis_dinners ) && ! $proximo_dinner ) : ?>
         <div class="empty-state-vx py-5 text-center">
             <div class="empty-state-vx__icon"><i class="ti ti-bowl"></i></div>
-            <p class="empty-state-vx__title">Aún no has asistido a ningún 4Dinner</p>
+            <p class="empty-state-vx__title">Aún no has asistido a ningún Vitrinexo 4Dinner</p>
             <p class="empty-state-vx__desc">Cuando confirmes tu asistencia y la cena se marque como realizada, aparecerá aquí junto a tus compañeros de mesa.</p>
-            <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>" class="btn-vx btn-primary-vx btn-vx-sm mt-3">Ver próximos 4Dinners</a>
+            <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>" class="btn-vx btn-primary-vx btn-vx-sm mt-3">Ver próximas cenas</a>
         </div>
     <?php elseif ( empty( $mis_dinners ) && $proximo_dinner ) : ?>
-        <p class="text-sm-muted" style="font-size:13px;padding:.5rem 0">Cuando asistas a tu primer 4Dinner y el equipo lo marque como realizado, aparecerá aquí.</p>
+        <p class="text-sm-muted" style="font-size:13px;padding:.5rem 0">Cuando asistas a tu primer Vitrinexo 4Dinner y el equipo lo marque como realizado, aparecerá aquí.</p>
     <?php else : ?>
         <div class="row g-4">
         <?php foreach ( $mis_dinners as $dinner ) :

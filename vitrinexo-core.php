@@ -885,8 +885,8 @@ function vx_admin_validaciones_page(): void {
     $mensajes = [
         'cuenta_aprobada'  => [ 'success', 'Cuenta aprobada. El usuario recibirá un email para activarla.' ],
         'cuenta_rechazada' => [ 'warning', 'Cuenta rechazada.' ],
-        'senior_aprobado'  => [ 'success', 'Distintivo Senior activado. El usuario recibió un email de confirmación.' ],
-        'senior_rechazado' => [ 'warning', 'Solicitud Senior rechazada.' ],
+        'senior_aprobado'  => [ 'success', 'Distintivo de Vitrinexo Senior activado. El usuario recibió un email de confirmación.' ],
+        'senior_rechazado' => [ 'warning', 'Solicitud de Vitrinexo Senior rechazada.' ],
     ];
     $ok = sanitize_key( $_GET['vx_ok'] ?? '' );
 
@@ -1075,17 +1075,17 @@ function vx_admin_validaciones_page(): void {
     ?>
     <div class="vx-val-section">
         <div class="vx-val-section-head">
-            <h2>Solicitudes de verificación Senior</h2>
+            <h2>Solicitudes de verificación de Vitrinexo Senior</h2>
             <?php if ( $senior_reqs ) : ?>
             <span class="vx-val-badge"><?php echo count( $senior_reqs ); ?></span>
             <?php else : ?>
             <span class="vx-val-badge vx-val-badge--ok"><span class="dashicons dashicons-yes" aria-hidden="true"></span></span>
             <?php endif; ?>
-            <span style="color:#5C5F6B;font-size:12px;margin-left:auto">Miembros que solicitaron verificación de su trayectoria Senior (ya aparecen en la comunidad; la verificación agrega el distintivo)</span>
+            <span style="color:#5C5F6B;font-size:12px;margin-left:auto">Miembros que solicitaron verificación de su trayectoria senior (ya aparecen en la comunidad; la verificación agrega el distintivo)</span>
         </div>
 
         <?php if ( empty( $senior_reqs ) ) : ?>
-        <p class="vx-val-empty">No hay solicitudes Senior pendientes.</p>
+        <p class="vx-val-empty">No hay solicitudes de Vitrinexo Senior pendientes.</p>
         <?php else : ?>
         <table class="vx-val-table">
             <thead>
@@ -1119,7 +1119,7 @@ function vx_admin_validaciones_page(): void {
             <tr>
                 <td>
                     <div class="vx-val-name"><?php echo esc_html( $nombre ?: '(sin nombre)' ); ?></div>
-                    <span class="vx-val-tipo vx-val-tipo--senior" style="margin-top:4px;display:inline-block">Senior</span>
+                    <span class="vx-val-tipo vx-val-tipo--senior" style="margin-top:4px;display:inline-block">Vitrinexo Senior</span>
                 </td>
                 <td>
                     <div><?php echo esc_html( $wp_user->user_email ); ?></div>
@@ -1130,12 +1130,12 @@ function vx_admin_validaciones_page(): void {
                     <div class="vx-val-actions">
                         <a href="<?php echo esc_url( $url_aprobar ); ?>"
                            class="vx-val-btn-approve"
-                           onclick="return confirm('¿Aprobar distintivo Senior para <?php echo esc_js( $nombre ?: $wp_user->user_email ); ?>?')">
-                            Aprobar Senior
+                           onclick="return confirm('¿Aprobar el distintivo de Vitrinexo Senior para <?php echo esc_js( $nombre ?: $wp_user->user_email ); ?>?')">
+                            Aprobar Vitrinexo Senior
                         </a>
                         <a href="<?php echo esc_url( $url_rechazar ); ?>"
                            class="vx-val-btn-reject"
-                           onclick="return confirm('¿Rechazar la solicitud Senior de <?php echo esc_js( $nombre ?: $wp_user->user_email ); ?>?')">
+                           onclick="return confirm('¿Rechazar la solicitud de Vitrinexo Senior de <?php echo esc_js( $nombre ?: $wp_user->user_email ); ?>?')">
                             Rechazar
                         </a>
                         <?php if ( $perfil_url ) : ?>
@@ -1454,11 +1454,11 @@ function vx_create_pages(): void {
         'ayuda'                    => [ 'title' => 'Ayuda',                      'shortcode' => '[vx_ayuda]' ],
         'blog-nuevo'               => [ 'title' => 'Escribir artículo',          'shortcode' => '[vx_blog_nuevo]' ],
         'blog-moderacion'          => [ 'title' => 'Moderación del blog',        'shortcode' => '[vx_blog_moderacion]' ],
-        'landing-4dinner'           => [ 'title' => '4Dinner: Sobre el evento',   'shortcode' => '[vx_landing_4dinner]' ],
-        '4dinner'                  => [ 'title' => '4Dinner',                    'shortcode' => '[vx_4dinner]' ],
-        'comunidad-out2b'          => [ 'title' => 'Comunidad LGBTQ+',           'shortcode' => '[vx_comunidad slug="out2b"]' ],
-        'comunidad-woman'          => [ 'title' => 'Comunidad Woman',            'shortcode' => '[vx_comunidad slug="woman"]' ],
-        'comunidad-senior'         => [ 'title' => 'Comunidad Senior',           'shortcode' => '[vx_comunidad slug="senior"]' ],
+        'landing-4dinner'           => [ 'title' => 'Vitrinexo 4Dinner: Sobre el evento', 'shortcode' => '[vx_landing_4dinner]' ],
+        '4dinner'                  => [ 'title' => 'Vitrinexo 4Dinner',          'shortcode' => '[vx_4dinner]' ],
+        'comunidad-out2b'          => [ 'title' => 'Vitrinexo LGBTQ+',           'shortcode' => '[vx_comunidad slug="out2b"]' ],
+        'comunidad-woman'          => [ 'title' => 'Vitrinexo Woman',            'shortcode' => '[vx_comunidad slug="woman"]' ],
+        'comunidad-senior'         => [ 'title' => 'Vitrinexo Senior',           'shortcode' => '[vx_comunidad slug="senior"]' ],
         'mis-eventos'              => [ 'title' => 'Mis eventos',                'shortcode' => '[vx_mis_eventos]' ],
     ];
 

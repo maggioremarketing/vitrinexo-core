@@ -38,7 +38,7 @@ class VX_Admin_Dinner
     {
         if ( empty( $_GET['vx_dinner_conflict'] ) ) return;
         if ( get_post_type() !== 'vx_dinner' ) return;
-        echo '<div class="notice notice-warning is-dismissible"><p><strong>Aviso:</strong> Ya existe otro 4Dinner con estado <em>abierto</em> o <em>confirmado</em> en la misma ciudad. Revisa si deseas mantener ambos activos.</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p><strong>Aviso:</strong> Ya existe otro Vitrinexo 4Dinner con estado <em>abierto</em> o <em>confirmado</em> en la misma ciudad. Revisa si deseas mantener ambos activos.</p></div>';
     }
 
     public static function enqueue_scripts( string $hook ): void
@@ -1056,7 +1056,7 @@ class VX_Admin_Dinner
 
                 VX_Mailer::send(
                     $user->get_email(),
-                    'Tu mesa para el 4Dinner de ' . $dinner->get_ciudad() . ' está lista',
+                    'Tu mesa para el Vitrinexo 4Dinner de ' . $dinner->get_ciudad() . ' está lista',
                     'dinner_mesa_asignada',
                     [
                         'nombre'      => $user->get_nombre(),

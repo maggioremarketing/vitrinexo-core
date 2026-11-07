@@ -4,12 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'init', function () {
     register_post_type( 'vx_dinner', [
         'labels' => [
-            'name'               => 'Eventos 4Dinner',
-            'singular_name'      => '4Dinner',
+            'name'               => 'Cenas Vitrinexo 4Dinner',
+            'singular_name'      => 'Vitrinexo 4Dinner',
             'add_new'            => 'Crear evento',
-            'add_new_item'       => 'Crear nuevo 4Dinner',
-            'edit_item'          => 'Editar 4Dinner',
-            'view_item'          => 'Ver 4Dinner',
+            'add_new_item'       => 'Crear nuevo Vitrinexo 4Dinner',
+            'edit_item'          => 'Editar Vitrinexo 4Dinner',
+            'view_item'          => 'Ver Vitrinexo 4Dinner',
             'search_items'       => 'Buscar eventos',
             'not_found'          => 'No se encontraron eventos',
             'not_found_in_trash' => 'No hay eventos en la papelera',

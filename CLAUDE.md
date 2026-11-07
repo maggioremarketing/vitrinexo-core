@@ -105,10 +105,19 @@ Configurables en Vitrinexo → Planes (`vx_get_planes()`). Defaults: Gratuito, M
 
 ## Comunidades
 
-- **LGBTQ+** — comunidad LGBTQ+
-- **Woman** — mujeres líderes
-- **Senior** — ejecutivos con trayectoria
+Las piezas de la línea **se nombran siempre con la marca madre adelante**, sin excepción y también en
+conversación: se escribe Vitrinexo 4Dinner, nunca 4Dinner a secas. Lo dice el manual en
+`estrategia-linea-de-producto` y lo mide `pruebas/pantalla/vocabulario.mjs` del tema, sobre el texto
+renderizado. En el código los identificadores siguen siendo cortos (`vx_landing_4dinner`,
+`comunidad-card--woman`): la regla es sobre el habla, no sobre los nombres de variable.
+
+- **Vitrinexo LGBTQ+** — comunidad LGBTQ+ en el mundo empresarial
+- **Vitrinexo Woman** — mujeres líderes
+- **Vitrinexo Senior** — ejecutivos con trayectoria
 - **Vitrinexo 4Dinner** — cenas de networking (4 personas, miércoles 20:00 hora local)
+
+Las dos únicas excepciones son las palabras que además son español corriente y ahí nombran a la gente,
+no a la pieza: «ejecutivos senior» (el cargo, en minúscula) y «profesionales LGBTQ+» (las personas).
 
 ## Pendientes
 

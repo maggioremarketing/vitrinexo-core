@@ -237,9 +237,9 @@ class VX_Admin_Users
 
             case 'vx_comunidades':
                 $coms = [];
-                if ( get_user_meta( $user_id, VX_User_Meta::COMUNIDAD_OUT2B, true ) ) $coms[] = 'LGBTQ+';
-                if ( get_user_meta( $user_id, VX_User_Meta::COMUNIDAD_WOMAN,  true ) ) $coms[] = 'Woman';
-                if ( get_user_meta( $user_id, VX_User_Meta::COMUNIDAD_SENIOR, true ) ) $coms[] = 'Senior';
+                if ( get_user_meta( $user_id, VX_User_Meta::COMUNIDAD_OUT2B, true ) ) $coms[] = 'Vitrinexo LGBTQ+';
+                if ( get_user_meta( $user_id, VX_User_Meta::COMUNIDAD_WOMAN,  true ) ) $coms[] = 'Vitrinexo Woman';
+                if ( get_user_meta( $user_id, VX_User_Meta::COMUNIDAD_SENIOR, true ) ) $coms[] = 'Vitrinexo Senior';
                 return $coms ? esc_html( implode( ', ', $coms ) ) : '-';
 
             case 'vx_stat_sol':
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
         );
         echo '<div class="notice notice-info"><p>'
            . '<strong>Vitrinexo:</strong> Estandarizar ciudades de usuarios al listado canónico. '
-           . '<a href="' . esc_url( $url ) . '" class="button button-small" onclick="return confirm(\'¿Normalizar ciudades de todos los miembros? Se intentará mapear valores libres (ej: Providencia · Santiago). Los que no tengan match quedarán sin cambios.\')">Normalizar ciudades ahora</a>'
+           . '<a href="' . esc_url( $url ) . '" class="button button-small" onclick="return confirm(\'¿Normalizar ciudades de todos los miembros? Se intentará mapear valores libres (ej: Providencia · Santiago). Los que no tengan correspondencia quedarán sin cambios.\')">Normalizar ciudades ahora</a>'
            . '</p></div>';
     }
 
@@ -733,7 +733,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Ofrece (texto)', 'Busca (texto)',
             'Offer tags', 'Seek tags', 'Profile tags',
             // Comunidades
-            'Comunidad LGBTQ+', 'Comunidad Woman', 'Comunidad Senior',
+            'Vitrinexo LGBTQ+', 'Vitrinexo Woman', 'Vitrinexo Senior',
             // Estadísticas de conexiones
             'Solicitudes recibidas (histórico)', 'Conexiones efectivas (histórico)',
             // 4Dinner

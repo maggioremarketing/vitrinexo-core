@@ -88,7 +88,7 @@ function vx_rest_comunidad_salir( WP_REST_Request $request ): WP_REST_Response
         return new WP_REST_Response( [
             'success' => false,
             'error'   => 'woman_obligatoria',
-            'message' => 'La comunidad Woman es parte de tu membresía por tu género y no puede desactivarse.',
+            'message' => 'Vitrinexo Woman es parte de tu membresía por tu género y no puede desactivarse.',
         ], 403 );
     }
 
@@ -99,7 +99,7 @@ function vx_rest_comunidad_salir( WP_REST_Request $request ): WP_REST_Response
         return new WP_REST_Response( [
             'success' => false,
             'error'   => 'senior_obligatoria',
-            'message' => 'La comunidad Senior se asigna automáticamente por tu edad o experiencia y no puede desactivarse.',
+            'message' => 'Vitrinexo Senior se asigna automáticamente por tu edad o experiencia y no puede desactivarse.',
         ], 403 );
     }
 

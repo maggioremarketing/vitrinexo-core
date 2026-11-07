@@ -39,7 +39,7 @@ add_shortcode( 'vx_landing', function (): string {
                 $vx_home_links = [
                     [ '/nexos/',    'ti-sparkles',        'Mis nexos',    'Personas que ofrecen lo que buscas y viceversa.' ],
                     [ '/conexiones/', 'ti-users-group',     'Mis conexiones', 'Tu red y las solicitudes pendientes.' ],
-                    [ '/4dinner/',    'ti-tools-kitchen-2', '4Dinner',        'Cenas de networking en tu ciudad.' ],
+                    [ '/4dinner/',    'ti-tools-kitchen-2', 'Vitrinexo 4Dinner', 'Cenas de networking en tu ciudad.' ],
                     [ '/blog/',       'ti-news',            'Blog',           'Ideas y casos B2B de la comunidad.' ],
                 ];
                 foreach ( $vx_home_links as $vx_hl ) : ?>
@@ -88,8 +88,8 @@ add_shortcode( 'vx_landing', function (): string {
     <section class="section-landing" id="el-problema">
         <div class="container">
             <div class="section-landing-head">
-                <span class="section-landing-label">Para hacer negocios, hay que ir a todos los eventos</span>
-                <h2 class="section-landing-title">Mucho evento, <strong>poco nexo.</strong></h2>
+                <p class="vx-mito"><s><span class="vx-solo-lectores">Mito: </span>Para hacer negocios, hay que ir a todos los eventos.</s></p>
+                <h2 class="section-landing-title">Mucho evento, <strong><mark>poco nexo.</mark></strong></h2>
             </div>
             <div class="problem-grid">
                 <div class="step-card">
@@ -123,7 +123,7 @@ add_shortcode( 'vx_landing', function (): string {
     <section class="section-landing" id="comunidades">
         <div class="container">
             <div class="section-landing-head">
-                <span class="section-landing-label">Una plataforma, cinco mesas</span>
+                <span class="section-landing-label">Una plataforma, cuatro mesas</span>
                 <h2 class="section-landing-title">Elige dónde <strong>sentarte.</strong></h2>
             </div>
             <div class="multiverse-grid">
@@ -151,18 +151,23 @@ add_shortcode( 'vx_landing', function (): string {
                     <p class="multiverse-card__desc">Ejecutivos con trayectoria. Su recorrido es la ventaja que traen a la mesa.</p>
                     <p class="vx-mesa-nexo"><span>Se conectan por</span> Experiencia y criterio</p>
                 </div>
-                <div class="multiverse-card multiverse-card--dinner" id="for-dinner">
-                    <span class="multiverse-card__label">En persona</span>
-                    <h3 class="multiverse-card__title">Vitrinexo <em>4Dinner</em></h3>
-                    <p class="multiverse-card__desc">Cuatro personas, una mesa. Vitrinexo arma cada mesa para conversar de trabajo, los miércoles a las 20:00 hora local.</p>
-                    <p class="vx-mesa-nexo"><span>Se conectan por</span> Conversación cara a cara</p>
-                </div>
             </div>
-            <p class="vx-mesas-pie">Woman, LGBTQ+ y Senior son comunidades dentro de <span class="vx-name-regular">Vitrinexo</span>. Un miembro puede estar en varias.</p>
+            <p class="vx-mesas-pie">Vitrinexo Woman, Vitrinexo LGBTQ+ y Vitrinexo Senior son comunidades del mismo directorio. Un miembro puede estar en varias.</p>
+        </div>
+    </section>
 
+    <!-- ── La experiencia presencial ── -->
+    <section class="section-landing" id="for-dinner">
+        <div class="container">
+            <div class="section-landing-head">
+                <span class="section-landing-label">La experiencia presencial</span>
+                <h2 class="section-landing-title">Cuatro personas, <strong>una mesa.</strong></h2>
+                <p class="section-landing-lead"><span class="vx-name-regular">Vitrinexo</span> <em>4Dinner</em> arma la mesa y reúne a los cuatro invitados para conversar de trabajo, los miércoles a las 20:00 hora local. Cada uno paga su consumo; sentarse a la mesa no cuesta nada.</p>
+            </div>
             <div class="vx-nocturna-banner">
                 <img class="vx-nocturna-banner__img" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/6-La-experiencia presencial-EP-2-nocturna.jpeg" alt="Cuatro personas cenando en una terraza de noche, con velas sobre la mesa." />
             </div>
+            <p class="vx-dinner-pie"><a class="btn-vx btn-ghost-vx" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">Cómo funciona la cena</a></p>
         </div>
     </section>
 
@@ -218,7 +223,7 @@ add_shortcode( 'vx_landing', function (): string {
                     <div class="step-card__num">03</div>
                     <div class="step-card__icon"><i class="ti ti-heart-handshake"></i></div>
                     <h3 class="step-card__title">Siéntate a la mesa</h3>
-                    <p class="step-card__desc">Escribe directo o súmate a una cena 4Dinner: <span class="vx-name-regular">Vitrinexo</span> la organiza y arma cada mesa para reunir a los invitados ideales.</p>
+                    <p class="step-card__desc">Escribe directo o súmate a una cena de <span class="vx-name-regular">Vitrinexo</span> 4Dinner: la organizamos y armamos cada mesa para reunir a los invitados ideales.</p>
                 </div>
             </div>
         </div>
@@ -595,7 +600,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
         </div>
         <div class="col-12 col-lg-7">
           <div class="row g-3">
-            <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Conexiones que perduran</div><p class="text-body-muted mb-0">Una cena de 4Dinner genera más conexiones de valor que una tarde entera en un evento masivo.</p></div></div>
+            <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Conexiones que perduran</div><p class="text-body-muted mb-0">Una cena de Vitrinexo 4Dinner genera más conexiones de valor que una tarde entera en un evento masivo.</p></div></div>
             <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Continental y local</div><p class="text-body-muted mb-0">Simultáneo en 18+ ciudades. Lo que pasa en Santiago pasa también en Bogotá, Lima y México.</p></div></div>
             <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Solo verificados</div><p class="text-body-muted mb-0">No hay sorpresas. Todos los comensales tienen ficha verificada en <span class="vx-name">Vitrinexo</span>.</p></div></div>
             <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Sin costo de acceso</div><p class="text-body-muted mb-0">Cada persona paga su consumo. <span class="vx-name">Vitrinexo</span> coordina la mesa, gratis.</p></div></div>
@@ -620,8 +625,8 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
           <div class="col-12 col-md-6 col-lg-3">
             <div class="card-vx text-center h-100">
               <div class="step-circle step-circle--cyan">2</div>
-              <div class="card-title-sm">Activa 4Dinner</div>
-              <p class="text-sm-muted mb-0" style="line-height:1.6">Desde tu perfil, activa la comunidad 4Dinner e indica tu ciudad y disponibilidad.</p>
+              <div class="card-title-sm">Activa Vitrinexo 4Dinner</div>
+              <p class="text-sm-muted mb-0" style="line-height:1.6">Desde tu perfil, activa Vitrinexo 4Dinner e indica tu ciudad y disponibilidad.</p>
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-3">
@@ -687,7 +692,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
       <!-- CTA FINAL -->
       <div class="text-center py-5">
         <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;letter-spacing:var(--ls-h2);margin-bottom:1rem">¿Listo para tu primera cena?</h2>
-        <p class="text-lead-muted mb-4">Crea tu cuenta en <span class="vx-name">Vitrinexo</span>, activa 4Dinner en tu perfil y el equipo te asigna a la próxima mesa disponible en tu ciudad.</p>
+        <p class="text-lead-muted mb-4">Crea tu cuenta en <span class="vx-name">Vitrinexo</span>, activa Vitrinexo 4Dinner en tu perfil y el equipo te asigna a la próxima mesa disponible en tu ciudad.</p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           <a href="<?php echo esc_url( $registro_url ); ?>" class="btn-vx btn-primary-vx btn-vx-lg">
             <i class="ti ti-user-plus me-1"></i>Crear mi cuenta gratis

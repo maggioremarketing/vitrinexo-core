@@ -75,7 +75,7 @@ class VX_Senior_Verification
 
         VX_Mailer::send(
             $admin_email,
-            '[Vitrinexo] Solicitud de verificación Senior',
+            '[Vitrinexo] Solicitud de verificación para Vitrinexo Senior',
             'admin_senior_request',
             [
                 'nombre_completo' => $user->get_nombre_completo(),

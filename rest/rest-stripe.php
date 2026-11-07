@@ -69,7 +69,7 @@ function vx_get_planes_config(): array {
             'moneda'      => $moneda,
             'intervalo'   => 'mes',
             'stripe_price_id' => get_option( 'vx_stripe_price_mensual', '' ),  // Stripe Price ID
-            'descripcion' => 'Acceso completo al directorio, matches, conexiones y 4Dinner.',
+            'descripcion' => 'Acceso completo al directorio, nexos, conexiones y Vitrinexo 4Dinner.',
         ],
         'anual' => [
             'id'          => 'anual',

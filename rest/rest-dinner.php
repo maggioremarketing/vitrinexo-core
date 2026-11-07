@@ -125,7 +125,7 @@ function vx_rest_dinner_interes_agregar( WP_REST_Request $request ): WP_REST_Res
     if ( $user_obj ) {
         VX_Mailer::send(
             $user_obj->get_email(),
-            'Tu interés en el 4Dinner de ' . $dinner->get_ciudad() . ' fue registrado',
+            'Tu interés en el Vitrinexo 4Dinner de ' . $dinner->get_ciudad() . ' fue registrado',
             'dinner_interes',
             [
                 'nombre' => $user_obj->get_nombre(),
