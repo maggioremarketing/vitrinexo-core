@@ -282,7 +282,7 @@ add_shortcode( 'vx_landing', function (): string {
                                 <label class="form-label-vx">Contraseña *</label>
                                 <div style="position:relative">
                                     <input type="password" class="form-control-vx" name="password" required autocomplete="new-password" id="founderPassword" style="padding-right:40px" />
-                                    <button type="button" id="founderPwdToggle" tabindex="-1" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);display:flex;align-items:center;justify-content:center;width:44px;height:44px">
+                                    <button type="button" id="founderPwdToggle" class="vx-pass-eye" tabindex="-1" style="position:absolute;right:2px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted)">
                                         <i class="ti ti-eye" id="founderPwdIcon" style="font-size:16px"></i>
                                     </button>
                                 </div>

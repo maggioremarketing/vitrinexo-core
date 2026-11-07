@@ -2631,7 +2631,7 @@ add_shortcode( 'vx_configuracion', function (): string {
                   <div class="input-group-vx" style="position:relative">
                     <span class="input-icon"><i class="ti ti-lock"></i></span>
                     <input type="password" id="vx-pass-actual" placeholder="Tu contraseña actual" style="padding-right:38px">
-                    <button type="button" class="vx-pass-eye" data-target="vx-pass-actual" tabindex="-1" aria-label="Mostrar u ocultar contraseña" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);padding:4px"><i class="ti ti-eye"></i></button>
+                    <button type="button" class="vx-pass-eye" data-target="vx-pass-actual" tabindex="-1" aria-label="Mostrar u ocultar contraseña" style="position:absolute;right:2px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted)"><i class="ti ti-eye"></i></button>
                   </div>
                 </div>
                 <div>
@@ -2639,7 +2639,7 @@ add_shortcode( 'vx_configuracion', function (): string {
                   <div class="input-group-vx" style="position:relative">
                     <span class="input-icon"><i class="ti ti-lock-plus"></i></span>
                     <input type="password" id="vx-pass-nuevo" placeholder="Mínimo 8 caracteres" style="padding-right:38px">
-                    <button type="button" class="vx-pass-eye" data-target="vx-pass-nuevo" tabindex="-1" aria-label="Mostrar u ocultar contraseña" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);padding:4px"><i class="ti ti-eye"></i></button>
+                    <button type="button" class="vx-pass-eye" data-target="vx-pass-nuevo" tabindex="-1" aria-label="Mostrar u ocultar contraseña" style="position:absolute;right:2px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted)"><i class="ti ti-eye"></i></button>
                   </div>
                 </div>
               </div>

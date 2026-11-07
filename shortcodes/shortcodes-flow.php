@@ -55,7 +55,7 @@ add_shortcode( 'vx_login', function (): string {
                             </label>
                             <div style="position:relative">
                                 <input type="password" id="login-password" name="password" class="vx-form__input" required autocomplete="current-password" style="padding-right:40px">
-                                <button type="button" id="login-pwd-toggle" tabindex="-1" aria-label="Mostrar u ocultar contraseña" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);padding:4px">
+                                <button type="button" id="login-pwd-toggle" class="vx-pass-eye" tabindex="-1" aria-label="Mostrar u ocultar contraseña" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);padding:4px">
                                     <i class="ti ti-eye" id="login-pwd-icon" style="font-size:16px"></i>
                                 </button>
                             </div>
