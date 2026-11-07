@@ -129,7 +129,7 @@ add_shortcode( 'vx_onboarding', function (): string {
           <img src="<?php echo esc_url( $foto_url ); ?>" alt="Tu foto" id="foto-preview" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
           <?php else : ?>
           <i class="ti ti-user ob-logo-placeholder" id="foto-icon"></i>
-          <img src="" alt="Tu foto" id="foto-preview" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:inherit">
+          <img alt="Tu foto" id="foto-preview" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:inherit">
           <?php endif; ?>
           <div class="logo-upload-overlay"><i class="ti ti-camera"></i></div>
         </div>
@@ -3964,7 +3964,7 @@ add_shortcode( 'vx_editor_perfil', function (): string {
               <label class="form-label-vx mb-2">Logo de empresa</label>
               <div class="d-flex align-items-center gap-3">
                 <div class="logo-upload-zone" onclick="document.getElementById('vx-new-logo-input').click()">
-                  <img src="" alt="Logo" id="vx-new-logo-img" style="display:none">
+                  <img alt="Logo" id="vx-new-logo-img" style="display:none">
                   <div id="vx-new-logo-placeholder"
                        style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-text-tertiary)">
                     <i class="ti ti-building" style="font-size:24px"></i>
