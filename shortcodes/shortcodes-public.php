@@ -601,7 +601,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
         <div class="col-12 col-lg-7">
           <div class="row g-3">
             <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Conexiones que perduran</div><p class="text-body-muted mb-0">Una cena de Vitrinexo 4Dinner genera más conexiones de valor que una tarde entera en un evento masivo.</p></div></div>
-            <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Continental y local</div><p class="text-body-muted mb-0">Simultáneo en 18+ ciudades. Lo que pasa en Santiago pasa también en Bogotá, Lima y México.</p></div></div>
+            <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Siempre en tu ciudad</div><p class="text-body-muted mb-0">Cada miércoles hay mesas en más de 18 ciudades, de Santiago a Ciudad de México. Te sientas en la tuya.</p></div></div>
             <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Solo verificados</div><p class="text-body-muted mb-0">No hay sorpresas. Todos los comensales tienen ficha verificada en <span class="vx-name">Vitrinexo</span>.</p></div></div>
             <div class="col-6"><div class="card-vx h-100"><div class="card-title-sm">Sin costo de acceso</div><p class="text-body-muted mb-0">Cada persona paga su consumo. <span class="vx-name">Vitrinexo</span> coordina la mesa, gratis.</p></div></div>
           </div>
@@ -744,7 +744,7 @@ add_shortcode( 'vx_blog', function (): string {
                         <span class="section-landing-label" style="margin:0">Blog</span>
                     </div>
                     <h1 class="page-header-vx__title">Ideas, tendencias y<br><strong>casos B2B</strong></h1>
-                    <p class="page-header-vx__lead">Ensayos, entrevistas y data sobre el ecosistema de servicios B2B en Hispanoamérica.</p>
+                    <p class="page-header-vx__lead">Ensayos, entrevistas y datos sobre los servicios B2B y quienes los venden.</p>
                 </div>
                 <div class="d-flex gap-2 flex-wrap">
                     <?php if ( is_user_logged_in() ) : ?>
@@ -761,7 +761,7 @@ add_shortcode( 'vx_blog', function (): string {
         <div class="empty-state-vx">
             <i class="ti ti-article-off empty-state-vx__icon"></i>
             <h2 class="empty-state-vx__title">Aún no hay artículos</h2>
-            <p class="empty-state-vx__desc">Pronto publicaremos ensayos, entrevistas y data sobre el ecosistema B2B de Hispanoamérica.</p>
+            <p class="empty-state-vx__desc">Pronto publicaremos ensayos, entrevistas y datos sobre los servicios B2B y quienes los venden.</p>
         </div>
     </div>
     <?php
@@ -800,7 +800,7 @@ add_shortcode( 'vx_blog', function (): string {
                         <span class="section-landing-label" style="margin:0">Blog</span>
                     </div>
                     <h1 class="page-header-vx__title">Ideas, tendencias y<br><strong>casos B2B</strong></h1>
-                    <p class="page-header-vx__lead">Ensayos, entrevistas y data sobre el ecosistema de servicios B2B en Hispanoamérica.</p>
+                    <p class="page-header-vx__lead">Ensayos, entrevistas y datos sobre los servicios B2B y quienes los venden.</p>
                 </div>
                 <div class="d-flex gap-2 flex-wrap">
                     <?php if ( is_user_logged_in() ) : ?>

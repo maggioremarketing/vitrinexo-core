@@ -36,6 +36,23 @@ const VX_VOZ_PROHIBIDAS = [
     [ '/\bsos\s+(un|una|el|la|miembro)\b/iu', 'se trata de tu: «eres», nunca «sos»' ],
     [ '/\bplataforma\s+(latinoamericana|latina)\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
     [ '/\b(red|directorio|comunidad)\s+latinoamericana\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
+
+    // Las dos de arriba piden un sustantivo al lado y estas no, a proposito.
+    // «latinoamericano» es español corriente y describe a una persona o a una
+    // empresa sin decir nada de la marca, asi que prohibirlo entero marcaria
+    // en rojo la ficha de un miembro. «Hispanoamerica» y «continental» no:
+    // en este producto no aparecen nunca para otra cosa que para decir de
+    // que region es Vitrinexo, que es justo lo que no se dice.
+    //
+    // Las tres veces que se escribieron lo confirman. La landing del evento
+    // decia que la cena es «en una ciudad de Hispanoamerica», su tarjeta se
+    // titulaba «Continental y local», y el blog hablaba del «ecosistema de
+    // servicios B2B en Hispanoamerica». Ninguna prueba vio una sola: las dos
+    // del blog ademas llevaban «ecosistema», que si estaba prohibida desde el
+    // principio, y siguieron en produccion porque /blog/ no era una ruta que
+    // alguien abriera.
+    [ '/\bhispanoam[eé]rica(nas?|nos?)?\b/iu', 'no se dice que la marca sea de una region: se dice donde hay comunidad hoy' ],
+    [ '/\bcontinental(es)?\b/iu', 'no se dice que la marca sea de una region: se dice en que ciudades hay mesa hoy' ],
 ];
 
 /** Las piezas de la linea, que nunca se nombran sin la marca madre adelante. */

@@ -5155,7 +5155,7 @@ add_shortcode( 'vx_comunidad', function ( $atts ): string {
         ],
         'woman'  => [
             'titulo'      => 'Vitrinexo Woman',
-            'descripcion' => 'Comunidad de empresarias y directivas hispanoamericanas. Un espacio de apoyo, colaboración y crecimiento para mujeres líderes en el mundo empresarial.',
+            'descripcion' => 'Comunidad de empresarias y directivas de habla hispana. Un espacio de apoyo, colaboración y crecimiento para mujeres líderes en el mundo empresarial.',
             'label'       => 'Comunidad vertical',
         ],
         'senior' => [
