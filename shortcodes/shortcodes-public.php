@@ -544,7 +544,7 @@ add_shortcode( 'vx_landing_4dinner', function (): string {
               4 personas.<br>1 mesa.<br><em style="font-style:italic">1 conversación real.</em>
             </h1>
             <p style="font-size:1rem;color:var(--color-text-primary);line-height:1.7;max-width:480px;margin-bottom:2rem">
-              Cada miércoles a las 20:00, cuatro miembros de Vitrinexo se sientan a cenar en una ciudad de Hispanoamérica. Sin agenda formal, sin pitches. Solo personas que ya se conocen por sus fichas y quieren dar el paso a lo presencial.
+              Cada miércoles a las 20:00, cuatro miembros de Vitrinexo se sientan a cenar en su ciudad. Sin agenda formal, sin pitches. Solo personas que ya se conocen por sus fichas y quieren dar el paso a lo presencial.
             </p>
             <div class="d-flex gap-3 flex-wrap">
               <a href="<?php echo esc_url( $registro_url ); ?>" class="btn-vx btn-vx-lg btn-4dinner-cta">
