@@ -353,7 +353,13 @@ add_shortcode( 'vx_nueva_contrasena', function (): string {
     if ( is_wp_error( $result ) ) {
         ?>
         <div class="container-sm py-5 text-center">
-            <div class="vx-alert vx-alert--error">El enlace de recuperación es inválido o ha expirado. <a href="<?php echo esc_url( home_url( '/recuperar-contrasena/' ) ); ?>">Solicitar uno nuevo</a>.</div>
+            <?php /* La salida iba como enlace suelto dentro de la frase, y medía
+               111x19,5 donde la regla pide 44x44. Un enlace metido en un texto
+               corrido no se puede agrandar sin romper el renglón, así que la
+               acción sale del párrafo y se vuelve lo que era: el botón que
+               saca a esta persona del callejón. */ ?>
+            <div class="vx-alert vx-alert--error">El enlace de recuperación es inválido o ha expirado.</div>
+            <a href="<?php echo esc_url( home_url( '/recuperar-contrasena/' ) ); ?>" class="btn-vx btn-primary-vx mt-3">Solicitar uno nuevo</a>
         </div>
         <?php
     } else {
