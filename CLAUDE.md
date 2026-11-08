@@ -60,6 +60,22 @@ tema, y eso solo puede hacerlo con el tema presente. **Si el tema repinta, el de
 hasta que la copia de `pruebas-colores.mjs` se ponga al día**: es a propósito, una copia que se
 desincroniza en silencio deja pasar colores que ya no existen.
 
+**Los dos repos se clonan entre sí, así que el orden de los dos despliegues importa.** El CI del
+tema clona `vitrinexo-core` para levantar el banco, y el del plugin clona `vitrinexo-theme` para
+la paleta y las pruebas de pantalla. Ninguno de los dos clonados fija un `ref`, así que cada uno
+mide el `main` del otro tal como esté en el momento del run.
+
+Por eso, cuando un cambio toca los dos repos, **se empuja primero el repo cuyas pruebas no
+necesitan el código nuevo del otro, y se espera su verde**. Casi siempre es el plugin, porque el
+copy vive acá y el tema solo necesita el plugin para levantar el banco; pero eso es la costumbre,
+no la regla. Si el cambio del plugin necesitara código nuevo del tema, empujar el plugin primero
+lo pondría rojo por el mismo mecanismo, al revés. Y si los dos se necesitan, el primero sale rojo
+vaya cual vaya: se empuja el segundo y se relanza el run del primero, que vuelve a clonar.
+
+Mordió dos veces el 7 de noviembre de 2026, las dos en el mismo sentido: el tema empujado antes
+midió el plugin sin corregir y salió rojo por copy que ya estaba arreglado. Relanzar a ciegas no
+es el arreglo, porque sin el segundo push vuelve a clonar lo mismo.
+
 ```yaml
 # Secrets requeridos en el repo
 SSH_HOST: 195.200.3.42
