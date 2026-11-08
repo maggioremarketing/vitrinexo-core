@@ -1456,9 +1456,16 @@ function vx_create_pages(): void {
         'onboarding'               => [ 'title' => 'Completa tu perfil',         'shortcode' => '[vx_onboarding]' ],
         'dashboard'                => [ 'title' => 'Dashboard',                  'shortcode' => '[vx_dashboard]' ],
         'directorio'               => [ 'title' => 'Directorio',                 'shortcode' => '[vx_directorio]' ],
-        'matches'                  => [ 'title' => 'Mis nexos',                'shortcode' => '[vx_matches]' ],
-        'match-seeks'              => [ 'title' => 'Ofrecen lo que buscas',      'shortcode' => '[vx_match_seeks]' ],
-        'match-offers'             => [ 'title' => 'Buscan lo que ofreces',      'shortcode' => '[vx_match_offers]' ],
+        /* Las tres de nexos NO van acá. Se sirven desde el código del tema con
+           reglas de reescritura (inc/nexos.php), a propósito: así el nombre no
+           depende de que nadie renombre un slug en el escritorio. Esta lista
+           las creaba con sus nombres viejos —matches, match-seeks,
+           match-offers— que son palabra prohibida por el manual, y lo único
+           que hacían era existir para que el tema redirigiera desde ellas. En
+           una instalación nueva eso son tres páginas que nacen muertas.
+           El redirect del tema no las necesita: corre en template_redirect
+           comparando la ruta pedida, así que funciona aunque la página no
+           exista. */
         'perfil'                   => [ 'title' => 'Perfil',                     'shortcode' => '[vx_perfil]' ],
         'editar-perfil'            => [ 'title' => 'Editar perfil',              'shortcode' => '[vx_editor_perfil]' ],
         'favoritos'                => [ 'title' => 'Mis favoritos',              'shortcode' => '[vx_favoritos]' ],
@@ -1476,6 +1483,22 @@ function vx_create_pages(): void {
         'comunidad-woman'          => [ 'title' => 'Vitrinexo Woman',            'shortcode' => '[vx_comunidad slug="woman"]' ],
         'comunidad-senior'         => [ 'title' => 'Vitrinexo Senior',           'shortcode' => '[vx_comunidad slug="senior"]' ],
         'mis-eventos'              => [ 'title' => 'Mis eventos',                'shortcode' => '[vx_mis_eventos]' ],
+        /* Estas tres existen en producción desde hace tiempo y faltaban acá, o
+           sea que una instalación nueva nacía sin ellas: sin la pantalla de
+           oportunidades, sin las publicaciones propias y sin las preguntas
+           frecuentes. Los títulos son los que sirve producción hoy, para que
+           agregarlas no renombre nada. Sus plantillas llaman al shortcode
+           directamente e ignoran el contenido de la página, así que escribirlo
+           acá no pisa nada que alguien haya editado. */
+        'oportunidades'            => [ 'title' => 'Oportunidades',              'shortcode' => '[vx_feed]' ],
+        'mis-publicaciones'        => [ 'title' => 'Mis publicaciones',          'shortcode' => '[vx_mis_publicaciones]' ],
+        'preguntas-frecuentes'     => [ 'title' => 'Preguntas frecuentes',       'shortcode' => '[vx_faq]' ],
+        /* Y tres que tampoco van, para que nadie las agregue de buena fe:
+           «blog» es la página de entradas de WordPress y se configura en
+           Ajustes, no se crea acá; «privacidad» y «terminos» llevan texto
+           escrito a mano en el escritorio, y como el bloque de abajo sobrescribe
+           el contenido de toda página de esta lista, agregarlas significaría
+           borrar los dos documentos legales en el próximo cambio de versión. */
     ];
 
     // Eliminar la página mi-4dinner si existe (fue renombrada a 4dinner)
