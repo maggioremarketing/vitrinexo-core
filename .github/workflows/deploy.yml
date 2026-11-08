@@ -35,6 +35,7 @@ jobs:
           php pruebas-correos.php
           php pruebas-estados-vacios.php
           php pruebas-admin.php
+          php pruebas-redirecciones.php
 
       - name: Clonar el tema al lado
         # El banco vive en el tema y necesita a los dos. Acá no hay condición:

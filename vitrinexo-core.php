@@ -105,6 +105,9 @@ $vx_modules = [
     'rest/rest-blog.php',
     'rest/rest-profile-proposal.php',
 
+    // SEO
+    'modules/seo/class-vx-redirecciones.php',
+
     // Admin
     'modules/admin/class-vx-admin-emails.php',
     'modules/admin/class-vx-admin-users.php',
@@ -132,6 +135,7 @@ $vx_modules = [
     'migraciones/2026-11-07-pioneros-sin-vencimiento.php',
     'migraciones/2026-11-07-faq-periodo-gratuito.php',
     'migraciones/2026-11-07-faq-despues-del-programa.php',
+    'migraciones/2026-11-07-paginas-sobrantes.php',
 ];
 
 foreach ( $vx_modules as $file ) {
