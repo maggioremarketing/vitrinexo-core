@@ -105,6 +105,9 @@ $vx_modules = [
     'rest/rest-blog.php',
     'rest/rest-profile-proposal.php',
 
+    // Pagos
+    'modules/pagos/class-vx-stripe.php',
+
     // SEO
     'modules/seo/class-vx-redirecciones.php',
 
@@ -458,13 +461,11 @@ function vx_admin_stripe_manual_page(): void {
     <h3>Contenido</h3>
     <ol>
       <li><a href="#paso1">Crear cuenta y proyecto en Stripe</a></li>
-      <li><a href="#paso2">Crear los 3 productos y precios</a></li>
+      <li><a href="#paso2">Crear los 2 productos y precios</a></li>
       <li><a href="#paso3">Configurar el webhook</a></li>
-      <li><a href="#paso4">Instalar el SDK de Stripe en el servidor</a></li>
-      <li><a href="#paso5">Activar el código en Vitrinexo</a></li>
-      <li><a href="#paso6">Llenar las claves en el admin</a></li>
-      <li><a href="#paso7">Probar con modo Test</a></li>
-      <li><a href="#paso8">Pasar a producción (live)</a></li>
+      <li><a href="#paso4">Llenar las claves en el admin</a></li>
+      <li><a href="#paso5">Probar con modo Test</a></li>
+      <li><a href="#paso6">Pasar a producción (live)</a></li>
       <li><a href="#checklist">Checklist final</a></li>
     </ol>
   </div>
@@ -485,8 +486,8 @@ function vx_admin_stripe_manual_page(): void {
   </div>
 
   <!-- PASO 2 -->
-  <h2 id="paso2"><span class="step-num">2</span> Crear los 3 productos y precios en Stripe</h2>
-  <p>Ir a <strong>Catalog · Products · Add product</strong> y crear los siguientes tres:</p>
+  <h2 id="paso2"><span class="step-num">2</span> Crear los 2 productos y precios en Stripe</h2>
+  <p>Ir a <strong>Catalog · Products · Add product</strong> y crear estos dos:</p>
 
   <table class="field-table">
     <thead><tr><th>Producto</th><th>Precio</th><th>Tipo</th><th>Moneda</th></tr></thead>
@@ -524,47 +525,8 @@ function vx_admin_stripe_manual_page(): void {
   </ol>
 
   <!-- PASO 4 -->
-  <h2 id="paso4"><span class="step-num">4</span> Instalar el SDK de Stripe en el servidor</h2>
-  <p>Conectarse al servidor vía SSH y ejecutar desde la raíz del plugin:</p>
-  <div class="code-block"><span class="comment"># Navegar al directorio del plugin</span>
-cd <?php echo esc_html( WP_PLUGIN_DIR . '/vitrinexo-core' ); ?>
-
-<span class="comment"># Instalar el SDK de Stripe (requiere Composer instalado)</span>
-composer require stripe/stripe-php</div>
-
-  <p>Si no hay Composer en el servidor:</p>
-  <div class="code-block"><span class="comment"># Instalar Composer primero</span>
-curl -sS https://getcomposer.org/installer | php
-php composer.phar require stripe/stripe-php</div>
-
-  <div class="info-box">
-    Esto crea la carpeta <code>vendor/</code> dentro del plugin con el SDK de Stripe. El archivo <code>vendor/autoload.php</code> se referencia en el código del paso siguiente.
-  </div>
-  <div class="warn-box">
-    <strong>Hostinger:</strong> En Hostinger puedes usar el terminal SSH desde hPanel · Advanced · SSH Access. Si no hay Composer, contacta al soporte de Hostinger para que lo habiliten, o sube manualmente la carpeta <code>vendor/</code> generada localmente.
-  </div>
-
-  <!-- PASO 5 -->
-  <h2 id="paso5"><span class="step-num">5</span> Activar el código en Vitrinexo</h2>
-  <p>Abrir el archivo <code><?php echo esc_html( WP_PLUGIN_DIR . '/vitrinexo-core/rest/rest-stripe.php' ); ?></code> y buscar los 3 bloques marcados con:</p>
-  <div class="code-block"><span class="comment">// ── STRIPE TODO ────────────────────────────────────────────</span></div>
-  <p>En cada bloque hay que:</p>
-  <ol>
-    <li><strong>Eliminar</strong> los <code>//</code> al inicio de cada línea dentro del bloque (descomentar).</li>
-    <li><strong>Eliminar</strong> el bloque STUB que empieza con <code>// STUB:</code> justo después.</li>
-  </ol>
-  <p>Los 3 bloques a activar son:</p>
-  <ul>
-    <li><code>vx_rest_stripe_checkout()</code>: crea sesiones de pago</li>
-    <li><code>vx_rest_stripe_webhook()</code>: procesa eventos de Stripe</li>
-    <li><code>vx_rest_stripe_portal()</code>: acceso al portal de facturación</li>
-  </ul>
-  <div class="info-box">
-    Todo el código ya está escrito y documentado. Solo hay que descomentar, no hay que escribir nada nuevo.
-  </div>
-
-  <!-- PASO 6 -->
-  <h2 id="paso6"><span class="step-num">6</span> Llenar las claves en el admin de WordPress</h2>
+  <!-- PASO 4 -->
+  <h2 id="paso4"><span class="step-num">4</span> Llenar las claves en el admin de WordPress</h2>
   <p>Ir a <strong><?php echo $admin_url; ?></strong> · sección "Precios y Stripe" y completar:</p>
 
   <table class="field-table">
@@ -603,8 +565,8 @@ php composer.phar require stripe/stripe-php</div>
     </tbody>
   </table>
 
-  <!-- PASO 7 -->
-  <h2 id="paso7"><span class="step-num">7</span> Probar con modo Test</h2>
+  <!-- PASO 5 -->
+  <h2 id="paso5"><span class="step-num">5</span> Probar con modo Test</h2>
   <p>Stripe provee tarjetas de prueba que puedes usar en el checkout sin cobrar dinero real:</p>
 
   <table class="field-table">
@@ -627,8 +589,8 @@ php composer.phar require stripe/stripe-php</div>
     <li>En Stripe Dashboard · Events verificar que se recibió el evento <code>checkout.session.completed</code>.</li>
   </ol>
 
-  <!-- PASO 8 -->
-  <h2 id="paso8"><span class="step-num">8</span> Pasar a producción (live)</h2>
+  <!-- PASO 6 -->
+  <h2 id="paso6"><span class="step-num">6</span> Pasar a producción (live)</h2>
   <div class="danger-box">
     <strong>Solo hacer esto cuando las pruebas con modo Test estén 100% verificadas.</strong>
   </div>
@@ -645,15 +607,13 @@ php composer.phar require stripe/stripe-php</div>
   <h2 id="checklist">Checklist final</h2>
   <ul class="checklist">
     <li>Cuenta de Stripe creada y verificada con datos bancarios</li>
-    <li>3 productos creados en Stripe (Mensual, Anual, Fundador) con sus Price IDs</li>
+    <li>2 productos creados en Stripe (Mensual y Anual) con sus Price IDs</li>
     <li>Webhook configurado en Stripe con la URL correcta y los 4 eventos</li>
     <li>Webhook Secret copiado</li>
-    <li>SDK de Stripe instalado en el servidor (<code>vendor/autoload.php</code> existe)</li>
-    <li>Código en <code>rest-stripe.php</code> descomentado (3 bloques STRIPE TODO)</li>
     <li>Publishable Key configurada en el admin</li>
     <li>Secret Key configurada en el admin</li>
     <li>Webhook Secret configurado en el admin</li>
-    <li>3 Price IDs configurados en el admin</li>
+    <li>2 Price IDs configurados en el admin</li>
     <li>Prueba exitosa con tarjeta de test <code>4242 4242 4242 4242</code></li>
     <li>Email de confirmación de plan recibido correctamente</li>
     <li>Claves cambiadas a Live (cuando esté listo para cobrar real)</li>

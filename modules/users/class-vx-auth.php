@@ -111,8 +111,21 @@ class VX_Auth
             return;
         }
 
-        // 7. Post-beta: gratuito + no fundador → solo puede ir a /configuracion/
-        if ( get_option( 'vx_auto_fundador', '1' ) !== '1'
+        // 7. Programa lleno: gratuito + no Pionero → solo puede ir a /configuracion/
+        //
+        // Esto dependía de un interruptor del panel, «auto_fundador», que
+        // alguien tenía que acordarse de apagar. O sea que el programa podía
+        // estar lleno, el miembro 101 no recibir distintivo, y entrar igual con
+        // acceso completo y gratis: el cupo cerraba la puerta del distintivo y
+        // dejaba la del producto abierta.
+        //
+        // Ahora lo manda el cupo. Mientras el programa esté abierto esto no le
+        // toca a nadie, porque quien entra recibe el distintivo; se activa solo
+        // al llenarse, que es cuando empieza a haber algo que cobrar. Se usa el
+        // número cacheado a propósito: corre en cada carga de página, y para
+        // decidir un redirect cinco minutos de desfase no hacen daño. Para dar
+        // el distintivo sí se cuenta fresco, y eso vive en la puerta.
+        if ( vx_pioneros_programa_lleno_cacheado()
              && $membresia->is_gratuito()
              && ! $user->is_founder()
              && ( $is_auth_page || ( $is_flow_page && 'onboarding' === $pagename ) )

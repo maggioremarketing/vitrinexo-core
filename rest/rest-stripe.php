@@ -3,12 +3,22 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * ════════════════════════════════════════════════════════════════════════════
- *  REST API — Stripe Integration (STUBS)
- *  Todos los endpoints están definidos y documentados.
- *  Para activar la integración real:
- *    1. composer require stripe/stripe-php
- *    2. Agregar claves en wp-admin → Vitrinexo → Ajustes
- *    3. Reemplazar los bloques marcados con "STRIPE TODO"
+ *  REST API — Stripe
+ *
+ *  Los cuatro endpoints están implementados y hablan con Stripe por HTTP, sin
+ *  SDK: acá no hay composer ni vendor, y el despliegue es un rsync del
+ *  repositorio, así que una carpeta de dependencias costaría más que las
+ *  llamadas que de verdad hacen falta. El cliente vive en
+ *  modules/pagos/class-vx-stripe.php.
+ *
+ *  Lo único que falta para cobrar son las claves, y no se escriben acá: van en
+ *  wp-admin → Vitrinexo → Ajustes, y el manual de activación está en
+ *  wp-admin → Vitrinexo → Manual de Stripe. Sin claves, todo esto responde
+ *  «no configurado» en vez de fallar a medias.
+ *
+ *  La firma del webhook es lo único que separa un pago real de alguien que
+ *  supo la URL: tiene su propia prueba en pruebas-stripe.php, verificada
+ *  rompiéndola.
  * ════════════════════════════════════════════════════════════════════════════
  */
 
@@ -130,46 +140,69 @@ function vx_rest_stripe_checkout( WP_REST_Request $request ): WP_REST_Response
 
     $plan = $planes[ $plan_id ];
 
-    // ── STRIPE TODO ────────────────────────────────────────────────────────
-    // Cuando tengas las claves de Stripe:
-    //
-    // require_once __DIR__ . '/../../vendor/autoload.php';
-    // \Stripe\Stripe::setApiKey( get_option('vx_stripe_secret_key') );
-    //
-    // $membresia = VX_Membership::get($user_id);
-    // $customer_id = $membresia->get_gateway_customer_id();
-    //
-    // if (!$customer_id) {
-    //     $customer = \Stripe\Customer::create([
-    //         'email' => $user->get_email(),
-    //         'name'  => $user->get_nombre_completo(),
-    //         'metadata' => ['vx_user_id' => $user_id],
-    //     ]);
-    //     $customer_id = $customer->id;
-    //     $membresia->set_gateway_customer_id($customer_id);
-    // }
-    //
-    // $session = \Stripe\Checkout\Session::create([
-    //     'customer'            => $customer_id,
-    //     'mode'                => 'subscription',
-    //     'line_items'          => [[ 'price' => $plan['stripe_price_id'], 'quantity' => 1 ]],
-    //     'success_url'         => home_url('/configuracion/?tab=plan&stripe=success&session_id={CHECKOUT_SESSION_ID}'),
-    //     'cancel_url'          => home_url('/configuracion/?tab=plan&stripe=cancelled'),
-    //     'metadata'            => ['vx_user_id' => $user_id, 'vx_plan' => $plan_id],
-    //     'allow_promotion_codes' => true,
-    // ]);
-    //
-    // return new WP_REST_Response(['success' => true, 'checkout_url' => $session->url], 200);
-    // ── FIN STRIPE TODO ────────────────────────────────────────────────────
+    if ( ! VX_Stripe::configurado() ) {
+        return new WP_REST_Response( [
+            'success' => false,
+            'error'   => 'stripe_no_configurado',
+            'message' => 'El sistema de pagos aún no está activado. Escríbenos a hola@vitrinexo.com y lo coordinamos.',
+            'plan'    => $plan['nombre'],
+            'precio'  => $plan['precio'] . ' ' . $plan['moneda'] . '/' . $plan['intervalo'],
+        ], 503 );
+    }
 
-    // STUB: mientras no hay Stripe conectado, devolver URL de configuración
-    return new WP_REST_Response( [
-        'success'      => false,
-        'error'        => 'stripe_no_configurado',
-        'message'      => 'El sistema de pagos aún no está activado. Contacta a hola@vitrinexo.com para coordinar tu suscripción.',
-        'plan'         => $plan['nombre'],
-        'precio'       => $plan['precio'] . ' ' . $plan['moneda'] . '/' . $plan['intervalo'],
-    ], 503 );
+    if ( ! $user ) {
+        return new WP_REST_Response( [ 'success' => false, 'error' => 'sin_sesion' ], 401 );
+    }
+
+    /* Sin price id no hay nada que cobrar. Pasa cuando alguien puso las claves
+       pero todavia no creo los productos en Stripe, y es mejor decirlo que
+       mandar a la gente a una pantalla de pago rota. */
+    if ( empty( $plan['stripe_price_id'] ) ) {
+        return new WP_REST_Response( [
+            'success' => false,
+            'error'   => 'plan_sin_precio_en_stripe',
+            'message' => 'Ese plan todavía no tiene precio configurado en Stripe.',
+        ], 503 );
+    }
+
+    $membresia = VX_Membership::get( $user_id );
+    $cliente   = $membresia->get_gateway_customer_id();
+
+    if ( ! $cliente ) {
+        $r = VX_Stripe::llamar( 'customers', [
+            'email'                   => $user->get_email(),
+            'name'                    => $user->get_nombre_completo(),
+            'metadata[vx_user_id]'    => $user_id,
+        ] );
+        if ( is_wp_error( $r ) || empty( $r['id'] ) ) {
+            return new WP_REST_Response( [ 'success' => false, 'error' => 'stripe_error' ], 502 );
+        }
+        $cliente = $r['id'];
+        $membresia->set_gateway_customer_id( $cliente );
+    }
+
+    $sesion = VX_Stripe::llamar( 'checkout/sessions', [
+        'customer'                  => $cliente,
+        'mode'                      => 'subscription',
+        'line_items[0][price]'      => $plan['stripe_price_id'],
+        'line_items[0][quantity]'   => 1,
+        'success_url'               => home_url( '/configuracion/?tab=plan&stripe=ok&session_id={CHECKOUT_SESSION_ID}' ),
+        'cancel_url'                => home_url( '/configuracion/?tab=plan&stripe=cancelado' ),
+        'metadata[vx_user_id]'      => $user_id,
+        'metadata[vx_plan]'         => $plan_id,
+        /* El plan tambien va en la suscripcion: el webhook de renovacion llega
+           con la suscripcion y no con la sesion, y asi no hay que adivinarlo. */
+        'subscription_data[metadata][vx_user_id]' => $user_id,
+        'subscription_data[metadata][vx_plan]'    => $plan_id,
+        'allow_promotion_codes'     => 'true',
+        'client_reference_id'       => (string) $user_id,
+    ] );
+
+    if ( is_wp_error( $sesion ) || empty( $sesion['url'] ) ) {
+        return new WP_REST_Response( [ 'success' => false, 'error' => 'stripe_error' ], 502 );
+    }
+
+    return new WP_REST_Response( [ 'success' => true, 'checkout_url' => $sesion['url'] ], 200 );
 }
 
 /**
@@ -187,81 +220,106 @@ function vx_rest_stripe_webhook(): WP_REST_Response
     $payload = @file_get_contents( 'php://input' );
     $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? '';
 
-    // ── STRIPE TODO ────────────────────────────────────────────────────────
-    // require_once __DIR__ . '/../../vendor/autoload.php';
-    // \Stripe\Stripe::setApiKey( get_option('vx_stripe_secret_key') );
-    // $webhook_secret = get_option('vx_stripe_webhook_secret');
-    //
-    // try {
-    //     $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $webhook_secret);
-    // } catch (\Exception $e) {
-    //     return new WP_REST_Response(['error' => 'firma_invalida'], 400);
-    // }
-    //
-    // switch ($event->type) {
-    //
-    //     case 'checkout.session.completed':
-    //         $session    = $event->data->object;
-    //         $user_id    = (int) $session->metadata->vx_user_id;
-    //         $plan_id    = $session->metadata->vx_plan;
-    //         $sub_id     = $session->subscription;
-    //         // Calcular vencimiento (1 mes o 1 año desde ahora)
-    //         $planes     = vx_get_planes_config();
-    //         $intervalo  = $planes[$plan_id]['intervalo'] ?? 'mes';
-    //         $expiry     = 'año' === $intervalo ? strtotime('+1 year') : strtotime('+1 month');
-    //         $membresia  = VX_Membership::get($user_id);
-    //         $membresia->activate($plan_id, $expiry);
-    //         $membresia->set_gateway_subscription_id($sub_id);
-    //         // Enviar email de confirmación
-    //         $user = VX_User::get($user_id);
-    //         if ($user) {
-    //             VX_Mailer::send($user->get_email(), '¡Tu plan está activo!', 'plan_activado', [
-    //                 'nombre' => $user->get_nombre(),
-    //                 'plan' => $plan_id,
-    //                 'fecha_vencimiento' => date_i18n('j \d\e F Y', $expiry),
-    //                 'es_fundador' => $user->is_founder(),
-    //             ]);
-    //         }
-    //         break;
-    //
-    //     case 'invoice.payment_succeeded':
-    //         $invoice   = $event->data->object;
-    //         $sub       = $invoice->subscription;
-    //         // Buscar usuario por subscription_id y renovar vencimiento
-    //         $users = get_users(['meta_key' => VX_Membership_Meta::GATEWAY_SUBSCRIPTION, 'meta_value' => $sub, 'fields' => 'ids']);
-    //         foreach ($users as $uid) {
-    //             $plan = VX_Membership::get($uid)->get_plan();
-    //             $planes = vx_get_planes_config();
-    //             $intervalo = $planes[$plan]['intervalo'] ?? 'mes';
-    //             $expiry = 'año' === $intervalo ? strtotime('+1 year') : strtotime('+1 month');
-    //             VX_Membership::get($uid)->activate($plan, $expiry);
-    //         }
-    //         break;
-    //
-    //     case 'customer.subscription.deleted':
-    //         $sub   = $event->data->object;
-    //         $users = get_users(['meta_key' => VX_Membership_Meta::GATEWAY_SUBSCRIPTION, 'meta_value' => $sub->id, 'fields' => 'ids']);
-    //         foreach ($users as $uid) { VX_Membership::get($uid)->cancel(); }
-    //         break;
-    //
-    //     case 'invoice.payment_failed':
-    //         $invoice = $event->data->object;
-    //         $users = get_users(['meta_key' => VX_Membership_Meta::GATEWAY_CUSTOMER_ID, 'meta_value' => $invoice->customer, 'fields' => 'ids']);
-    //         foreach ($users as $uid) {
-    //             $user = VX_User::get($uid);
-    //             if ($user) {
-    //                 VX_Mailer::send($user->get_email(), 'Problema con tu pago en Vitrinexo', 'plan_pago_fallido', [
-    //                     'nombre' => $user->get_nombre(),
-    //                     'url_actualizar' => home_url('/configuracion/?tab=plan'),
-    //                 ]);
-    //             }
-    //         }
-    //         break;
-    // }
-    // ── FIN STRIPE TODO ────────────────────────────────────────────────────
+    /* Sin firma valida no se mira el cuerpo siquiera. Esta URL es publica por
+       necesidad —Stripe tiene que poder llamarla sin sesion— asi que la firma
+       es lo unico que separa un pago real de alguien que supo la direccion y
+       dijo que pago. */
+    if ( ! VX_Stripe::firma_valida( (string) $payload, (string) $sig_header, VX_Stripe::secreto_webhook() ) ) {
+        return new WP_REST_Response( [ 'error' => 'firma_invalida' ], 400 );
+    }
 
-    // STUB: responder 200 para que Stripe no reintente
+    $evento = json_decode( (string) $payload, true );
+    if ( ! is_array( $evento ) || empty( $evento['type'] ) ) {
+        return new WP_REST_Response( [ 'error' => 'cuerpo_invalido' ], 400 );
+    }
+
+    /* Stripe reintenta cuando no recibe un 200, y puede entregar el mismo
+       evento mas de una vez aunque todo haya ido bien. Procesar dos veces una
+       renovacion correria el vencimiento dos meses. */
+    if ( VX_Stripe::evento_repetido( (string) ( $evento['id'] ?? '' ) ) ) {
+        return new WP_REST_Response( [ 'received' => true, 'repetido' => true ], 200 );
+    }
+
+    $objeto = $evento['data']['object'] ?? [];
+
+    switch ( $evento['type'] ) {
+
+        case 'checkout.session.completed':
+            $uid  = (int) ( $objeto['metadata']['vx_user_id'] ?? 0 );
+            $plan = (string) ( $objeto['metadata']['vx_plan'] ?? '' );
+            if ( ! $uid || ! $plan ) break;
+
+            $membresia = VX_Membership::get( $uid );
+            $membresia->activate( $plan, vx_stripe_vencimiento( $plan ) );
+            if ( ! empty( $objeto['subscription'] ) ) {
+                $membresia->set_gateway_subscription_id( (string) $objeto['subscription'] );
+            }
+            if ( ! empty( $objeto['customer'] ) ) {
+                $membresia->set_gateway_customer_id( (string) $objeto['customer'] );
+            }
+
+            $user = VX_User::get( $uid );
+            if ( $user ) {
+                VX_Mailer::send( $user->get_email(), 'Tu plan en Vitrinexo está activo', 'plan_activado', [
+                    'nombre'            => $user->get_nombre(),
+                    'plan'              => $plan,
+                    'fecha_vencimiento' => date_i18n( 'j \d\e F \d\e Y', vx_stripe_vencimiento( $plan ) ),
+                    'es_fundador'       => $user->is_founder(),
+                ] );
+            }
+            break;
+
+        case 'invoice.payment_succeeded':
+            /* La renovacion. Se busca por suscripcion, que es lo que no cambia
+               entre un cobro y el siguiente. */
+            $sub = (string) ( $objeto['subscription'] ?? '' );
+            foreach ( vx_stripe_usuarios_por( VX_Membership_Meta::GATEWAY_SUBSCRIPTION, $sub ) as $uid ) {
+                $membresia = VX_Membership::get( $uid );
+                $plan      = $membresia->get_plan();
+                if ( '' === $plan ) continue;
+                $membresia->activate( $plan, vx_stripe_vencimiento( $plan ) );
+            }
+            break;
+
+        case 'customer.subscription.deleted':
+            $sub = (string) ( $objeto['id'] ?? '' );
+            foreach ( vx_stripe_usuarios_por( VX_Membership_Meta::GATEWAY_SUBSCRIPTION, $sub ) as $uid ) {
+                VX_Membership::get( $uid )->cancel();
+            }
+            break;
+
+        case 'invoice.payment_failed':
+            $cliente = (string) ( $objeto['customer'] ?? '' );
+            foreach ( vx_stripe_usuarios_por( VX_Membership_Meta::GATEWAY_CUSTOMER_ID, $cliente ) as $uid ) {
+                $user = VX_User::get( $uid );
+                if ( ! $user ) continue;
+                VX_Mailer::send( $user->get_email(), 'No pudimos procesar tu pago', 'plan_pago_fallido', [
+                    'nombre'         => $user->get_nombre(),
+                    'url_actualizar' => home_url( '/configuracion/?tab=plan' ),
+                ] );
+            }
+            break;
+    }
+
     return new WP_REST_Response( [ 'received' => true ], 200 );
+}
+
+/**
+ * Hasta cuando vale un plan recien pagado.
+ *
+ * Se lee el intervalo de la configuracion en vez de escribir los dias acá: si
+ * algun dia hay un plan trimestral, esto no hay que tocarlo.
+ */
+function vx_stripe_vencimiento( string $plan_id ): int {
+    $planes = vx_get_planes_config();
+    $inter  = $planes[ $plan_id ]['intervalo'] ?? 'mes';
+    return 'año' === $inter ? strtotime( '+1 year' ) : strtotime( '+1 month' );
+}
+
+/** Los usuarios que tienen ese valor en ese meta. Vacio si el valor es vacio. */
+function vx_stripe_usuarios_por( string $meta, string $valor ): array {
+    if ( '' === $valor ) return [];
+    return get_users( [ 'meta_key' => $meta, 'meta_value' => $valor, 'fields' => 'ids', 'number' => -1 ] );
 }
 
 /**
@@ -279,18 +337,22 @@ function vx_rest_stripe_portal(): WP_REST_Response
         return new WP_REST_Response( [ 'success' => false, 'error' => 'sin_suscripcion' ], 404 );
     }
 
-    // ── STRIPE TODO ────────────────────────────────────────────────────────
-    // \Stripe\Stripe::setApiKey( get_option('vx_stripe_secret_key') );
-    // $session = \Stripe\BillingPortal\Session::create([
-    //     'customer'   => $customer,
-    //     'return_url' => home_url('/configuracion/?tab=plan'),
-    // ]);
-    // return new WP_REST_Response(['success' => true, 'portal_url' => $session->url], 200);
-    // ── FIN STRIPE TODO ────────────────────────────────────────────────────
+    if ( ! VX_Stripe::configurado() ) {
+        return new WP_REST_Response( [
+            'success' => false,
+            'error'   => 'stripe_no_configurado',
+            'message' => 'El portal de facturación aún no está disponible.',
+        ], 503 );
+    }
 
-    return new WP_REST_Response( [
-        'success' => false,
-        'error'   => 'stripe_no_configurado',
-        'message' => 'Portal no disponible aún.',
-    ], 503 );
+    $sesion = VX_Stripe::llamar( 'billing_portal/sessions', [
+        'customer'   => $customer,
+        'return_url' => home_url( '/configuracion/?tab=plan' ),
+    ] );
+
+    if ( is_wp_error( $sesion ) || empty( $sesion['url'] ) ) {
+        return new WP_REST_Response( [ 'success' => false, 'error' => 'stripe_error' ], 502 );
+    }
+
+    return new WP_REST_Response( [ 'success' => true, 'portal_url' => $sesion['url'] ], 200 );
 }

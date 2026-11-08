@@ -113,11 +113,21 @@ class VX_Onboarding
         // vence: los primeros 100 son gratis para siempre, no gratis hasta que
         // alguien fije una fecha. Antes esa fecha la ponía un ajuste del panel
         // que ya no existe, porque contradecía la regla del programa.
-        if ( get_option( 'vx_auto_fundador', '1' ) === '1' && vx_pioneros_dar_distintivo( $user_id ) ) {
-            $membresia = VX_Membership::get( $user_id );
-            if ( empty( $membresia->get_plan() ) || 'gratuito' === $membresia->get_plan() ) {
-                $membresia->activate( 'gratuito', 0 );
-            }
+        // Todo el mundo sale del onboarding con un plan escrito, tenga
+        // distintivo o no. Atar el plan al cupo fue un error mio de hace un
+        // rato: cuando el programa se llena la puerta devuelve false, y asi el
+        // miembro 101 quedaba con el plan vacio. is_gratuito() compara con la
+        // cadena exacta, de modo que un plan vacio no es «gratuito» y se
+        // escurre por el guard que limita a quien no es Pionero. Un hueco en
+        // una comparacion, no en una regla.
+        $membresia = VX_Membership::get( $user_id );
+        if ( empty( $membresia->get_plan() ) ) {
+            $membresia->activate( 'gratuito', 0 );
+        }
+
+        // El distintivo si depende del cupo, y por una sola puerta.
+        if ( get_option( 'vx_auto_fundador', '1' ) === '1' ) {
+            vx_pioneros_dar_distintivo( $user_id );
         }
 
         // Limpiar meta temporal del registro

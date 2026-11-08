@@ -105,6 +105,26 @@ comprobar( 'contar de nuevo despues de dar, para que el siguiente vea la verdad'
     return $GLOBALS['consultas'] > $antes ? null : 'no volvio a contar: se quedo con el cache';
 } );
 
+comprobar( 'el guard de acceso mira el cupo y no un interruptor', function () {
+    // Se limpia el cache entre escenarios a proposito: lo que se mide aca es el
+    // umbral, no el cache. Que el numero quede pegado dentro de una misma carga
+    // es el comportamiento buscado y esta documentado en la funcion; en
+    // produccion el transient vence a los cinco minutos y se corrige solo.
+    $probar = function ( int $n ): bool {
+        delete_transient( 'vx_pioneros_aprobados' );
+        $GLOBALS['pioneros'] = $n;
+        return vx_pioneros_programa_lleno_cacheado();
+    };
+
+    // Con el programa abierto no le toca a nadie: quien entra es Pionero.
+    if ( $probar( 44 ) )   return 'dijo lleno con 44 de 100';
+    if ( $probar( 99 ) )   return 'dijo lleno con 99 de 100';
+    // Lleno, si: ahi empieza a haber algo que cobrar.
+    if ( ! $probar( 100 ) ) return 'dijo abierto con 100 de 100';
+    if ( ! $probar( 130 ) ) return 'dijo abierto con 130';
+    return null;
+} );
+
 // ── La tercera puerta ────────────────────────────────────────────────────────
 //
 // El distintivo solo se escribe en un sitio. Si manana alguien agrega otro
@@ -149,6 +169,6 @@ if ( $fallos ) {
     exit( 1 );
 }
 
-echo "  ok pioneros (6 reglas, cupo " . vx_pioneros_cupo() . ", una puerta y "
+echo "  ok pioneros (7 reglas, cupo " . vx_pioneros_cupo() . ", una puerta y "
    . count( $excepciones ) . " excepcion" . ( 1 === count( $excepciones ) ? '' : 'es' ) . " declarada"
    . ( 1 === count( $excepciones ) ? '' : 's' ) . ")\n";

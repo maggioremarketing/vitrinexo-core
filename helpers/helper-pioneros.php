@@ -81,3 +81,16 @@ function vx_pioneros_dar_distintivo( int $user_id ): bool {
     delete_transient( 'vx_pioneros_aprobados' );
     return true;
 }
+
+/**
+ * Si el programa esta lleno, segun el numero cacheado.
+ *
+ * Es la version barata, para decidir un redirect en cada carga de pagina. Para
+ * repartir un distintivo no sirve: ahi cinco minutos de desfase son uno de mas,
+ * y por eso la puerta cuenta fresco. Acá el peor caso es que alguien entre al
+ * panel cinco minutos despues de que se lleno el cupo, que no le hace daño a
+ * nadie.
+ */
+function vx_pioneros_programa_lleno_cacheado(): bool {
+    return vx_pioneros_aprobados() >= vx_pioneros_cupo();
+}
