@@ -31,14 +31,16 @@ class VX_Plans
             'precio_renovacion' => 24900,
             'descripcion'       => 'Acceso anual con descuento (equivale a 10 meses)',
         ],
-        'preferencial' => [
-            'nombre'            => 'Plan Fundador',
-            'precio'            => 1900,
-            'duracion_dias'     => 30,
-            'precio_renovacion' => 1900,
-            'descripcion'       => 'Precio exclusivo para Miembros Pioneros',
-            'solo_fundadores'   => true,
-        ],
+        /* Acá estaba 'preferencial', el plan de 19 para Miembros Pioneros. Se
+           va porque los primeros 100 son gratis para siempre: un precio
+           preferente no tiene a quién aplicarse si quien lo tendría nunca
+           paga. Quedan dos precios, 29 al mes y 249 al año, para quien entre
+           del 101 en adelante.
+
+           Las lecturas que interpretan un plan guardado (el directorio,
+           VX_Membership::is_paid) siguen aceptando la cadena 'preferencial',
+           por si alguien la tuviera escrita de antes: dejar de ofrecer un plan
+           no es lo mismo que romperle la cuenta a quien lo tenga. */
     ];
 
     public static function get( string $plan_id ): ?array  { return self::PLANS[ $plan_id ] ?? null; }

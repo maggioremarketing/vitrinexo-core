@@ -520,13 +520,13 @@ class VX_Email_Templates
             default     => 'En ' . $days . ' días',
         };
 
-        $cta_text  = $fundador
-            ? 'Activa tu precio preferencial'
-            : 'Renovar mi plan';
-
-        $msg_extra = $fundador
-            ? '<p style="font-size:14px;color:#14161F;">Como <strong>Miembro Pionero</strong> tienes acceso a un precio especial permanente. Actívalo antes de que venza tu acceso gratuito para no perder ninguna conexión.</p>'
-            : '';
+        /* Este correo le ofrecia al Pionero «activar su precio preferencial»
+           antes de perder el acceso. Ya no: los primeros 100 son gratis para
+           siempre y su plan no vence, asi que nunca reciben este aviso. Y si
+           lo recibieran por tener una fecha puesta a mano, ofrecerles un
+           precio que ya no existe seria peor que no decir nada. */
+        $cta_text  = 'Renovar mi plan';
+        $msg_extra = '';
 
         $content = self::h1( "$urgencia Tu plan vence el $fecha" )
             . self::p( "Hola $nombre, tu plan en Vitrinexo vencerá el <strong>$fecha</strong> ($days día" . ( 1 === $days ? '' : 's' ) . ' restante' . ( 1 === $days ? '' : 's' ) . ').' )

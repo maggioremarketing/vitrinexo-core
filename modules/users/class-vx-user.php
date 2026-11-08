@@ -190,15 +190,6 @@ class VX_User
         return (bool) get_user_meta( $this->wp_user->ID, VX_User_Meta::ES_FUNDADOR, true );
     }
 
-    /**
-     * Si el plan actual tiene precio preferencial de fundador.
-     * (badge is_founder() = true + ha empezado a pagar = precio especial)
-     */
-    public function is_on_preferential_plan(): bool
-    {
-        return $this->is_founder() && 'preferencial' === $this->get_plan();
-    }
-
     public function has_precio_preferente(): bool
     {
         return (bool) get_user_meta( $this->wp_user->ID, VX_User_Meta::PRECIO_PREFERENTE, true );

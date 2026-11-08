@@ -92,23 +92,15 @@ class VX_Verification
     {
         update_user_meta( $user_id, VX_User_Meta::ESTADO, 'activo' );
 
-        // ── Distintivo Pionero (primeros 100 miembros activos) ─────────────
-        $activos = get_users( [
-            'meta_key'   => VX_User_Meta::ESTADO,
-            'meta_value' => 'activo',
-            'count_total' => true,
-            'number'     => 1,
-            'fields'     => 'ids',
-        ] );
-        $total_activos = count( get_users( [
-            'meta_key'   => VX_User_Meta::ESTADO,
-            'meta_value' => 'activo',
-            'number'     => -1,
-            'fields'     => 'ids',
-        ] ) );
-        if ( $total_activos <= 100 ) {
-            update_user_meta( $user_id, 'vx_es_fundador', 1 );
-        }
+        // ── Distintivo Pionero, por la única puerta ────────────────────────
+        //
+        // Esto contaba a mano los usuarios activos contra un 100 escrito acá,
+        // y de paso hacía una consulta entera que no usaba. Peor: era una de
+        // dos puertas. La otra, el final del onboarding, repartía el
+        // distintivo sin mirar el cupo, así que el miembro 130 salía Pionero
+        // igual. Ahora las dos preguntan lo mismo, y el cupo vive en
+        // vx_pioneros_cupo() y no en un número suelto.
+        vx_pioneros_dar_distintivo( $user_id );
 
         // ── El plan gratuito no vence en una fecha, vence en un número ────
         //

@@ -2688,9 +2688,6 @@ add_shortcode( 'vx_configuracion', function (): string {
               <div>
                 <strong>Tu acceso gratuito ha vencido.</strong><br>
                 Elige un plan para seguir conectando con la red Vitrinexo.
-                <?php if ( $es_fundador ) : ?>
-                Como Miembro Pionero tienes acceso al <strong>precio preferencial</strong>.
-                <?php endif; ?>
               </div>
             </div>
             <?php elseif ( $days_left !== null && $days_left <= 30 && $days_left > 0 ) : ?>
@@ -2699,9 +2696,6 @@ add_shortcode( 'vx_configuracion', function (): string {
               <div>
                 Tu plan gratuito vence en <strong><?php echo $days_left; ?> día<?php echo 1 === $days_left ? '' : 's'; ?></strong>
                 (<?php echo esc_html( date_i18n( 'd/m/Y', $expiry ) ); ?>).
-                <?php if ( $es_fundador ) : ?>
-                Activa tu precio preferencial antes de perder el acceso.
-                <?php endif; ?>
               </div>
             </div>
             <?php endif; ?>
@@ -2742,19 +2736,15 @@ add_shortcode( 'vx_configuracion', function (): string {
             <div class="row g-3 mb-4" id="vx-planes-container">
               <?php
               // Filtrar planes disponibles según si es fundador
-              $planes_mostrar = array_filter( $planes_config, fn($p) =>
-                  empty( $p['solo_fundadores'] ) || $es_fundador
-              );
-              foreach ( $planes_mostrar as $plan ) :
+              /* Ya no hay planes solo para fundadores: el filtro que los
+                 separaba se fue con el precio preferencial. Los dos planes que
+                 quedan son los mismos para todos. */
+              foreach ( $planes_config as $plan ) :
                   $es_actual  = $plan['id'] === $plan_actual && ! $is_vencido;
                   $precio_str = number_format( $plan['precio'], 0, ',', '.' ) . ' ' . $plan['moneda'] . '/' . $plan['intervalo'];
-                  $destacado  = 'preferencial' === $plan['id'] && $es_fundador;
               ?>
               <div class="col-12 col-md-4">
-                <div class="card-vx <?php echo $destacado ? 'border-left-primary' : ''; ?> h-100">
-                  <?php if ( $destacado ) : ?>
-                  <span class="badge-vx badge-primary mb-2" style="font-size:11px">Tu precio especial</span>
-                  <?php endif; ?>
+                <div class="card-vx h-100">
                   <?php if ( isset( $plan['ahorro'] ) && $plan['ahorro'] > 0 ) : ?>
                   <span class="badge-vx badge-neutral mb-2" style="font-size:11px">Ahorra <?php echo $plan['ahorro']; ?> <?php echo $plan['moneda']; ?></span>
                   <?php endif; ?>

@@ -278,7 +278,7 @@ add_shortcode( 'vx_landing', function (): string {
                     <dl class="vx-pionero-datos">
                         <div><dt>Cupos</dt><dd><?php echo esc_html( (string) vx_pioneros_cupo() ); ?> miembros aprobados</dd></div>
                         <div><dt>Distintivo</dt><dd>Miembro Pionero, permanente</dd></div>
-                        <div><dt>Membresía</dt><dd>Gratis mientras el programa esté abierto</dd></div>
+                        <div><dt>Membresía</dt><dd>Gratis para siempre</dd></div>
                         <div><dt>Ingreso</dt><dd>Solo con perfil verificado</dd></div>
                     </dl>
                 </div>

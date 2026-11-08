@@ -436,7 +436,7 @@ class VX_Cron
         if ( ! $user ) return;
 
         $es_fundador = $user->is_founder();
-        $plan_label  = $es_fundador ? 'gratuito (precio preferencial disponible)' : ucfirst( $membresia->get_plan() );
+        $plan_label  = ucfirst( $membresia->get_plan() );
 
         // Fix: solo marcar como enviado si el email salió correctamente
         $sent = VX_Mailer::send(

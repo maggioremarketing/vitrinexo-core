@@ -136,6 +136,7 @@ $vx_modules = [
     'migraciones/2026-11-07-faq-periodo-gratuito.php',
     'migraciones/2026-11-07-faq-despues-del-programa.php',
     'migraciones/2026-11-07-paginas-sobrantes.php',
+    'migraciones/2026-11-08-faq-gratis-para-siempre.php',
 ];
 
 foreach ( $vx_modules as $file ) {
@@ -386,7 +387,6 @@ function vx_admin_stripe_manual_page(): void {
     $admin_url    = esc_url( admin_url( 'admin.php?page=vitrinexo-core' ) );
     $precio_m     = esc_html( get_option( 'vx_precio_mensual', 29 ) );
     $precio_a     = esc_html( get_option( 'vx_precio_anual', 249 ) );
-    $precio_f     = esc_html( get_option( 'vx_precio_preferencial', 19 ) );
     $moneda       = esc_html( get_option( 'vx_moneda', 'USD' ) );
 
     ?><!DOCTYPE html>
@@ -493,7 +493,6 @@ function vx_admin_stripe_manual_page(): void {
     <tbody>
       <tr><td>Vitrinexo Mensual</td><td><?php echo $precio_m; ?> <?php echo $moneda; ?></td><td>Recurrente / mes</td><td><?php echo $moneda; ?></td></tr>
       <tr><td>Vitrinexo Anual</td><td><?php echo $precio_a; ?> <?php echo $moneda; ?></td><td>Recurrente / año</td><td><?php echo $moneda; ?></td></tr>
-      <tr><td>Vitrinexo Fundador</td><td><?php echo $precio_f; ?> <?php echo $moneda; ?></td><td>Recurrente / mes</td><td><?php echo $moneda; ?></td></tr>
     </tbody>
   </table>
 
@@ -1191,45 +1190,35 @@ function vx_admin_ajustes_page(): void {
     if ( isset( $_POST['vx_ajustes_nonce'] ) && wp_verify_nonce( $_POST['vx_ajustes_nonce'], 'vx_ajustes_save' ) ) {
         update_option( 'vx_auto_fundador', isset( $_POST['vx_auto_fundador'] ) ? '1' : '0' );
         // Precios
-        foreach ( [ 'vx_precio_mensual', 'vx_precio_anual', 'vx_precio_preferencial' ] as $k ) {
+        foreach ( [ 'vx_precio_mensual', 'vx_precio_anual' ] as $k ) {
             if ( isset( $_POST[ $k ] ) ) update_option( $k, (float) $_POST[ $k ] );
         }
         update_option( 'vx_moneda', sanitize_key( $_POST['vx_moneda'] ?? 'USD' ) );
         // Stripe keys (escritura segura — no mostrar en pantalla)
         foreach ( [ 'vx_stripe_publishable_key', 'vx_stripe_secret_key', 'vx_stripe_webhook_secret',
-                    'vx_stripe_price_mensual', 'vx_stripe_price_anual', 'vx_stripe_price_preferencial' ] as $k ) {
+                    'vx_stripe_price_mensual', 'vx_stripe_price_anual' ] as $k ) {
             if ( isset( $_POST[ $k ] ) && $_POST[ $k ] !== '' ) {
                 update_option( $k, sanitize_text_field( $_POST[ $k ] ) );
             }
         }
 
-        // Vencimiento global del plan gratuito para fundadores (fecha en que dejan de ser gratis)
-        $fecha_fin = sanitize_text_field( $_POST['vx_fundador_gratuito_fin'] ?? '' );
-        update_option( 'vx_fundador_gratuito_fin', $fecha_fin ? strtotime( $fecha_fin . ' 23:59:59' ) : 0 );
+        /* Acá vivía «Fin del plan gratuito para Fundadores»: un campo de fecha y
+           una casilla que le escribía vencimiento a todos los Pioneros en plan
+           gratuito de una sola vez.
 
-        // Si se marca "Aplicar vencimiento ahora" → actualizar todos los fundadores en plan gratuito
-        if ( ! empty( $_POST['vx_aplicar_vencimiento'] ) && $fecha_fin ) {
-            $timestamp = strtotime( $fecha_fin . ' 23:59:59' );
-            $fundadores = get_users( [
-                'role'       => 'subscriber',
-                'number'     => -1,
-                'meta_query' => [
-                    [ 'key' => VX_User_Meta::ES_FUNDADOR, 'value' => '1' ],
-                    [ 'key' => VX_User_Meta::PLAN,        'value' => 'gratuito' ],
-                ],
-            ] );
-            foreach ( $fundadores as $u ) {
-                update_user_meta( $u->ID, VX_User_Meta::PLAN_VENCIMIENTO, $timestamp );
-            }
-            $saved = count( $fundadores ) . ' fundadores actualizados.';
-        }
+           Se va porque contradice la regla del programa. Los primeros 100 son
+           gratis para siempre, no gratis hasta una fecha, y un ajuste capaz de
+           deshacer eso con un clic distraído es una trampa, no una herramienta.
+           Eran 44 personas a un tilde de distancia.
+
+           Si alguna vez hace falta ponerle fecha a alguien, la columna de cada
+           miembro en el panel lo permite uno por uno, que es la escala
+           correcta para una excepción. */
 
         echo '<div class="notice notice-success"><p>Ajustes guardados.' . ( $saved ? ' ' . esc_html( $saved ) : '' ) . '</p></div>';
     }
 
     $auto_fundador       = get_option( 'vx_auto_fundador', '1' );
-    $fin_ts              = (int) get_option( 'vx_fundador_gratuito_fin', 0 );
-    $fin_date            = $fin_ts ? date( 'Y-m-d', $fin_ts ) : '';
 
     // Conteos
     $total_fundadores = count( get_users( [
@@ -1282,31 +1271,6 @@ function vx_admin_ajustes_page(): void {
                 </tr>
 
                 <tr>
-                    <th>Fin del plan gratuito para Fundadores</th>
-                    <td>
-                        <input type="date" name="vx_fundador_gratuito_fin"
-                               value="<?php echo esc_attr( $fin_date ); ?>"
-                               style="margin-right:12px">
-                        <?php if ( $fin_ts ) : ?>
-                            <span style="color:#C6C167;font-weight:600">
-                                Los Fundadores en plan gratuito vencen el <?php echo date_i18n( 'd/m/Y', $fin_ts ); ?>
-                            </span>
-                        <?php else : ?>
-                            <span style="color:#5C5F6B">Sin fecha definida, acceso gratuito indefinido</span>
-                        <?php endif; ?>
-                        <p class="description">
-                            Cuando llegue esta fecha, los Fundadores en plan gratuito quedarán con <em>plan_estado = vencido</em>
-                            y se les pedirá que se suscriban al <strong>precio preferencial</strong> para seguir accediendo.
-                        </p>
-                        <label style="margin-top:8px;display:block">
-                            <input type="checkbox" name="vx_aplicar_vencimiento" value="1">
-                            Aplicar esta fecha a todos los Fundadores en plan gratuito ahora mismo
-                            <span style="color:#5C5F6B">(actualiza <?php echo $fundadores_gratis; ?> usuarios)</span>
-                        </label>
-                    </td>
-                </tr>
-
-                <tr>
                     <td colspan="2">
                         <hr>
                         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:8px 0">
@@ -1336,7 +1300,6 @@ function vx_admin_ajustes_page(): void {
                 $price_fields = [
                     'vx_precio_mensual'      => [ 'Plan Mensual',       29  ],
                     'vx_precio_anual'        => [ 'Plan Anual',        249  ],
-                    'vx_precio_preferencial' => [ 'Plan Fundador (preferencial)', 19 ],
                 ];
                 foreach ( $price_fields as $opt => [ $label, $default ] ) : ?>
                 <tr>
@@ -1359,7 +1322,6 @@ function vx_admin_ajustes_page(): void {
                     'vx_stripe_webhook_secret'      => 'Stripe Webhook Secret (whsec_...)',
                     'vx_stripe_price_mensual'       => 'Stripe Price ID: Mensual',
                     'vx_stripe_price_anual'         => 'Stripe Price ID: Anual',
-                    'vx_stripe_price_preferencial'  => 'Stripe Price ID: Fundador',
                 ];
                 foreach ( $stripe_fields as $opt => $label ) :
                     $val = get_option( $opt, '' );
@@ -1388,9 +1350,9 @@ function vx_admin_ajustes_page(): void {
         <hr>
         <h2>Flujo de pagos</h2>
         <ol style="max-width:640px;line-height:1.8">
-            <li><strong>Ahora (beta)</strong>: los usuarios completan el onboarding · reciben distintivo Pionero permanente · plan gratuito sin fecha de vencimiento.</li>
-            <li><strong>Cuando decidas cobrar</strong>: fija una fecha de fin del plan gratuito y marca "Aplicar a todos". Los Fundadores reciben aviso y pueden suscribirse al precio preferencial desde su configuración.</li>
-            <li><strong>Usuarios nuevos post-fundador</strong>: no reciben distintivo (auto-pionero desactivado) · plan gratuito con acceso limitado · para acceso completo deben suscribirse al plan mensual o anual.</li>
+            <li><strong>Los primeros 100</strong>: completan el onboarding · reciben el distintivo de Miembro Pionero, que es permanente · acceso gratuito <strong>sin fecha de vencimiento y sin cobro posterior</strong>. No pagan nunca. No hay nada que activar ni fecha que fijar.</li>
+            <li><strong>Del 101 en adelante</strong>: no reciben distintivo, porque el programa cierra al llenarse · para acceso completo se suscriben al plan mensual o anual.</li>
+            <li><strong>Excepciones</strong>: si alguna vez hay que ponerle fecha a una cuenta concreta, se hace una por una desde la columna <em>Plan</em> de Usuarios. No existe una forma de hacerlo a todos de golpe, y es a propósito.</li>
         </ol>
         <p>Para modificar el plan o distintivo de un miembro individual · <a href="<?php echo esc_url( admin_url( 'users.php' ) ); ?>">Usuarios</a> · columna <em>Plan</em>.</p>
     </div>

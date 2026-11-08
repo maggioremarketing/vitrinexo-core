@@ -389,14 +389,12 @@ class VX_Admin_Users
         // ── Cambio de distintivo Pionero (via GET link) ──
         if ( ! empty( $params['quitar_fundador'] ) ) {
             update_user_meta( $user_id, VX_User_Meta::ES_FUNDADOR, false );
-            update_user_meta( $user_id, VX_User_Meta::PRECIO_PREFERENTE, false );
             wp_safe_redirect( admin_url( 'users.php?vx_plan_cambiado=1' ) );
             exit;
         }
 
         if ( ! empty( $params['dar_fundador'] ) ) {
             update_user_meta( $user_id, VX_User_Meta::ES_FUNDADOR, true );
-            update_user_meta( $user_id, VX_User_Meta::PRECIO_PREFERENTE, true );
             wp_safe_redirect( admin_url( 'users.php?vx_plan_cambiado=1' ) );
             exit;
         }
@@ -533,7 +531,6 @@ document.addEventListener('DOMContentLoaded', function() {
         $user_id = absint( $_GET['user_id'] ?? 0 );
         check_admin_referer( 'vx_dar_pionero_' . $user_id );
         update_user_meta( $user_id, VX_User_Meta::ES_FUNDADOR, true );
-        update_user_meta( $user_id, VX_User_Meta::PRECIO_PREFERENTE, true );
         wp_safe_redirect( admin_url( 'users.php?vx_plan_cambiado=1' ) );
         exit;
     }
@@ -545,7 +542,6 @@ document.addEventListener('DOMContentLoaded', function() {
         $user_id = absint( $_GET['user_id'] ?? 0 );
         check_admin_referer( 'vx_quitar_pionero_' . $user_id );
         update_user_meta( $user_id, VX_User_Meta::ES_FUNDADOR, false );
-        update_user_meta( $user_id, VX_User_Meta::PRECIO_PREFERENTE, false );
         wp_safe_redirect( admin_url( 'users.php?vx_plan_cambiado=1' ) );
         exit;
     }

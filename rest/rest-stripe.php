@@ -30,7 +30,7 @@ add_action( 'rest_api_init', function () {
             'plan' => [
                 'required'          => true,
                 'sanitize_callback' => 'sanitize_key',
-                'validate_callback' => fn( $v ) => in_array( $v, [ 'mensual', 'anual', 'preferencial' ], true ),
+                'validate_callback' => fn( $v ) => in_array( $v, [ 'mensual', 'anual' ], true ),
             ],
         ],
     ] );
@@ -81,16 +81,6 @@ function vx_get_planes_config(): array {
             'descripcion' => 'Todo el plan mensual + 2 meses gratis.',
             'ahorro'      => round( ( get_option( 'vx_precio_mensual', 29 ) * 12 ) - get_option( 'vx_precio_anual', 249 ) ),
         ],
-        'preferencial' => [
-            'id'          => 'preferencial',
-            'nombre'      => 'Plan Fundador',
-            'precio'      => (float) get_option( 'vx_precio_preferencial', 19 ),
-            'moneda'      => $moneda,
-            'intervalo'   => 'mes',
-            'stripe_price_id' => get_option( 'vx_stripe_price_preferencial', '' ),
-            'descripcion' => 'Precio exclusivo para Miembros Pioneros de Vitrinexo.',
-            'solo_fundadores' => true,
-        ],
     ];
 }
 
@@ -98,9 +88,11 @@ function vx_get_planes_config(): array {
 
 /**
  * GET /stripe/planes
- * Devuelve los planes disponibles para el usuario actual.
- * Si es fundador → incluye 'preferencial'.
- * Si no es fundador → solo 'mensual' y 'anual'.
+ * Devuelve los planes disponibles: mensual y anual, los mismos para todos.
+ *
+ * Hubo un tercero, 'preferencial', que solo se le mostraba a los Pioneros. Ya
+ * no existe: los primeros 100 son gratis para siempre y no tienen nada que
+ * pagar, asi que un precio exclusivo para ellos no tenia a quien aplicarse.
  */
 function vx_rest_stripe_planes(): WP_REST_Response
 {
@@ -108,11 +100,6 @@ function vx_rest_stripe_planes(): WP_REST_Response
     $user      = VX_User::get( $user_id );
     $membresia = VX_Membership::get( $user_id );
     $planes    = vx_get_planes_config();
-
-    // Solo mostrar 'preferencial' a fundadores
-    if ( ! $user || ! $user->is_founder() ) {
-        unset( $planes['preferencial'] );
-    }
 
     return new WP_REST_Response( [
         'success'       => true,
@@ -139,11 +126,6 @@ function vx_rest_stripe_checkout( WP_REST_Request $request ): WP_REST_Response
 
     if ( ! isset( $planes[ $plan_id ] ) ) {
         return new WP_REST_Response( [ 'success' => false, 'error' => 'plan_invalido' ], 400 );
-    }
-
-    // Verificar que el plan preferencial solo sea para fundadores
-    if ( 'preferencial' === $plan_id && ( ! $user || ! $user->is_founder() ) ) {
-        return new WP_REST_Response( [ 'success' => false, 'error' => 'no_autorizado' ], 403 );
     }
 
     $plan = $planes[ $plan_id ];

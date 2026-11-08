@@ -103,18 +103,21 @@ class VX_Onboarding
         // Senior es automático: 45+ años y/o 20+ de experiencia. Sin verificación manual.
         VX_Senior_Verification::apply_auto( $user_id );
 
-        // Auto-fundador: activo por defecto en fase beta, desactivable desde wp-admin → Vitrinexo → Ajustes.
-        if ( get_option( 'vx_auto_fundador', '1' ) === '1' ) {
-            // Asignar badge PERMANENTE de Fundador
-            update_user_meta( $user_id, VX_User_Meta::ES_FUNDADOR, true );
-            // El plan sigue siendo 'gratuito' — sin vencimiento hasta que el admin lo defina.
-            // El admin controla CUÁNDO los fundadores pasan a pagar (precio preferencial).
+        // Auto-fundador: desactivable desde wp-admin → Vitrinexo → Ajustes.
+        //
+        // Esto escribía el distintivo directo, sin mirar el cupo, así que era
+        // la puerta por la que el programa se podía pasar de 100 sin que nadie
+        // lo notara. Ahora pregunta lo mismo que la aprobación.
+        //
+        // El plan gratuito va con vencimiento 0, que acá significa que no
+        // vence: los primeros 100 son gratis para siempre, no gratis hasta que
+        // alguien fije una fecha. Antes esa fecha la ponía un ajuste del panel
+        // que ya no existe, porque contradecía la regla del programa.
+        if ( get_option( 'vx_auto_fundador', '1' ) === '1' && vx_pioneros_dar_distintivo( $user_id ) ) {
             $membresia = VX_Membership::get( $user_id );
             if ( empty( $membresia->get_plan() ) || 'gratuito' === $membresia->get_plan() ) {
-                $membresia->activate( 'gratuito', 0 ); // 0 = sin vencimiento por ahora
+                $membresia->activate( 'gratuito', 0 );
             }
-            // Marcar precio preferente para cuando empiece a cobrar
-            update_user_meta( $user_id, VX_User_Meta::PRECIO_PREFERENTE, true );
         }
 
         // Limpiar meta temporal del registro

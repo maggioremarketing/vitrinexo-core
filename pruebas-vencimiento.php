@@ -56,6 +56,16 @@ function metadata_exists( $tipo, $uid, $key ) { return array_key_exists( $key, $
 function get_userdata( $uid ) { return $GLOBALS['usuarios'][ $uid ] ?? false; }
 function get_users( $args = [] ) { return []; }
 
+/* La puerta del distintivo Pionero vive en helpers/helper-pioneros.php y tiene
+   su propia prueba. Acá solo interesa que la aprobación le pregunte: si alguien
+   vuelve a escribir el distintivo a mano en class-vx-verification.php, el cupo
+   deja de valer y esta prueba lo dice. */
+$GLOBALS['pregunto_a_la_puerta'] = 0;
+function vx_pioneros_dar_distintivo( int $user_id ): bool {
+    $GLOBALS['pregunto_a_la_puerta']++;
+    return true;
+}
+
 // ── Lo mínimo de WordPress para que los archivos carguen y dibujen ──────────
 function date_i18n( $formato, $ts = null ) { return date( $formato, $ts ?? time() ); }
 function esc_attr( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); }
@@ -117,6 +127,16 @@ comprobar( 'la aprobación guarda un timestamp', function () {
     $v = $GLOBALS['meta'][1][ VENC ] ?? null;
     if ( ! is_int( $v ) ) return 'guardó ' . var_export( $v, true ) . ', que no es un timestamp';
     if ( (int) $v !== (int) (string) $v ) return "guardó $v, que no sobrevive un (int)";
+    return null;
+} );
+
+comprobar( 'la aprobación le pregunta a la puerta por el distintivo', function () {
+    miembro( 1, 0 );
+    $GLOBALS['pregunto_a_la_puerta'] = 0;
+    VX_Verification::activate_account( 1 );
+    if ( 0 === $GLOBALS['pregunto_a_la_puerta'] ) {
+        return 'aprobó sin pasar por vx_pioneros_dar_distintivo(): el cupo de 100 no se está mirando';
+    }
     return null;
 } );
 
