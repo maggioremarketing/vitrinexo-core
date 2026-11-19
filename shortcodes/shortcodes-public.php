@@ -65,10 +65,14 @@ add_shortcode( 'vx_landing', function (): string {
     ?>
 
     <!-- ── Hero ── -->
-    <section class="network-hero light">
+    <!-- Sin logotipo propio: la barra fija ya lo lleva, y dos en el mismo
+         primer pantallazo se leían como un error. Texto a la izquierda y
+         retratos a la derecha, para que la ilustración entre entera y no
+         quede cortada al pie de la pantalla. -->
+    <section class="network-hero light vx-portada">
         <div class="container">
+            <div class="vx-portada__rejilla">
             <div class="hero-content">
-                <img width="200" src="<?php echo esc_url( $logo_url ); ?>" alt="Vitrinexo" />
                 <p class="vx-hero-tagline"><?php echo function_exists( 'vx_tagline_html' ) ? wp_kses( vx_tagline_html(), [ 'strong' => [] ] ) : ''; ?></p>
                 <h1 class="my-4">Networking servido<br><strong>a tu mesa.</strong></h1>
                 <div class="mt-4">
@@ -79,7 +83,10 @@ add_shortcode( 'vx_landing', function (): string {
                     <a class="btn-vx btn-ghost-vx btn-vx-lg" href="#como-funciona">Cómo funciona</a>
                 </div>
                 <p class="vx-hero-nota">Sin publicidad y sin comisión por conectar.</p>
-                <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-portada.svg' ) ); ?>" alt="Diez retratos ilustrados en dos filas; uno es un lugar libre dibujado con línea punteada." class="hero-feature-img mt-5 img-fluid" />
+            </div>
+            <div class="vx-portada__ilustracion">
+                <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-portada.svg' ) ); ?>" alt="Diez retratos ilustrados en dos filas; uno es un lugar libre dibujado con línea punteada." class="hero-feature-img img-fluid" />
+            </div>
             </div>
         </div>
     </section>
@@ -91,7 +98,7 @@ add_shortcode( 'vx_landing', function (): string {
                 <p class="vx-mito"><s><span class="vx-solo-lectores">Mito: </span>Para hacer negocios, hay que ir a todos los eventos.</s></p>
                 <h2 class="section-landing-title">Mucho evento, <strong><mark>poco nexo.</mark></strong></h2>
             </div>
-            <div class="problem-grid">
+            <div class="problem-grid problem-grid--problema">
                 <div class="step-card">
                     <div class="step-card__icon"><i class="ti ti-cash-off"></i></div>
                     <h3 class="step-card__title">Caro y poco medible</h3>
@@ -103,7 +110,7 @@ add_shortcode( 'vx_landing', function (): string {
                     <p class="step-card__desc">Gana quien habla más fuerte, y deja fuera a quien prefiere que su trabajo hable por él.</p>
                 </div>
                 <div class="step-card">
-                    <div class="step-card__icon"><i class="ti ti-brand-linkedin"></i></div>
+                    <div class="step-card__icon"><i class="ti ti-briefcase-off"></i></div>
                     <h3 class="step-card__title">Las plataformas de empleo no venden servicios</h3>
                     <p class="step-card__desc">Están hechas para buscar trabajo, no para que una empresa le ofrezca algo a otra.</p>
                 </div>
@@ -128,24 +135,28 @@ add_shortcode( 'vx_landing', function (): string {
             </div>
             <div class="multiverse-grid">
                 <div class="multiverse-card multiverse-card--main">
+                    <span class="multiverse-card__icono" aria-hidden="true"><i class="ti ti-building-store"></i></span>
                     <span class="multiverse-card__label">La marca madre</span>
                     <h3 class="multiverse-card__title">Vitrinexo</h3>
                     <p class="multiverse-card__desc">El directorio completo de empresas de servicios verificadas.</p>
                     <p class="vx-mesa-nexo"><span>Se conectan por</span> Lo que ofrecen y lo que buscan</p>
                 </div>
                 <div class="multiverse-card multiverse-card--woman">
+                    <span class="multiverse-card__icono" aria-hidden="true"><i class="ti ti-woman"></i></span>
                     <span class="multiverse-card__label">Comunidad</span>
                     <h3 class="multiverse-card__title">Vitrinexo <em>Woman</em></h3>
                     <p class="multiverse-card__desc">Empresas lideradas por mujeres, que se encuentran para hacer crecer sus negocios entre pares.</p>
                     <p class="vx-mesa-nexo"><span>Se conectan por</span> Liderazgo compartido</p>
                 </div>
                 <div class="multiverse-card multiverse-card--out2b">
+                    <span class="multiverse-card__icono" aria-hidden="true"><i class="ti ti-rainbow"></i></span>
                     <span class="multiverse-card__label">Comunidad</span>
                     <h3 class="multiverse-card__title">Vitrinexo <em>LGBTQ+</em></h3>
                     <p class="multiverse-card__desc">Afinidad para entrar, negocio para quedarse.</p>
                     <p class="vx-mesa-nexo"><span>Se conectan por</span> Afinidad y confianza</p>
                 </div>
                 <div class="multiverse-card multiverse-card--senior">
+                    <span class="multiverse-card__icono" aria-hidden="true"><i class="ti ti-award"></i></span>
                     <span class="multiverse-card__label">Comunidad</span>
                     <h3 class="multiverse-card__title">Vitrinexo <em>Senior</em></h3>
                     <p class="multiverse-card__desc">Ejecutivos con trayectoria. Su recorrido es la ventaja que traen a la mesa.</p>
@@ -167,7 +178,7 @@ add_shortcode( 'vx_landing', function (): string {
             <div class="vx-nocturna-banner">
                 <img class="vx-nocturna-banner__img" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/6-La-experiencia presencial-EP-2-nocturna.jpeg" alt="Cuatro personas cenando en una terraza de noche, con velas sobre la mesa." />
             </div>
-            <p class="vx-dinner-pie"><a class="btn-vx btn-ghost-vx" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">Cómo funciona la cena</a></p>
+            <p class="vx-dinner-pie"><a class="btn-vx btn-primary-vx btn-vx-lg" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">Cómo funciona la cena</a></p>
         </div>
     </section>
 
@@ -261,7 +272,7 @@ add_shortcode( 'vx_landing', function (): string {
                 </details>
                 <?php endforeach; ?>
             </div>
-            <p class="vx-faq__mas"><a class="btn-vx btn-ghost-vx" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Ver todas las preguntas</a></p>
+            <p class="vx-faq__mas"><a class="btn-vx btn-ghost-vx btn-vx-lg" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Ver todas las preguntas</a></p>
         </div>
     </section>
     <?php endif; ?>
