@@ -65,56 +65,74 @@ add_shortcode( 'vx_landing', function (): string {
     ?>
 
     <!-- ── Hero ── -->
-    <!-- Sin logotipo propio: la barra fija ya lo lleva, y dos en el mismo
-         primer pantallazo se leían como un error. Texto a la izquierda y
-         retratos a la derecha, para que la ilustración entre entera y no
-         quede cortada al pie de la pantalla. -->
+    <!-- Sin logotipo propio: la barra ya lo lleva. Texto a la izquierda y, a
+         la derecha, la mesa de cuatro vista desde arriba: tres personas
+         sentadas y un puesto libre. La pared de retratos sigue más abajo, en
+         Perfiles; repetirla acá era abrir la página con la misma imagen dos
+         veces. -->
+    <?php
+    $vx_puestos = [
+        [ 'mesa-puesto-1.svg', 'left:37%;top:-11.5%' ],
+        [ 'mesa-puesto-2.svg', 'right:-5%;top:33.75%' ],
+        [ 'mesa-puesto-3.svg', 'left:37%;bottom:-11.5%' ],
+    ];
+    // Lo que hay sobre la mesa, en el orden en que entra.
+    $vx_objetos = [
+        [ 'plato', 'left:44%;top:27%' ], [ 'plato', 'left:44%;top:61%' ],
+        [ 'plato', 'left:27%;top:44%' ], [ 'plato', 'left:61%;top:44%' ],
+        [ 'laptop', 'left:28.5%;top:29.5%' ], [ 'nota', 'left:60%;top:29%' ],
+        [ 'vaso', 'left:67%;top:37%' ], [ 'agenda', 'left:58.5%;top:60%' ],
+        [ 'taza', 'left:31%;top:63%' ],
+    ];
+    ?>
     <section class="network-hero light vx-portada">
         <div class="container">
             <div class="vx-portada__rejilla">
             <div class="hero-content">
                 <p class="vx-hero-tagline"><?php echo function_exists( 'vx_tagline_html' ) ? wp_kses( vx_tagline_html(), [ 'strong' => [] ] ) : ''; ?></p>
-                <h1 class="my-4">Networking servido<br><strong>a tu mesa.</strong></h1>
-                <div class="mt-4">
-                    <p>Cuéntanos qué haces o qué buscas, y siéntate a conversar.</p>
-                </div>
-                <div class="vx-hero-acciones mt-4">
+                <h1 class="vx-portada__titular">Networking servido<br> <strong class="vx-portada__golpe">a tu mesa.</strong></h1>
+                <p class="vx-portada__bajada">Cuéntanos qué haces o qué buscas, y siéntate a conversar.</p>
+                <div class="vx-hero-acciones">
                     <a class="btn-vx btn-primary-vx btn-vx-lg" href="#afiliado-original"><?php echo esc_html( $cta_label ); ?></a>
-                    <a class="btn-vx btn-ghost-vx btn-vx-lg" href="#como-funciona">Cómo funciona</a>
+                    <a class="btn-vx btn-texto-vx btn-vx-lg" href="#como-funciona">Cómo funciona <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
                 </div>
-                <p class="vx-hero-nota">Sin publicidad y sin comisión por conectar.</p>
+                <p class="vx-hero-nota"><img src="<?php echo esc_url( vx_asset_url( 'isotipo.svg' ) ); ?>" alt="" width="26" height="26" />Sin publicidad y sin comisión por conectar.</p>
             </div>
-            <div class="vx-portada__ilustracion">
-                <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-portada.svg' ) ); ?>" alt="Diez retratos ilustrados en dos filas; uno es un lugar libre dibujado con línea punteada." class="hero-feature-img img-fluid" />
+            <div class="vx-portada__ilustracion vx-mesa-hero" id="vxMesaHero">
+                <div class="vx-mesa-hero__fondo" aria-hidden="true"></div>
+                <div class="vx-mesa-hero__inclina" id="vxMesaInclina">
+                    <div class="vx-mesa" role="img" aria-label="Una mesa de cuatro vista desde arriba: tres personas sentadas y un puesto libre, punteado, que pregunta si te sumas. Alrededor, lo que ofrece una empresa, lo que busca otra y el cargo de quien se sienta.">
+                        <div class="vx-mesa__tabla"></div>
+                        <?php foreach ( $vx_objetos as $vx_o ) : ?>
+                        <i class="vx-mesa__<?php echo esc_attr( $vx_o[0] ); ?>" style="<?php echo esc_attr( $vx_o[1] ); ?>"></i>
+                        <?php endforeach; ?>
+                        <?php foreach ( $vx_puestos as $vx_p ) : ?>
+                        <div class="vx-mesa__puesto" style="<?php echo esc_attr( $vx_p[1] ); ?>"><img src="<?php echo esc_url( vx_asset_url( 'marca/' . $vx_p[0] ) ); ?>" alt="" /></div>
+                        <?php endforeach; ?>
+                        <div class="vx-mesa__libre" style="left:-5%;top:33.75%"><img src="<?php echo esc_url( vx_asset_url( 'marca/mesa-puesto-libre.svg' ) ); ?>" alt="" /><span>¿Y tú?<br>¿Te sumas?</span></div>
+                    </div>
+                </div>
+                <span class="vx-casilla vx-casilla--1" aria-hidden="true"><span class="vx-casilla__icono vx-casilla__icono--lavanda"><i class="ti ti-building-store"></i></span><span><small>Ofrece</small><span data-vx-rubro="ofrece">Contabilidad</span></span></span>
+                <span class="vx-casilla vx-casilla--2" aria-hidden="true"><span class="vx-casilla__icono vx-casilla__icono--celeste"><i class="ti ti-search"></i></span><span><small>Busca</small><span data-vx-rubro="busca">Abogado laboral</span></span></span>
+                <span class="vx-casilla vx-casilla--4" aria-hidden="true"><span class="vx-casilla__icono vx-casilla__icono--salvia"><i class="ti ti-briefcase"></i></span><span><small>Cargo</small><span data-vx-cargo>Directora comercial</span></span></span>
             </div>
             </div>
         </div>
     </section>
 
     <!-- ── El problema ── -->
-    <section class="section-landing" id="el-problema">
+    <!-- La estructura de la propuesta: la creencia tachada, el titular grande
+         y alineado a la izquierda, y los tres problemas como filas con su
+         ícono de color. El recuadro oscuro de abajo sigue igual. -->
+    <section class="section-landing vx-problema" id="el-problema">
         <div class="container">
-            <div class="section-landing-head">
-                <p class="vx-mito"><s><span class="vx-solo-lectores">Mito: </span>Para hacer negocios, hay que ir a todos los eventos.</s></p>
-                <h2 class="section-landing-title">Mucho evento, <strong><mark>poco nexo.</mark></strong></h2>
-            </div>
-            <div class="problem-grid problem-grid--problema">
-                <div class="step-card">
-                    <div class="step-card__icon"><i class="ti ti-cash-off"></i></div>
-                    <h3 class="step-card__title">Caro y poco medible</h3>
-                    <p class="step-card__desc">El networking tradicional cuesta membresías, viajes y tardes enteras, y nadie sabe decir qué devolvió.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-card__icon"><i class="ti ti-mood-empty"></i></div>
-                    <h3 class="step-card__title">Favorece a los extrovertidos</h3>
-                    <p class="step-card__desc">Gana quien habla más fuerte, y deja fuera a quien prefiere que su trabajo hable por él.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-card__icon"><i class="ti ti-briefcase-off"></i></div>
-                    <h3 class="step-card__title">Las plataformas de empleo no venden servicios</h3>
-                    <p class="step-card__desc">Están hechas para buscar trabajo, no para que una empresa le ofrezca algo a otra.</p>
-                </div>
-            </div>
+            <p class="vx-mito"><s><span class="vx-solo-lectores">Mito: </span>Para hacer negocios, hay que ir a todos los eventos.</s></p>
+            <h2 class="section-landing-title vx-problema__titulo">Mucho evento, <strong><mark>poco nexo.</mark></strong></h2>
+            <ul class="vx-problema__lista">
+                <li><span class="vx-problema__icono vx-problema__icono--rosa" aria-hidden="true"><i class="ti ti-receipt"></i></span><span><strong>Caro y poco medible.</strong> El networking tradicional cuesta membresías, viajes y tardes enteras, y nadie sabe decir qué devolvió.</span></li>
+                <li><span class="vx-problema__icono vx-problema__icono--celeste" aria-hidden="true"><i class="ti ti-microphone"></i></span><span><strong>Favorece a los extrovertidos.</strong> Gana quien habla más fuerte, y deja fuera a quien prefiere que su trabajo hable por él.</span></li>
+                <li><span class="vx-problema__icono vx-problema__icono--mantequilla" aria-hidden="true"><i class="ti ti-message-off"></i></span><span><strong>Las plataformas de empleo no venden servicios.</strong> Están hechas para buscar trabajo, no para que una empresa le ofrezca algo a otra.</span></li>
+            </ul>
 
             <div class="vx-context-banner">
                 <div class="vx-context-banner__content">
@@ -173,12 +191,19 @@ add_shortcode( 'vx_landing', function (): string {
             <div class="section-landing-head">
                 <span class="section-landing-label">La experiencia presencial</span>
                 <h2 class="section-landing-title">Cuatro personas, <strong>una mesa.</strong></h2>
-                <p class="section-landing-lead"><span class="vx-name-regular">Vitrinexo</span> <em>4Dinner</em> arma la mesa y reúne a los cuatro invitados para conversar de trabajo, los miércoles a las 20:00 hora local. Cada uno paga su consumo; sentarse a la mesa no cuesta nada.</p>
+                <p class="section-landing-lead vx-dinner-propuesta"><strong class="vx-dinner-marca">Vitrinexo 4Dinner</strong> arma la mesa y reúne a los cuatro invitados para conversar de trabajo.</p>
+                <ul class="vx-dinner-datos">
+                    <li><span class="vx-dinner-datos__icono vx-dinner-datos__icono--lavanda" aria-hidden="true"><i class="ti ti-calendar-event"></i></span>Los miércoles, 20:00 hora local</li>
+                    <li><span class="vx-dinner-datos__icono vx-dinner-datos__icono--rosa" aria-hidden="true"><i class="ti ti-users"></i></span>Cuatro invitados por mesa</li>
+                    <li><span class="vx-dinner-datos__icono vx-dinner-datos__icono--celeste" aria-hidden="true"><i class="ti ti-receipt"></i></span>Cada uno paga su consumo</li>
+                    <li><span class="vx-dinner-datos__icono vx-dinner-datos__icono--mantequilla" aria-hidden="true"><i class="ti ti-armchair"></i></span>Sentarse a la mesa no cuesta nada</li>
+                </ul>
             </div>
             <div class="vx-nocturna-banner">
-                <img class="vx-nocturna-banner__img" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/6-La-experiencia presencial-EP-2-nocturna.jpeg" alt="Cuatro personas cenando en una terraza de noche, con velas sobre la mesa." />
+                <img class="vx-nocturna-banner__img" src="<?php echo esc_url( vx_asset_url( 'marca/4dinner-puesto-libre.jpg' ) ); ?>" width="2000" height="667" alt="Tres personas ríen sentadas a una mesa redonda en un restaurante amplio y cálido, con velas, flores y servilletas de colores. En la cuarta silla hay una silueta lavanda de borde punteado: el puesto que queda libre." />
+                <!-- El botón va sobre la foto: debajo de ella se perdía. -->
+                <p class="vx-nocturna-banner__accion"><a class="btn-vx btn-primary-vx btn-vx-lg" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">Cómo funciona la cena <i class="ti ti-arrow-right" aria-hidden="true"></i></a></p>
             </div>
-            <p class="vx-dinner-pie"><a class="btn-vx btn-primary-vx btn-vx-lg" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">Cómo funciona la cena</a></p>
         </div>
     </section>
 
@@ -193,17 +218,17 @@ add_shortcode( 'vx_landing', function (): string {
                 <div class="vx-contraste__col vx-contraste__col--antes">
                     <h3 class="vx-contraste__titulo">Antes</h3>
                     <ul class="vx-contraste__lista">
-                        <li>Eventos caros y difíciles de medir.</li>
-                        <li>Gana quien habla más fuerte.</li>
-                        <li>Mensajes de venta que nadie responde.</li>
+                        <li><i class="ti ti-minus" aria-hidden="true"></i>Eventos caros y difíciles de medir.</li>
+                        <li><i class="ti ti-minus" aria-hidden="true"></i>Gana quien habla más fuerte.</li>
+                        <li><i class="ti ti-minus" aria-hidden="true"></i>Mensajes de venta que nadie responde.</li>
                     </ul>
                 </div>
                 <div class="vx-contraste__col vx-contraste__col--ahora">
                     <h3 class="vx-contraste__titulo">Ahora</h3>
                     <ul class="vx-contraste__lista">
-                        <li>Tu perfil trabaja mientras tú trabajas.</li>
-                        <li>Todos los miembros están verificados.</li>
-                        <li>Una mesa de cuatro para conversar de trabajo.</li>
+                        <li><i class="ti ti-check" aria-hidden="true"></i>Tu perfil trabaja mientras tú trabajas.</li>
+                        <li><i class="ti ti-check" aria-hidden="true"></i>Todos los miembros están verificados.</li>
+                        <li><i class="ti ti-check" aria-hidden="true"></i>Una mesa de cuatro para conversar de trabajo.</li>
                     </ul>
                 </div>
             </div>
@@ -217,39 +242,57 @@ add_shortcode( 'vx_landing', function (): string {
                 <span class="section-landing-label">Cómo funciona</span>
                 <h2 class="section-landing-title">Tres pasos para <strong>sentarte a la mesa.</strong></h2>
             </div>
-            <div class="problem-grid problem-grid--tres">
-                <div class="step-card">
-                    <div class="step-card__num">01</div>
-                    <div class="step-card__icon"><i class="ti ti-id-badge-2"></i></div>
-                    <h3 class="step-card__title">Crea tu perfil</h3>
-                    <p class="step-card__desc">Lo que ofreces y lo que buscas.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-card__num">02</div>
-                    <div class="step-card__icon"><i class="ti ti-shield-check"></i></div>
-                    <h3 class="step-card__title">Te verificamos</h3>
-                    <p class="step-card__desc">Revisamos cada perfil para que cada conexión sea con una empresa real, lista para tejer redes contigo.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-card__num">03</div>
-                    <div class="step-card__icon"><i class="ti ti-heart-handshake"></i></div>
-                    <h3 class="step-card__title">Siéntate a la mesa</h3>
-                    <p class="step-card__desc">Escribe directo o súmate a una cena de <span class="vx-name-regular">Vitrinexo</span> 4Dinner: la organizamos y armamos cada mesa para reunir a los invitados ideales.</p>
-                </div>
-            </div>
+            <ol class="vx-pasos">
+                <li class="vx-paso">
+                    <span class="vx-paso__num">01</span>
+                    <h3 class="vx-paso__titulo">Crea tu perfil</h3>
+                    <p class="vx-paso__desc">Lo que ofreces y lo que buscas.</p>
+                    <span class="vx-paso__icono vx-paso__icono--lavanda" aria-hidden="true"><i class="ti ti-id"></i></span>
+                </li>
+                <li class="vx-paso">
+                    <span class="vx-paso__num">02</span>
+                    <h3 class="vx-paso__titulo">Te verificamos</h3>
+                    <p class="vx-paso__desc">Revisamos cada perfil para que cada conexión sea con una empresa real, lista para tejer redes contigo.</p>
+                    <span class="vx-paso__icono vx-paso__icono--salvia" aria-hidden="true"><i class="ti ti-shield-check"></i></span>
+                </li>
+                <li class="vx-paso">
+                    <span class="vx-paso__num">03</span>
+                    <h3 class="vx-paso__titulo">Siéntate a la mesa</h3>
+                    <p class="vx-paso__desc">Escribe directo o súmate a una cena de <span class="vx-name-regular">Vitrinexo</span> 4Dinner: la organizamos y armamos cada mesa para reunir a los invitados ideales.</p>
+                    <span class="vx-paso__icono vx-paso__icono--mantequilla" aria-hidden="true"><i class="ti ti-tools-kitchen-2"></i></span>
+                </li>
+            </ol>
         </div>
     </section>
 
-    <!-- ── Perfiles: la pared del directorio ── -->
-    <section class="section-landing" id="perfiles">
+    <!-- ── Perfiles ── -->
+    <!-- La disposición de la propuesta: un rostro grande y dos chicos, cada
+         uno armado con pedazos de varias personas. portada.js los dibuja y
+         los vuelve a mezclar cada pocos segundos, junto con lo que se ofrece y
+         se busca. El tercero es siempre el puesto libre, punteado y sin rostro.
+         Sin JavaScript se ve la pared de retratos de siempre. -->
+    <section class="section-landing vx-perfiles" id="perfiles">
         <div class="container">
-            <div class="section-landing-head">
-                <span class="section-landing-label">Perfiles</span>
-                <h2 class="section-landing-title">Un encuentro tiene <strong>muchas caras.</strong></h2>
-                <p class="section-landing-lead">Un nexo se arma con muchas aristas: personas de distintos rubros que se unen por un fin común. Cada perfil dice qué ofrece y qué busca, y detrás de cada cara hay una empresa verificada.</p>
-            </div>
-            <div class="vx-img-banner">
-                <img src="<?php echo esc_url( vx_asset_url( 'marca/retratos-mosaico.svg' ) ); ?>" alt="Una pared de treinta retratos ilustrados, todos distintos; uno es un lugar libre dibujado con línea punteada." />
+            <div class="vx-caras-g">
+                <div class="vx-caras" id="vxCaras" role="img" aria-label="Tres rostros ilustrados: dos armados con pedazos de varias personas y un puesto libre, punteado y sin rostro. Al lado, lo que ofrece una empresa y lo que busca otra.">
+                    <div class="vx-cara vx-cara--grande" data-vx-cara="a"></div>
+                    <div class="vx-caras__lado">
+                        <div class="vx-cara" data-vx-cara="b"></div>
+                        <div class="vx-cara vx-cara--libre" data-vx-cara="libre"></div>
+                    </div>
+                    <span class="vx-casilla vx-caras__k1" aria-hidden="true"><span class="vx-casilla__icono vx-casilla__icono--lavanda"><i class="ti ti-building-store"></i></span><span><small>Ofrece</small><span data-vx-rubro="ofrece">Producción audiovisual</span></span></span>
+                    <span class="vx-casilla vx-caras__k2" aria-hidden="true"><span class="vx-casilla__icono vx-casilla__icono--celeste"><i class="ti ti-search"></i></span><span><small>Busca</small><span data-vx-rubro="busca">Desarrollo de software</span></span></span>
+                    <noscript><img class="vx-caras__respaldo" src="<?php echo esc_url( vx_asset_url( 'marca/retratos-mosaico.svg' ) ); ?>" alt="Una pared de treinta retratos ilustrados, todos distintos; uno es un lugar libre dibujado con línea punteada." /></noscript>
+                </div>
+                <div class="vx-caras-txt">
+                    <span class="section-landing-label">Perfiles</span>
+                    <h2 class="section-landing-title">Un encuentro tiene <strong>muchas caras.</strong></h2>
+                    <p class="section-landing-lead">Un nexo se arma con muchas aristas: personas de distintos rubros que se unen por un fin común.</p>
+                    <ul class="vx-caras-reglas">
+                        <li><i class="ti ti-circle-check" aria-hidden="true"></i>Cada perfil dice qué ofrece y qué busca.</li>
+                        <li><i class="ti ti-shield-check" aria-hidden="true"></i>Detrás de cada cara hay una empresa verificada.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -257,22 +300,44 @@ add_shortcode( 'vx_landing', function (): string {
     <!-- ── Preguntas frecuentes, de la misma fuente que la página completa ── -->
     <?php $vx_faqs = function_exists( 'vx_faq_destacadas' ) ? vx_faq_destacadas( 8 ) : []; ?>
     <?php if ( $vx_faqs ) : ?>
-    <section class="section-landing section-landing--alt" id="preguntas">
+    <!-- Como en la propuesta: el encabezado a la izquierda y las preguntas a la
+         derecha, separadas por una línea y con un más en lavanda que se
+         vuelve coral al abrirse. -->
+    <section class="section-landing" id="preguntas">
         <div class="container">
-            <div class="section-landing-head">
-                <span class="section-landing-label">Preguntas frecuentes</span>
-                <h2 class="section-landing-title">Lo que <strong>nos preguntan.</strong></h2>
-                <p class="section-landing-lead">Todo lo que necesitas saber antes de poner tu empresa en vitrina. Si te queda una duda, escríbenos a <a class="link-primary-color" href="mailto:hola@vitrinexo.com">hola@vitrinexo.com</a>.</p>
+            <div class="vx-faq-g">
+                <div class="vx-faq-g__head">
+                    <span class="section-landing-label">Preguntas frecuentes</span>
+                    <h2 class="section-landing-title">Lo que <strong>nos preguntan.</strong></h2>
+                    <p class="section-landing-lead">Todo lo que necesitas saber antes de poner tu empresa en vitrina. Si te queda una duda, escríbenos a <a class="link-primary-color" href="mailto:hola@vitrinexo.com">hola@vitrinexo.com</a>.</p>
+                    <p class="vx-faq__mas"><a class="btn-vx btn-tinta-vx btn-vx-lg" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Ver todas las preguntas</a></p>
+                </div>
+                <div class="vx-faq vx-faq--portada">
+                    <?php foreach ( $vx_faqs as $vx_faq ) : ?>
+                    <details class="vx-faq__item">
+                        <summary class="vx-faq__q"><span><?php echo esc_html( $vx_faq->post_title ); ?></span><span class="vx-faq__mas-icono" aria-hidden="true"><i class="ti ti-plus"></i></span></summary>
+                        <div class="vx-faq__a"><?php echo wp_kses_post( wpautop( $vx_faq->post_content ) ); ?></div>
+                    </details>
+                    <?php endforeach; ?>
+                </div>
             </div>
-            <div class="vx-faq vx-faq--portada">
-                <?php foreach ( $vx_faqs as $vx_faq ) : ?>
-                <details class="vx-faq__item">
-                    <summary class="vx-faq__q"><span><?php echo esc_html( $vx_faq->post_title ); ?></span><i class="ti ti-chevron-down vx-faq__chev" aria-hidden="true"></i></summary>
-                    <div class="vx-faq__a"><?php echo wp_kses_post( wpautop( $vx_faq->post_content ) ); ?></div>
-                </details>
-                <?php endforeach; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- ── La franja de cierre ── -->
+    <!-- El remate de la página, en coral entero de lado a lado: la mesa está
+         servida y hay un puesto libre. Lleva a la inscripción, que viene justo
+         debajo. El texto va en tinta: sobre el coral, el blanco no se lee. -->
+    <?php if ( ! $is_logged ) : ?>
+    <section class="vx-cierre" aria-labelledby="vx-cierre-titulo">
+        <div class="container vx-cierre__in">
+            <div>
+                <span class="vx-cierre__sobre">La mesa está servida</span>
+                <h2 id="vx-cierre-titulo" class="vx-cierre__titulo">Hay un puesto libre. ¿Te sumas a la conversación?</h2>
+                <a class="btn-vx btn-tinta-vx btn-vx-lg" href="#afiliado-original">Toma tu puesto</a>
             </div>
-            <p class="vx-faq__mas"><a class="btn-vx btn-ghost-vx btn-vx-lg" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Ver todas las preguntas</a></p>
+            <img class="vx-cierre__libre" src="<?php echo esc_url( vx_asset_url( 'marca/isotipo-puesto-libre.svg' ) ); ?>" alt="" />
         </div>
     </section>
     <?php endif; ?>
@@ -298,25 +363,26 @@ add_shortcode( 'vx_landing', function (): string {
                         <h3>Inscríbete</h3>
 
                         <!-- Contador de inscritos con barra de progreso -->
-                        <div id="founderCounter" style="margin-bottom:16px">
-                            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-                                <span style="font-size:13px;color:var(--color-text-muted)">Miembros Pioneros</span>
-                                <span id="founderCountText" style="font-size:13px;font-weight:600;color:var(--color-primary-ink)"><?php echo esc_html( vx_pioneros_aprobados() . ' / ' . vx_pioneros_cupo() ); ?></span>
+                        <?php $vx_pct = (int) min( 100, round( vx_pioneros_aprobados() / max( 1, vx_pioneros_cupo() ) * 100 ) ); ?>
+                        <div id="founderCounter" class="vx-cupos">
+                            <div class="vx-cupos__top">
+                                <span class="vx-cupos__titulo"><i class="ti ti-star" aria-hidden="true"></i> Miembros Pioneros</span>
+                                <span id="founderCountText" class="vx-cupos__n"><?php echo esc_html( vx_pioneros_aprobados() . ' / ' . vx_pioneros_cupo() ); ?></span>
                             </div>
-                            <div style="background:var(--celeste-suave);border-radius:999px;height:6px;overflow:hidden">
-                                <div id="founderProgressBar" style="height:100%;width:<?php echo esc_attr( (string) min( 100, round( vx_pioneros_aprobados() / max( 1, vx_pioneros_cupo() ) * 100 ) ) ); ?>%;background:var(--color-primary);border-radius:999px;transition:width .6s ease"></div>
+                            <div class="vx-cupos__barra" role="progressbar" aria-label="Cupos de Miembro Pionero ocupados" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?php echo esc_attr( (string) $vx_pct ); ?>">
+                                <div id="founderProgressBar" style="width:<?php echo esc_attr( (string) $vx_pct ); ?>%"></div>
                             </div>
-                            <p id="founderCountSub" style="font-size:12px;color:var(--color-text-muted);margin:4px 0 0"></p>
+                            <p id="founderCountSub" class="vx-cupos__sub"></p>
                         </div>
 
                         <div id="founderFormError" class="alert-vx alert-error mb-2" style="display:none;padding:8px 12px;font-size:13px"></div>
                         <form id="founderForm">
                             <div class="row g-2 mb-2">
-                                <div class="col-6">
+                                <div class="col-12 col-sm-6">
                                     <label class="form-label-vx">Nombre *</label>
                                     <input class="form-control-vx" name="nombre" required autocomplete="given-name" />
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-sm-6">
                                     <label class="form-label-vx">Apellido *</label>
                                     <input class="form-control-vx" name="apellido" required autocomplete="family-name" />
                                 </div>
@@ -348,7 +414,7 @@ add_shortcode( 'vx_landing', function (): string {
                             </div>
                             <div class="mb-2">
                                 <label class="form-label-vx">Teléfono celular *</label>
-                                <div class="d-flex gap-2">
+                                <div class="d-flex gap-2 vx-tel-campo">
                                     <?php echo vx_dial_code_select( 'telefono_prefijo', '+56', [ 'style' => 'max-width:180px;flex-shrink:0' ] ); ?>
                                     <input type="tel" class="form-control-vx" id="founderTelNum" name="telefono_numero" required autocomplete="tel" placeholder="9 1234 5678" inputmode="tel" style="flex:1" />
                                 </div>
@@ -356,7 +422,7 @@ add_shortcode( 'vx_landing', function (): string {
                                 <p style="font-size:11px;color:var(--color-text-secondary);margin:4px 0 0"><i class="ti ti-info-circle" style="font-size:10px"></i> Elige tu país; el número se guarda con prefijo internacional para el botón de WhatsApp.</p>
                             </div>
                             <div class="row g-2 mb-3">
-                                <div class="col-6">
+                                <div class="col-12 col-sm-6">
                                     <label class="form-label-vx">País *</label>
                                     <select class="form-control-vx" name="pais" id="founderPais" required>
                                         <option value="">Detectando...</option>
@@ -365,7 +431,7 @@ add_shortcode( 'vx_landing', function (): string {
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-sm-6">
                                     <label class="form-label-vx">Rubro *</label>
                                     <select class="form-control-vx" name="rubro" required>
                                         <option value="">Selecciona</option>
@@ -403,6 +469,7 @@ add_shortcode( 'vx_landing', function (): string {
             .then(function(d){
                 document.getElementById('founderCountText').textContent = d.inscritos + ' / ' + d.cupo;
                 document.getElementById('founderProgressBar').style.width = d.porcentaje + '%';
+                document.getElementById('founderProgressBar').parentNode.setAttribute('aria-valuenow', String(d.porcentaje));
                 var restante = d.restante;
                 document.getElementById('founderCountSub').textContent =
                     restante > 0
